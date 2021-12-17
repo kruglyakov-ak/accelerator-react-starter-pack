@@ -1,7 +1,20 @@
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { getGuitars } from '../../store/selectors';
 
 function Header(): JSX.Element {
+  const guitars = useSelector(getGuitars);
+
+  const [isSearchListHidden, setIsSearchListHidden] = useState(true);
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleSearchChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    setIsSearchListHidden(false);
+    setSearchValue(target.value);
+  };
+
   return (
     <header className="header" id="header">
       <div className="container header__wrapper">
@@ -25,17 +38,23 @@ function Header(): JSX.Element {
                 <use xlinkHref="#icon-search"></use>
               </svg><span className="visually-hidden">Начать поиск</span>
             </button>
-            <input className="form-search__input" id="search" type="text" autoComplete="off" placeholder="что вы ищите?" />
+            <input
+              className="form-search__input"
+              id="search"
+              type="text"
+              autoComplete="off"
+              placeholder="что вы ищите?"
+              onChange={handleSearchChange}
+            />
             <label className="visually-hidden" htmlFor="search">Поиск</label>
           </form>
-          <ul className="form-search__select-list hidden">
-            <li className="form-search__select-item" tabIndex={0}>Четстер Plus</li>
-            <li className="form-search__select-item" tabIndex={0}>Четстер UX</li>
-            <li className="form-search__select-item" tabIndex={0}>Четстер UX2</li>
-            <li className="form-search__select-item" tabIndex={0}>Четстер UX3</li>
-            <li className="form-search__select-item" tabIndex={0}>Четстер UX4</li>
-            <li className="form-search__select-item" tabIndex={0}>Четстер UX5</li>
-          </ul>
+          {isSearchListHidden ?
+            <ul className="form-search__select-list hidden"></ul> :
+            <ul className="form-search__select-list">
+              {guitars
+                .filter((guitar) => guitar.name.toLowerCase().includes(searchValue.toLowerCase()))
+                .map((guitar) => (<li className="form-search__select-item" tabIndex={0} key={guitar.id}><Link to={`${AppRoute.Main}product/${guitar.id}`} className="link">{guitar.name}</Link></li>))}
+            </ul>}
         </div>
         <Link to={AppRoute.Cart} className="header__cart-link" aria-label="Корзина">
           <svg className="header__cart-icon" width="14" height="14" aria-hidden="true">
