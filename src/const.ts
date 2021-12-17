@@ -15,8 +15,15 @@ const enum GuitarType {
   Ukulele = 'ukulele',
 }
 
+const GuitarTypeToReadable = {
+  [GuitarType.Electric]: 'Электрогитара',
+  [GuitarType.Acoustic]: 'Акустическая гитара',
+  [GuitarType.Ukulele]: 'Укулеле',
+};
+
 export {
   AppRoute,
   APIRoute,
-  GuitarType
+  GuitarType,
+  GuitarTypeToReadable
 };

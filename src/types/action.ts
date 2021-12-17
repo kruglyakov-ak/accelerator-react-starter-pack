@@ -5,6 +5,7 @@ import { State } from './state';
 
 enum ActionType {
   LoadGuitars = 'data/loadGuitars',
+  LoadGuitarById = 'data/loadGuitarById',
 }
 
 type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

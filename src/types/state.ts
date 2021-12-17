@@ -1,7 +1,8 @@
 import { Guitar } from './guitar';
 
 type State = {
-  guitars: Guitar[]
+  guitars: Guitar[],
+  guitar: Guitar | null,
 };
 
 export type {

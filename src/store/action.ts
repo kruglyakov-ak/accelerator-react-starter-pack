@@ -11,6 +11,17 @@ const loadGuitars = createAction(
   }),
 );
 
+const loadGuitarById = createAction(
+  ActionType.LoadGuitarById,
+  (guitar: Guitar) => ({
+    payload: {
+      guitar,
+    },
+  }),
+);
+
+
 export {
-  loadGuitars
+  loadGuitars,
+  loadGuitarById
 };

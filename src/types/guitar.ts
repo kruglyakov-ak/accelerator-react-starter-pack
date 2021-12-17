@@ -1,8 +1,10 @@
+import { GuitarType } from '../const';
+
 type Guitar = {
   id: number,
   name: string,
   vendorCode: string,
-  type: string,
+  type: GuitarType,
   description: string,
   previewImg: string,
   stringCount: number,

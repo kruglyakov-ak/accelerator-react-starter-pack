@@ -12,6 +12,7 @@ function ProductCardItem({ guitar }: ProductCardItemProps): JSX.Element {
     previewImg,
     price,
     rating,
+    id,
   } = guitar;
 
   return (
@@ -52,7 +53,7 @@ function ProductCardItem({ guitar }: ProductCardItemProps): JSX.Element {
         </p>
       </div>
       <div className="product-card__buttons">
-        <Link to={AppRoute.Product} className="button button--mini">Подробнее</Link>
+        <Link to={`${AppRoute.Main}product/${id}`} className="button button--mini">Подробнее</Link>
         <button className="button button--red button--mini button--add-to-cart">Купить</button>
       </div>
     </div>

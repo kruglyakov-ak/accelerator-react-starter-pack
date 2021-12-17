@@ -1,9 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { State } from '../types/state';
-import { loadGuitars } from './action';
+import { loadGuitarById, loadGuitars } from './action';
 
 const initialState: State = {
   guitars: [],
+  guitar: null,
 };
 
 const rootReducer = createReducer(initialState, (builder) => {
@@ -11,6 +12,10 @@ const rootReducer = createReducer(initialState, (builder) => {
     .addCase(loadGuitars, (state, action) => {
       const { guitars } = action.payload;
       state.guitars = guitars;
+    })
+    .addCase(loadGuitarById, (state, action) => {
+      const { guitar } = action.payload;
+      state.guitar = guitar;
     });
 });
 
