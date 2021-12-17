@@ -5,6 +5,11 @@ const enum AppRoute {
   Plug='#'
 }
 
+const enum APIRoute {
+  Guitars = '/guitars',
+}
+
 export {
-  AppRoute
+  AppRoute,
+  APIRoute
 };
