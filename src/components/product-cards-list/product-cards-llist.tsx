@@ -7,7 +7,7 @@ function ProductCardsList(): JSX.Element {
 
   return (
     <div className="cards catalog__cards">
-      {guitars.map((guitar) => <ProductCardItem key={guitar.id} />)}
+      {guitars.map((guitar) => <ProductCardItem key={guitar.id} guitar={guitar} />)}
     </div>
   );
 }

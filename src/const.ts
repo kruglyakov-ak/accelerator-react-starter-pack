@@ -9,7 +9,14 @@ const enum APIRoute {
   Guitars = '/guitars',
 }
 
+const enum GuitarType {
+  Electric = 'electric',
+  Acoustic = 'acoustic',
+  Ukulele = 'ukulele',
+}
+
 export {
   AppRoute,
-  APIRoute
+  APIRoute,
+  GuitarType
 };
