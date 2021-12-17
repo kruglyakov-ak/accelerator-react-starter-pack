@@ -13,6 +13,9 @@ function Header(): JSX.Element {
   const handleSearchChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setIsSearchListHidden(false);
     setSearchValue(target.value);
+    if (!target.value.length) {
+      setIsSearchListHidden(true);
+    }
   };
 
   return (
