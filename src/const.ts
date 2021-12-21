@@ -1,8 +1,8 @@
 const enum AppRoute {
   Main = '/',
-  Cart='/cart',
-  Product='/product/:id',
-  Plug='#'
+  Cart = '/cart',
+  Product = '/product/:id',
+  Plug = '#'
 }
 
 const enum APIRoute {
@@ -21,9 +21,18 @@ const GuitarTypeToReadable = {
   [GuitarType.Ukulele]: 'Укулеле',
 };
 
+const enum SortType {
+  Default = '/guitars',
+  PriceAsc = '/guitars?_sort=price',
+  PriceDesc = '/guitars?_sort=price',
+  RatingOrderAsc = '/guitars?_sort=rating&_order=asc',
+  RatingOrderDesc = '/guitars?_sort=rating&_order=desc',
+}
+
 export {
   AppRoute,
   APIRoute,
   GuitarType,
-  GuitarTypeToReadable
+  GuitarTypeToReadable,
+  SortType
 };
