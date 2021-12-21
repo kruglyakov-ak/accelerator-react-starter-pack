@@ -6,8 +6,8 @@ import { changeOrderType, changeSortType, loadGuitarById, loadGuitars } from './
 const initialState: State = {
   guitars: [],
   guitar: null,
-  sortType: SortType.Price,
-  orderType: OrderType.Asc,
+  sortType: SortType.Default,
+  orderType: OrderType.Default,
 };
 
 const rootReducer = createReducer(initialState, (builder) => {

@@ -22,11 +22,13 @@ const GuitarTypeToReadable = {
 };
 
 const enum SortType {
+  Default = '',
   Price = 'price',
   Rating = 'rating',
 }
 
 const enum OrderType {
+  Default = '',
   Asc = 'asc',
   Desc = 'desc',
 }
