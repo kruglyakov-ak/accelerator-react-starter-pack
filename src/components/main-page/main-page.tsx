@@ -1,10 +1,32 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, OrderType, SortType } from '../../const';
+import { changeOrderType, changeSortType } from '../../store/action';
+import { fetchGuitarsAction } from '../../store/api-actions';
+import { getOrderType, getSortType } from '../../store/selectors';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import ProductCardsList from '../product-cards-list/product-cards-llist';
 
 function MainPage(): JSX.Element {
+  const dispatch = useDispatch();
+  const sortType = useSelector(getSortType);
+  const orderType = useSelector(getOrderType);
+
+  dispatch(fetchGuitarsAction(sortType, orderType));
+
+  const handleSortClick = (evt: React.SyntheticEvent<HTMLButtonElement>) => {
+    if (evt.currentTarget.dataset.sort) {
+      dispatch(changeSortType(evt.currentTarget.dataset.sort));
+    }
+  };
+
+  const handleOrderClick = (evt: React.SyntheticEvent<HTMLButtonElement>) => {
+    if (evt.currentTarget.dataset.order) {
+      dispatch(changeOrderType(evt.currentTarget.dataset.order));
+    }
+  };
+
   return (
     <div className="wrapper">
       <Header />
@@ -74,12 +96,20 @@ function MainPage(): JSX.Element {
             <div className="catalog-sort">
               <h2 className="catalog-sort__title">Сортировать:</h2>
               <div className="catalog-sort__type">
-                <button className="catalog-sort__type-button catalog-sort__type-button--active" aria-label="по цене" tabIndex={-1}>по цене</button>
-                <button className="catalog-sort__type-button" aria-label="по популярности">по популярности</button>
+                {sortType === SortType.Price ?
+                  <button className="catalog-sort__type-button catalog-sort__type-button--active" aria-label="по цене" tabIndex={-1} data-sort={SortType.Price} onClick={handleSortClick}>по цене</button> :
+                  <button className="catalog-sort__type-button catalog-sort__type-button" aria-label="по цене" tabIndex={-1} data-sort={SortType.Price} onClick={handleSortClick}>по цене</button>}
+                {sortType === SortType.Rating ?
+                  <button className="catalog-sort__type-button catalog-sort__type-button--active" aria-label="по популярности" data-sort={SortType.Rating} onClick={handleSortClick}>по популярности</button> :
+                  <button className="catalog-sort__type-button" aria-label="по популярности" data-sort={SortType.Rating} onClick={handleSortClick}>по популярности</button>}
               </div>
               <div className="catalog-sort__order">
-                <button className="catalog-sort__order-button catalog-sort__order-button--up catalog-sort__order-button--active" aria-label="По возрастанию" tabIndex={-1}></button>
-                <button className="catalog-sort__order-button catalog-sort__order-button--down" aria-label="По убыванию"></button>
+                {orderType === OrderType.Asc ?
+                  <button className="catalog-sort__order-button catalog-sort__order-button--up catalog-sort__order-button--active" aria-label="По возрастанию" tabIndex={-1} data-order={OrderType.Asc} onClick={handleOrderClick}></button> :
+                  <button className="catalog-sort__order-button catalog-sort__order-button--up catalog-sort__order-button" aria-label="По возрастанию" tabIndex={-1} data-order={OrderType.Asc} onClick={handleOrderClick}></button>}
+                {orderType === OrderType.Desc ?
+                  <button className="catalog-sort__order-button catalog-sort__order-button--down catalog-sort__order-button--down--active" aria-label="По убыванию" data-order={OrderType.Desc} onClick={handleOrderClick}></button> :
+                  <button className="catalog-sort__order-button catalog-sort__order-button--down" aria-label="По убыванию" data-order={OrderType.Desc} onClick={handleOrderClick}></button>}
               </div>
             </div>
 

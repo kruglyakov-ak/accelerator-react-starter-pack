@@ -1,5 +1,4 @@
 import { createAction } from '@reduxjs/toolkit';
-import { SortType } from '../const';
 import { ActionType } from '../types/action';
 import { Guitar } from '../types/guitar';
 
@@ -23,9 +22,18 @@ const loadGuitarById = createAction(
 
 const changeSortType = createAction(
   ActionType.ChangeSortType,
-  (sortType: SortType) => ({
+  (sortType: string) => ({
     payload: {
       sortType,
+    },
+  }),
+);
+
+const changeOrderType = createAction(
+  ActionType.ChangeOrderType,
+  (orderType: string) => ({
+    payload: {
+      orderType,
     },
   }),
 );
@@ -34,5 +42,6 @@ const changeSortType = createAction(
 export {
   loadGuitars,
   loadGuitarById,
-  changeSortType
+  changeSortType,
+  changeOrderType
 };

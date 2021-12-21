@@ -22,11 +22,13 @@ const GuitarTypeToReadable = {
 };
 
 const enum SortType {
-  Default = '/guitars',
-  PriceAsc = '/guitars?_sort=price',
-  PriceDesc = '/guitars?_sort=price',
-  RatingOrderAsc = '/guitars?_sort=rating&_order=asc',
-  RatingOrderDesc = '/guitars?_sort=rating&_order=desc',
+  Price = 'price',
+  Rating = 'rating',
+}
+
+const enum OrderType {
+  Asc = 'asc',
+  Desc = 'desc',
 }
 
 export {
@@ -34,5 +36,6 @@ export {
   APIRoute,
   GuitarType,
   GuitarTypeToReadable,
-  SortType
+  SortType,
+  OrderType
 };

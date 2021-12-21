@@ -1,12 +1,13 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { SortType } from '../const';
+import { OrderType, SortType } from '../const';
 import { State } from '../types/state';
-import { changeSortType, loadGuitarById, loadGuitars } from './action';
+import { changeOrderType, changeSortType, loadGuitarById, loadGuitars } from './action';
 
 const initialState: State = {
   guitars: [],
   guitar: null,
-  sortType: SortType.Default,
+  sortType: SortType.Price,
+  orderType: OrderType.Asc,
 };
 
 const rootReducer = createReducer(initialState, (builder) => {
@@ -22,6 +23,10 @@ const rootReducer = createReducer(initialState, (builder) => {
     .addCase(changeSortType, (state, action) => {
       const { sortType } = action.payload;
       state.sortType = sortType;
+    })
+    .addCase(changeOrderType, (state, action) => {
+      const { orderType } = action.payload;
+      state.orderType = orderType;
     });
 });
 
