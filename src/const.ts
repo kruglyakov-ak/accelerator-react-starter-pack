@@ -21,7 +21,7 @@ const GuitarTypeToReadable = {
   [GuitarType.Ukulele]: 'Укулеле',
 };
 
-const enum SortType {
+enum SortType {
   Default = '',
   Price = 'price',
   Rating = 'rating',
@@ -33,11 +33,38 @@ const enum OrderType {
   Desc = 'desc',
 }
 
+const SortTypePath = {
+  [SortType.Default]: '',
+  [SortType.Price]: '&_sort=price',
+  [SortType.Rating]: '&_sort=rating',
+};
+
+const OrderTypePath = {
+  [OrderType.Default]: '',
+  [OrderType.Asc]: '&_order=asc',
+  [OrderType.Desc]: '&_order=desc',
+};
+
+const enum FilterPath {
+  PriceGte = '&price_gte=',
+  PriceLte = '&price_lte=',
+}
+
+const enum DefaultPriceRange {
+  Min = 1000,
+  Max = 30000,
+}
+
+
 export {
   AppRoute,
   APIRoute,
   GuitarType,
   GuitarTypeToReadable,
   SortType,
-  OrderType
+  OrderType,
+  SortTypePath,
+  OrderTypePath,
+  FilterPath,
+  DefaultPriceRange
 };

@@ -1,11 +1,14 @@
-import { APIRoute } from '../const';
+import { APIRoute, FilterPath, OrderType, OrderTypePath, SortType, SortTypePath } from '../const';
 import { ThunkActionResult } from '../types/action';
 import { loadGuitarById, loadGuitars } from './action';
 import { Guitar } from '../types/guitar';
 
-const fetchGuitarsAction = (sortType: string, orderType: string): ThunkActionResult =>
+const fetchGuitarsAction = (
+  sortType: SortType,
+  orderType: OrderType,
+  priceRange: number[]): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const { data } = await api.get<Guitar[]>(`${APIRoute.Guitars}?_sort=${sortType}&_order=${orderType}`);
+    const { data } = await api.get<Guitar[]>(`${APIRoute.Guitars}?${SortTypePath[sortType]}${OrderTypePath[orderType]}${FilterPath.PriceGte}${priceRange[0]}${FilterPath.PriceLte}${priceRange[1]}`);
     dispatch(loadGuitars(data));
   };
 
