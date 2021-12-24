@@ -1,7 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DefaultPriceRange, OrderType, SortType } from '../const';
 import { State } from '../types/state';
-import { changeOrderType, changePriceRangeMax, changePriceRangeMin, changeSortType, loadGuitarById, loadGuitars } from './action';
+import {
+  changeOrderType,
+  changeSortType,
+  setPriceRangeMin,
+  setPriceRangeMax,
+  loadGuitarById,
+  loadGuitars,
+  setUserPriceMin,
+  setUserPriceMax
+} from './action';
 
 const initialState: State = {
   guitars: [],
@@ -10,6 +19,8 @@ const initialState: State = {
   orderType: OrderType.Default,
   priceRangeMin: DefaultPriceRange.Min,
   priceRangeMax: DefaultPriceRange.Max,
+  userPriceMin: '',
+  userPriceMax: '',
 };
 
 const rootReducer = createReducer(initialState, (builder) => {
@@ -30,19 +41,21 @@ const rootReducer = createReducer(initialState, (builder) => {
       const { orderType } = action.payload;
       state.orderType = orderType;
     })
-    .addCase(changePriceRangeMin, (state, action) => {
+    .addCase(setPriceRangeMin, (state, action) => {
       const { priceRangeMin } = action.payload;
       state.priceRangeMin = priceRangeMin;
-      if (priceRangeMin < DefaultPriceRange.Min) {
-        state.priceRangeMin = DefaultPriceRange.Min;
-      }
-      if (priceRangeMin > DefaultPriceRange.Max) {
-        state.priceRangeMin = DefaultPriceRange.Max;
-      }
     })
-    .addCase(changePriceRangeMax, (state, action) => {
+    .addCase(setPriceRangeMax, (state, action) => {
       const { priceRangeMax } = action.payload;
       state.priceRangeMax = priceRangeMax;
+    })
+    .addCase(setUserPriceMin, (state, action) => {
+      const { userPriceMin } = action.payload;
+      state.userPriceMin = userPriceMin;
+    })
+    .addCase(setUserPriceMax, (state, action) => {
+      const { userPriceMax } = action.payload;
+      state.userPriceMax = userPriceMax;
     });
 });
 

@@ -1,8 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { fetchGuitarsAction } from '../../store/api-actions';
-import { getOrderType, getPriceRangeMax, getPriceRangeMin, getSortType } from '../../store/selectors';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import CatalogSort from '../catalog-sort/catalog-sort';
@@ -10,14 +7,6 @@ import ProductCardsList from '../product-cards-list/product-cards-llist';
 import CatalogFilter from '../catalog-filter/catalog-filter';
 
 function MainPage(): JSX.Element {
-  const dispatch = useDispatch();
-  const sortType = useSelector(getSortType);
-  const orderType = useSelector(getOrderType);
-  const priceRangeMin = useSelector(getPriceRangeMin);
-  const priceRangeMax = useSelector(getPriceRangeMax);
-
-  dispatch(fetchGuitarsAction(sortType, orderType, [priceRangeMin, priceRangeMax]));
-
   return (
     <div className="wrapper">
       <Header />

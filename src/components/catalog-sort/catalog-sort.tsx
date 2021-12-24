@@ -48,9 +48,9 @@ function CatalogSort(): JSX.Element {
       <div className="catalog-sort__order">
         {orderType === OrderType.Asc ?
           <button className="catalog-sort__order-button catalog-sort__order-button--up catalog-sort__order-button--active" aria-label="По возрастанию" tabIndex={-1} data-order={OrderType.Asc} onClick={handleOrderClick}></button> :
-          <button className="catalog-sort__order-button catalog-sort__order-button--up catalog-sort__order-button" aria-label="По возрастанию" tabIndex={-1} data-order={OrderType.Asc} onClick={handleOrderClick}></button>}
+          <button className="catalog-sort__order-button catalog-sort__order-button--up" aria-label="По возрастанию" tabIndex={-1} data-order={OrderType.Asc} onClick={handleOrderClick}></button>}
         {orderType === OrderType.Desc ?
-          <button className="catalog-sort__order-button catalog-sort__order-button--down catalog-sort__order-button--down--active" aria-label="По убыванию" data-order={OrderType.Desc} onClick={handleOrderClick}></button> :
+          <button className="catalog-sort__order-button catalog-sort__order-button--down catalog-sort__order-button--active" aria-label="По убыванию" data-order={OrderType.Desc} onClick={handleOrderClick}></button> :
           <button className="catalog-sort__order-button catalog-sort__order-button--down" aria-label="По убыванию" data-order={OrderType.Desc} onClick={handleOrderClick}></button>}
       </div>
     </div>

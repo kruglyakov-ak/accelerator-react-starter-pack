@@ -39,8 +39,8 @@ const changeOrderType = createAction(
   }),
 );
 
-const changePriceRangeMin = createAction(
-  ActionType.ChangePriceRangeMin,
+const setPriceRangeMin = createAction(
+  ActionType.SetPriceRangeMin,
   (priceRangeMin: number) => ({
     payload: {
       priceRangeMin,
@@ -48,8 +48,8 @@ const changePriceRangeMin = createAction(
   }),
 );
 
-const changePriceRangeMax = createAction(
-  ActionType.ChangePriceRangeMax,
+const setPriceRangeMax = createAction(
+  ActionType.SetPriceRangeMax,
   (priceRangeMax: number) => ({
     payload: {
       priceRangeMax,
@@ -57,12 +57,31 @@ const changePriceRangeMax = createAction(
   }),
 );
 
+const setUserPriceMin = createAction(
+  ActionType.SetUserPriceMin,
+  (userPriceMin: string) => ({
+    payload: {
+      userPriceMin,
+    },
+  }),
+);
+
+const setUserPriceMax = createAction(
+  ActionType.SetUserPriceMax,
+  (userPriceMax: string) => ({
+    payload: {
+      userPriceMax,
+    },
+  }),
+);
 
 export {
   loadGuitars,
   loadGuitarById,
   changeSortType,
   changeOrderType,
-  changePriceRangeMin,
-  changePriceRangeMax
+  setPriceRangeMin,
+  setPriceRangeMax,
+  setUserPriceMin,
+  setUserPriceMax
 };

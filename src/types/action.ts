@@ -8,8 +8,10 @@ enum ActionType {
   LoadGuitarById = 'data/loadGuitarById',
   ChangeSortType = 'sort/changeSortType',
   ChangeOrderType = 'sort/changeOrderType',
-  ChangePriceRangeMin = 'filte/changePriceRangeMin',
-  ChangePriceRangeMax = 'filte/changePriceRangeMax'
+  SetPriceRangeMin = 'filter/settPriceRangeMin',
+  SetPriceRangeMax = 'filter/setPriceRangeMax',
+  SetUserPriceMin = 'filter/setUserPriceMin',
+  SetUserPriceMax = 'filter/setUserPriceMax'
 }
 
 type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

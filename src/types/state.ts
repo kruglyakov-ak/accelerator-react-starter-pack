@@ -8,6 +8,8 @@ type State = {
   orderType: OrderType,
   priceRangeMin: number,
   priceRangeMax: number,
+  userPriceMin: string,
+  userPriceMax: string,
 };
 
 export type {

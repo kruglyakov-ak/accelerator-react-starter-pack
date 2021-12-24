@@ -1,43 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { DefaultPriceRange } from '../../const';
-import { changePriceRangeMax, changePriceRangeMin } from '../../store/action';
+import { setUserPriceMax, setUserPriceMin } from '../../store/action';
 import { getPriceRangeMax, getPriceRangeMin } from '../../store/selectors';
 
 function CatalogFilter(): JSX.Element {
   const dispatch = useDispatch();
-  const priceRangeMin = useSelector(getPriceRangeMin);
-  const priceRangeMax = useSelector(getPriceRangeMax);
-  const [priceMin, setPriceMin] = useState(DefaultPriceRange.Min);
-  const [priceMax, setPriceMax] = useState(DefaultPriceRange.Max);
+  const [userPriceMinValue, setUserPriceMinValue] = useState('');
+  const [userPriceMaxValue, setUserPriceMaxValue] = useState('');
+  const priceMin = useSelector(getPriceRangeMin);
+  const priceMax = useSelector(getPriceRangeMax);
 
-  const handlePriceRangeMinChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    setPriceMin(+target.value);
-    if (+target.value > DefaultPriceRange.Max) {
-      setPriceMin(DefaultPriceRange.Max);
-    }
-    if (+target.value < DefaultPriceRange.Min) {
-      setPriceMin(DefaultPriceRange.Min);
-    }
+  const handlePriceMinChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    setUserPriceMinValue(target.value);
+  };
+  const handlePriceMaxChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    setUserPriceMaxValue(target.value);
   };
 
-  const handlePriceRangeMaxChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    setPriceMax(+target.value);
-    if (+target.value > DefaultPriceRange.Max) {
-      setPriceMax(DefaultPriceRange.Max);
+  const handlePriceMinBlur = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    if (+target.value < priceMin && target.value !== '') {
+      setUserPriceMinValue(`${priceMin}`);
     }
-    if (+target.value < DefaultPriceRange.Min) {
-      setPriceMax(DefaultPriceRange.Min);
+    if (+target.value > priceMax && target.value !== '') {
+      setUserPriceMinValue(`${priceMax}`);
     }
+    dispatch(setUserPriceMin(target.value));
   };
 
-  useEffect(() => {
-    dispatch(changePriceRangeMin(+priceMin));
-  }, [dispatch, priceMin]);
-
-  useEffect(() => {
-    dispatch(changePriceRangeMax(+priceMax));
-  }, [dispatch, priceMax]);
+  const handlePriceMaxBlur = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    if (+target.value < priceMin && target.value !== '') {
+      setUserPriceMaxValue(`${priceMin}`);
+    }
+    if (+target.value > priceMax && target.value !== '') {
+      setUserPriceMaxValue(`${priceMax}`);
+    }
+    dispatch(setUserPriceMax(target.value));
+  };
 
   return (
     <form className="catalog-filter">
@@ -47,11 +45,11 @@ function CatalogFilter(): JSX.Element {
         <div className="catalog-filter__price-range">
           <div className="form-input">
             <label className="visually-hidden">Минимальная цена</label>
-            <input type="number" placeholder="1 000" id="priceMin" name="от" onChange={handlePriceRangeMinChange} value={priceRangeMin} />
+            <input type="number" placeholder={`${priceMin}`} id="priceMin" name="от" value={userPriceMinValue} onChange={handlePriceMinChange} onBlur={handlePriceMinBlur} />
           </div>
           <div className="form-input">
             <label className="visually-hidden">Максимальная цена</label>
-            <input type="number" placeholder="30 000" id="priceMax" name="до" onChange={handlePriceRangeMaxChange} value={priceRangeMax} />
+            <input type="number" placeholder={`${priceMax}`} id="priceMax" name="до" value={userPriceMaxValue} onChange={handlePriceMaxChange} onBlur={handlePriceMaxBlur} />
           </div>
         </div>
       </fieldset>
