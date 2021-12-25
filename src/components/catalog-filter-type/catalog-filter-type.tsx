@@ -13,7 +13,7 @@ import {
   getIsSixStringsCheck,
   getIsTwelveStringsCheck,
   getIsUkuleleCheck
-} from '../../store/selectors';
+} from '../../store/catalog-filter/selectors';
 
 function CatalogFilterType(): JSX.Element {
   const dispatch = useDispatch();

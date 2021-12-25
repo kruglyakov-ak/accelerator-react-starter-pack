@@ -3,7 +3,7 @@ import { AppRoute } from '../../const';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import CatalogSort from '../catalog-sort/catalog-sort';
-import ProductCardsList from '../product-cards-list/product-cards-llist';
+import ProductCardsList from '../product-cards-list/product-cards-list';
 import CatalogFilter from '../catalog-filter/catalog-filter';
 
 function MainPage(): JSX.Element {

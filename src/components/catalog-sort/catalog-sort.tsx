@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { OrderType, SortType } from '../../const';
-import { changeOrderType, changeSortType } from '../../store/action';
-import { getOrderType, getSortType } from '../../store/selectors';
+import { setOrderType, setSortType } from '../../store/action';
+import { getOrderType, getSortType } from '../../store/catalog-sort/selectors';
 
 function CatalogSort(): JSX.Element {
   const dispatch = useDispatch();
@@ -12,10 +12,10 @@ function CatalogSort(): JSX.Element {
   const handleSortClick = ({ currentTarget }: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     switch (currentTarget.dataset.sort) {
       case SortType.Price:
-        dispatch(changeSortType(currentTarget.dataset.sort));
+        dispatch(setSortType(currentTarget.dataset.sort));
         break;
       case SortType.Rating:
-        dispatch(changeSortType(currentTarget.dataset.sort));
+        dispatch(setSortType(currentTarget.dataset.sort));
         break;
     }
   };
@@ -23,14 +23,14 @@ function CatalogSort(): JSX.Element {
   const handleOrderClick = ({ currentTarget }: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     switch (currentTarget.dataset.order) {
       case OrderType.Asc:
-        dispatch(changeOrderType(currentTarget.dataset.order));
+        dispatch(setOrderType(currentTarget.dataset.order));
         break;
       case OrderType.Desc:
-        dispatch(changeOrderType(currentTarget.dataset.order));
+        dispatch(setOrderType(currentTarget.dataset.order));
         break;
     }
     if (sortType === SortType.Default) {
-      dispatch(changeSortType(SortType.Price));
+      dispatch(setSortType(SortType.Price));
     }
   };
 

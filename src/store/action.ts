@@ -21,8 +21,8 @@ const loadGuitarById = createAction(
   }),
 );
 
-const changeSortType = createAction(
-  ActionType.ChangeSortType,
+const setSortType = createAction(
+  ActionType.SetSortType,
   (sortType: SortType) => ({
     payload: {
       sortType,
@@ -30,8 +30,8 @@ const changeSortType = createAction(
   }),
 );
 
-const changeOrderType = createAction(
-  ActionType.ChangeOrderType,
+const setOrderType = createAction(
+  ActionType.SetOrderType,
   (orderType: OrderType) => ({
     payload: {
       orderType,
@@ -139,8 +139,8 @@ const setIsTwelveStringsCheck = createAction(
 export {
   loadGuitars,
   loadGuitarById,
-  changeSortType,
-  changeOrderType,
+  setSortType,
+  setOrderType,
   setPriceRangeMin,
   setPriceRangeMax,
   setUserPriceMin,

@@ -6,8 +6,8 @@ import { State } from './state';
 enum ActionType {
   LoadGuitars = 'data/loadGuitars',
   LoadGuitarById = 'data/loadGuitarById',
-  ChangeSortType = 'sort/changeSortType',
-  ChangeOrderType = 'sort/changeOrderType',
+  SetSortType = 'sort/setSortType',
+  SetOrderType = 'sort/setOrderType',
   SetPriceRangeMin = 'filter/settPriceRangeMin',
   SetPriceRangeMax = 'filter/setPriceRangeMax',
   SetUserPriceMin = 'filter/setUserPriceMin',

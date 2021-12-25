@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { AppRoute, GuitarTypeToReadable } from '../../const';
 import { fetchGuitarByIdAction } from '../../store/api-actions';
-import { getGuitarById } from '../../store/selectors';
+import { getGuitarById } from '../../store/guitar-data/selectors';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import Page404 from '../page-404/page-404';

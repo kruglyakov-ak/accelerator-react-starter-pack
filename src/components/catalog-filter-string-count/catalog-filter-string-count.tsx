@@ -14,7 +14,7 @@ import {
   getIsSixStringsCheck,
   getIsTwelveStringsCheck,
   getIsUkuleleCheck
-} from '../../store/selectors';
+} from '../../store/catalog-filter/selectors';
 
 function CatalogFilterStringCount(): JSX.Element {
   const dispatch = useDispatch();

@@ -7,7 +7,7 @@ import {
 import {
   getPriceRangeMax,
   getPriceRangeMin
-} from '../../store/selectors';
+} from '../../store/catalog-filter/selectors';
 
 function CatalogFilterPrice(): JSX.Element {
   const dispatch = useDispatch();

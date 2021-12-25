@@ -10,10 +10,10 @@ import {
   getIsSixStringsCheck,
   getIsTwelveStringsCheck,
   getIsUkuleleCheck,
-  getOrderType, getSortType,
   getUserPriceMax,
   getUserPriceMin
-} from '../../store/selectors';
+} from '../../store/catalog-filter/selectors';
+import { getOrderType, getSortType } from '../../store/catalog-sort/selectors';
 import Cart from '../cart/cart';
 import MainPage from '../main-page/main-page';
 import Page404 from '../page-404/page-404';
