@@ -13,6 +13,10 @@ const getUserPriceMax = (state: State): string => state.userPriceMax;
 const getIsAcousticCheck = (state: State): boolean => state.isAcousticCheck;
 const getIsElectricCheck = (state: State): boolean => state.isElectricCheck;
 const getIsUkuleleCheck = (state: State): boolean => state.isUkuleleCheck;
+const getIsFourStringsCheck = (state: State): boolean => state.isFourStringsCheck;
+const getIsSixStringsCheck = (state: State): boolean => state.isSixStringsCheck;
+const getIsSevenStringsCheck = (state: State): boolean => state.isSevenStringsCheck;
+const getIsTwelveStringsCheck = (state: State): boolean => state.isTwelveStringsCheck;
 
 export {
   getGuitars,
@@ -25,5 +29,9 @@ export {
   getUserPriceMax,
   getIsAcousticCheck,
   getIsElectricCheck,
-  getIsUkuleleCheck
+  getIsUkuleleCheck,
+  getIsFourStringsCheck,
+  getIsSixStringsCheck,
+  getIsSevenStringsCheck,
+  getIsTwelveStringsCheck
 };

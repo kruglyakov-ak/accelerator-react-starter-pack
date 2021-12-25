@@ -1,4 +1,4 @@
-import { APIRoute, FilterPath, GuitarType, OrderType, OrderTypePath, SortType, SortTypePath } from '../const';
+import { APIRoute, FilterPath, GuitarType, OrderType, OrderTypePath, SortType, SortTypePath, StringCount, StringCountNumber } from '../const';
 import { ThunkActionResult } from '../types/action';
 import { loadGuitarById, loadGuitars, setPriceRangeMax, setPriceRangeMin } from './action';
 import { Guitar } from '../types/guitar';
@@ -10,7 +10,11 @@ const fetchGuitarsAction = (
   userPriceMax: string,
   isAcousticCheck: boolean,
   isElectricCheck: boolean,
-  isUkuleleCheck: boolean): ThunkActionResult =>
+  isUkuleleCheck: boolean,
+  setIsFourStringsCheck: boolean,
+  setIsSixStringsCheck: boolean,
+  setIsSevenStringsCheck: boolean,
+  setIsTwelveStringsCheck: boolean): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     let path = `${APIRoute.Guitars}?`;
     if (sortType) {
@@ -33,6 +37,18 @@ const fetchGuitarsAction = (
     }
     if (isUkuleleCheck) {
       path += `${FilterPath.Type}${GuitarType.Ukulele}`;
+    }
+    if (setIsFourStringsCheck) {
+      path += `${FilterPath.String}${StringCountNumber[StringCount.FourStrings]}`;
+    }
+    if (setIsSixStringsCheck) {
+      path += `${FilterPath.String}${StringCountNumber[StringCount.SixStrings]}`;
+    }
+    if (setIsSevenStringsCheck) {
+      path += `${FilterPath.String}${StringCountNumber[StringCount.SevenStrings]}`;
+    }
+    if (setIsTwelveStringsCheck) {
+      path += `${FilterPath.String}${StringCountNumber[StringCount.TwelveStrings]}`;
     }
     const { data } = await api.get<Guitar[]>(path);
     dispatch(loadGuitars(data));

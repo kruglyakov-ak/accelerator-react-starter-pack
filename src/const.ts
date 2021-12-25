@@ -6,7 +6,7 @@ const enum AppRoute {
 }
 
 const enum APIRoute {
-  Guitars = '/guitars',
+  Guitars = '/guitars?',
 }
 
 const enum GuitarType {
@@ -16,11 +16,18 @@ const enum GuitarType {
 }
 
 const enum StringCount {
-  FourStrings = 4,
-  SixStrings = 6,
-  SevenStrings = 7,
-  TwelveStrings = 12,
+  FourStrings = '4-strings',
+  SixStrings = '6-strings',
+  SevenStrings = '7-strings',
+  TwelveStrings = '12-strings',
 }
+
+const StringCountNumber = {
+  [StringCount.FourStrings]: 4,
+  [StringCount.SixStrings]: 6,
+  [StringCount.SevenStrings]: 7,
+  [StringCount.TwelveStrings]: 12,
+};
 
 const GuitarTypeToReadable = {
   [GuitarType.Electric]: 'Электрогитара',
@@ -76,5 +83,6 @@ export {
   OrderTypePath,
   FilterPath,
   DefaultPriceRange,
-  StringCount
+  StringCount,
+  StringCountNumber
 };

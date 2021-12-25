@@ -5,6 +5,10 @@ import { fetchGuitarsAction } from '../../store/api-actions';
 import {
   getIsAcousticCheck,
   getIsElectricCheck,
+  getIsFourStringsCheck,
+  getIsSevenStringsCheck,
+  getIsSixStringsCheck,
+  getIsTwelveStringsCheck,
   getIsUkuleleCheck,
   getOrderType, getSortType,
   getUserPriceMax,
@@ -24,6 +28,10 @@ function App(): JSX.Element {
   const isAcousticCheck = useSelector(getIsAcousticCheck);
   const isElectricCheck = useSelector(getIsElectricCheck);
   const isUkuleleCheck = useSelector(getIsUkuleleCheck);
+  const isFourStringsCheck = useSelector(getIsFourStringsCheck);
+  const isSixStringsCheck = useSelector(getIsSixStringsCheck);
+  const isSevenStringsCheck = useSelector(getIsSevenStringsCheck);
+  const isTwelveStringsCheck = useSelector(getIsTwelveStringsCheck);
 
   dispatch(fetchGuitarsAction(
     sortType,
@@ -32,7 +40,11 @@ function App(): JSX.Element {
     userPriceMax,
     isAcousticCheck,
     isElectricCheck,
-    isUkuleleCheck));
+    isUkuleleCheck,
+    isFourStringsCheck,
+    isSixStringsCheck,
+    isSevenStringsCheck,
+    isTwelveStringsCheck));
 
   return (
     <Switch>

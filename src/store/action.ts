@@ -83,6 +83,7 @@ const setIsAcousticCheck = createAction(
     },
   }),
 );
+
 const setIsElectricCheck = createAction(
   ActionType.SetIsElectricCheck,
   (isElectricCheck: boolean) => ({
@@ -91,11 +92,45 @@ const setIsElectricCheck = createAction(
     },
   }),
 );
+
 const setIsUkuleleCheck = createAction(
   ActionType.SetIsUkuleleCheck,
   (isUkuleleCheck: boolean) => ({
     payload: {
       isUkuleleCheck,
+    },
+  }),
+);
+
+const setIsFourStringsCheck = createAction(
+  ActionType.SetIsFourStringsCheck,
+  (isFourStringsCheck: boolean) => ({
+    payload: {
+      isFourStringsCheck,
+    },
+  }),
+);
+const setIsSixStringsCheck = createAction(
+  ActionType.SetIsSixStringsCheck,
+  (isSixStringsCheck: boolean) => ({
+    payload: {
+      isSixStringsCheck,
+    },
+  }),
+);
+const setIsSevenStringsCheck = createAction(
+  ActionType.SetIsSevenStringsCheck,
+  (isSevenStringsCheck: boolean) => ({
+    payload: {
+      isSevenStringsCheck,
+    },
+  }),
+);
+const setIsTwelveStringsCheck = createAction(
+  ActionType.SetIsTwelveStringsCheck,
+  (isTwelveStringsCheck: boolean) => ({
+    payload: {
+      isTwelveStringsCheck,
     },
   }),
 );
@@ -112,5 +147,9 @@ export {
   setUserPriceMax,
   setIsAcousticCheck,
   setIsElectricCheck,
-  setIsUkuleleCheck
+  setIsUkuleleCheck,
+  setIsFourStringsCheck,
+  setIsSixStringsCheck,
+  setIsSevenStringsCheck,
+  setIsTwelveStringsCheck
 };
