@@ -74,17 +74,14 @@ const rootReducer = createReducer(initialState, (builder) => {
     .addCase(setIsAcousticCheck, (state, action) => {
       const { isAcousticCheck } = action.payload;
       state.isAcousticCheck = isAcousticCheck;
-
     })
     .addCase(setIsElectricCheck, (state, action) => {
       const { isElectricCheck } = action.payload;
       state.isElectricCheck = isElectricCheck;
-
     })
     .addCase(setIsUkuleleCheck, (state, action) => {
       const { isUkuleleCheck } = action.payload;
       state.isUkuleleCheck = isUkuleleCheck;
-
     })
     .addCase(setIsFourStringsCheck, (state, action) => {
       const { isFourStringsCheck } = action.payload;

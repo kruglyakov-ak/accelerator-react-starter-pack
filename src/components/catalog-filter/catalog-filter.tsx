@@ -12,7 +12,17 @@ import {
   setUserPriceMax,
   setUserPriceMin
 } from '../../store/action';
-import { getPriceRangeMax, getPriceRangeMin } from '../../store/selectors';
+import {
+  getIsAcousticCheck,
+  getIsElectricCheck,
+  getIsFourStringsCheck,
+  getIsSevenStringsCheck,
+  getIsSixStringsCheck,
+  getIsTwelveStringsCheck,
+  getIsUkuleleCheck,
+  getPriceRangeMax,
+  getPriceRangeMin
+} from '../../store/selectors';
 
 function CatalogFilter(): JSX.Element {
   const dispatch = useDispatch();
@@ -20,6 +30,13 @@ function CatalogFilter(): JSX.Element {
   const [userPriceMaxValue, setUserPriceMaxValue] = useState('');
   const priceMin = useSelector(getPriceRangeMin);
   const priceMax = useSelector(getPriceRangeMax);
+  const isAcousticCheck = useSelector(getIsAcousticCheck);
+  const isElectricCheck = useSelector(getIsElectricCheck);
+  const isUkuleleCheck = useSelector(getIsUkuleleCheck);
+  const isFourStringsCheck = useSelector(getIsFourStringsCheck);
+  const isSixStringsCheck = useSelector(getIsSixStringsCheck);
+  const isSevenStringsCheck = useSelector(getIsSevenStringsCheck);
+  const isTwelveStringsCheck = useSelector(getIsTwelveStringsCheck);
 
   const handlePriceMinChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setUserPriceMinValue(target.value);
@@ -98,34 +115,158 @@ function CatalogFilter(): JSX.Element {
       <fieldset className="catalog-filter__block">
         <legend className="catalog-filter__block-title">Тип гитар</legend>
         <div className="form-checkbox catalog-filter__block-item">
-          <input className="visually-hidden" type="checkbox" id="acoustic" name="acoustic" onChange={handleGuitarTypeCheck} />
+          {isFourStringsCheck ?
+            <input
+              className="visually-hidden"
+              type="checkbox"
+              id="acoustic"
+              name="acoustic"
+              checked={isAcousticCheck}
+              onChange={handleGuitarTypeCheck}
+              disabled
+            /> :
+            <input
+              className="visually-hidden"
+              type="checkbox"
+              id="acoustic"
+              name="acoustic"
+              checked={isAcousticCheck}
+              onChange={handleGuitarTypeCheck}
+            />}
+
           <label htmlFor="acoustic">Акустические гитары</label>
         </div>
         <div className="form-checkbox catalog-filter__block-item">
-          <input className="visually-hidden" type="checkbox" id="electric" name="electric" onChange={handleGuitarTypeCheck} />
+          {isTwelveStringsCheck ?
+            <input
+              className="visually-hidden"
+              type="checkbox"
+              id="electric"
+              name="electric"
+              checked={isElectricCheck}
+              onChange={handleGuitarTypeCheck}
+              disabled
+            /> :
+            <input
+              className="visually-hidden"
+              type="checkbox"
+              id="electric"
+              name="electric"
+              checked={isElectricCheck}
+              onChange={handleGuitarTypeCheck}
+            />}
+
           <label htmlFor="electric">Электрогитары</label>
         </div>
         <div className="form-checkbox catalog-filter__block-item">
-          <input className="visually-hidden" type="checkbox" id="ukulele" name="ukulele" onChange={handleGuitarTypeCheck} />
+          {isTwelveStringsCheck || isSixStringsCheck || isSevenStringsCheck ?
+            <input
+              className="visually-hidden"
+              type="checkbox"
+              id="ukulele"
+              name="ukulele"
+              checked={isUkuleleCheck}
+              onChange={handleGuitarTypeCheck}
+              disabled
+            /> :
+            <input
+              className="visually-hidden"
+              type="checkbox"
+              id="ukulele"
+              name="ukulele"
+              checked={isUkuleleCheck}
+              onChange={handleGuitarTypeCheck}
+            />}
+
           <label htmlFor="ukulele">Укулеле</label>
         </div>
       </fieldset>
       <fieldset className="catalog-filter__block">
         <legend className="catalog-filter__block-title">Количество струн</legend>
         <div className="form-checkbox catalog-filter__block-item">
-          <input className="visually-hidden" type="checkbox" id="4-strings" name="4-strings" onChange={handleGuitarStringCheck} />
+          {isAcousticCheck ?
+            <input
+              className="visually-hidden"
+              type="checkbox"
+              id="4-strings"
+              name="4-strings"
+              checked={isFourStringsCheck}
+              onChange={handleGuitarStringCheck}
+              disabled
+            /> :
+            <input
+              className="visually-hidden"
+              type="checkbox"
+              id="4-strings"
+              name="4-strings"
+              checked={isFourStringsCheck}
+              onChange={handleGuitarStringCheck}
+            />}
+
           <label htmlFor="4-strings">4</label>
         </div>
         <div className="form-checkbox catalog-filter__block-item">
-          <input className="visually-hidden" type="checkbox" id="6-strings" name="6-strings" onChange={handleGuitarStringCheck} />
+          {isUkuleleCheck ?
+            <input
+              className="visually-hidden"
+              type="checkbox"
+              id="6-strings"
+              name="6-strings"
+              checked={isSixStringsCheck}
+              onChange={handleGuitarStringCheck}
+              disabled
+            /> :
+            <input
+              className="visually-hidden"
+              type="checkbox"
+              id="6-strings"
+              name="6-strings"
+              checked={isSixStringsCheck}
+              onChange={handleGuitarStringCheck}
+            />}
           <label htmlFor="6-strings">6</label>
         </div>
         <div className="form-checkbox catalog-filter__block-item">
-          <input className="visually-hidden" type="checkbox" id="7-strings" name="7-strings" onChange={handleGuitarStringCheck} />
+          {isUkuleleCheck ?
+            <input
+              className="visually-hidden"
+              type="checkbox"
+              id="7-strings"
+              name="7-strings"
+              checked={isSevenStringsCheck}
+              onChange={handleGuitarStringCheck}
+              disabled
+            /> :
+            <input
+              className="visually-hidden"
+              type="checkbox"
+              id="7-strings"
+              name="7-strings"
+              checked={isSevenStringsCheck}
+              onChange={handleGuitarStringCheck}
+            />}
+
           <label htmlFor="7-strings">7</label>
         </div>
         <div className="form-checkbox catalog-filter__block-item">
-          <input className="visually-hidden" type="checkbox" id="12-strings" name="12-strings" onChange={handleGuitarStringCheck} />
+          {isElectricCheck || isUkuleleCheck ?
+            <input
+              className="visually-hidden"
+              type="checkbox"
+              id="12-strings"
+              name="12-strings"
+              checked={isTwelveStringsCheck}
+              onChange={handleGuitarStringCheck}
+              disabled
+            /> :
+            <input
+              className="visually-hidden"
+              type="checkbox"
+              id="12-strings"
+              name="12-strings"
+              checked={isTwelveStringsCheck}
+              onChange={handleGuitarStringCheck}
+            />}
           <label htmlFor="12-strings">12</label>
         </div>
       </fieldset>
