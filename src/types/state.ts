@@ -10,6 +10,9 @@ type State = {
   priceRangeMax: number,
   userPriceMin: string,
   userPriceMax: string,
+  isAcousticCheck: boolean,
+  isElectricCheck: boolean,
+  isUkuleleCheck: boolean,
 };
 
 export type {

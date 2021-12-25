@@ -75,6 +75,32 @@ const setUserPriceMax = createAction(
   }),
 );
 
+const setIsAcousticCheck = createAction(
+  ActionType.SetIsAcousticCheck,
+  (isAcousticCheck: boolean) => ({
+    payload: {
+      isAcousticCheck,
+    },
+  }),
+);
+const setIsElectricCheck = createAction(
+  ActionType.SetIsElectricCheck,
+  (isElectricCheck: boolean) => ({
+    payload: {
+      isElectricCheck,
+    },
+  }),
+);
+const setIsUkuleleCheck = createAction(
+  ActionType.SetIsUkuleleCheck,
+  (isUkuleleCheck: boolean) => ({
+    payload: {
+      isUkuleleCheck,
+    },
+  }),
+);
+
+
 export {
   loadGuitars,
   loadGuitarById,
@@ -83,5 +109,8 @@ export {
   setPriceRangeMin,
   setPriceRangeMax,
   setUserPriceMin,
-  setUserPriceMax
+  setUserPriceMax,
+  setIsAcousticCheck,
+  setIsElectricCheck,
+  setIsUkuleleCheck
 };

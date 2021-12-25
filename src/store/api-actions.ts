@@ -1,4 +1,4 @@
-import { APIRoute, FilterPath, OrderType, OrderTypePath, SortType, SortTypePath } from '../const';
+import { APIRoute, FilterPath, GuitarType, OrderType, OrderTypePath, SortType, SortTypePath } from '../const';
 import { ThunkActionResult } from '../types/action';
 import { loadGuitarById, loadGuitars, setPriceRangeMax, setPriceRangeMin } from './action';
 import { Guitar } from '../types/guitar';
@@ -7,7 +7,10 @@ const fetchGuitarsAction = (
   sortType: SortType,
   orderType: OrderType,
   userPriceMin: string,
-  userPriceMax: string): ThunkActionResult =>
+  userPriceMax: string,
+  isAcousticCheck: boolean,
+  isElectricCheck: boolean,
+  isUkuleleCheck: boolean): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     let path = `${APIRoute.Guitars}?`;
     if (sortType) {
@@ -21,6 +24,15 @@ const fetchGuitarsAction = (
     }
     if (userPriceMax) {
       path += `${FilterPath.PriceLte}${userPriceMax}`;
+    }
+    if (isAcousticCheck) {
+      path += `${FilterPath.Type}${GuitarType.Acoustic}`;
+    }
+    if (isElectricCheck) {
+      path += `${FilterPath.Type}${GuitarType.Electric}`;
+    }
+    if (isUkuleleCheck) {
+      path += `${FilterPath.Type}${GuitarType.Ukulele}`;
     }
     const { data } = await api.get<Guitar[]>(path);
     dispatch(loadGuitars(data));

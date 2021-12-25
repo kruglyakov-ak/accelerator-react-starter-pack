@@ -15,6 +15,13 @@ const enum GuitarType {
   Ukulele = 'ukulele',
 }
 
+const enum StringCount {
+  FourStrings = 4,
+  SixStrings = 6,
+  SevenStrings = 7,
+  TwelveStrings = 12,
+}
+
 const GuitarTypeToReadable = {
   [GuitarType.Electric]: 'Электрогитара',
   [GuitarType.Acoustic]: 'Акустическая гитара',
@@ -48,6 +55,8 @@ const OrderTypePath = {
 const enum FilterPath {
   PriceGte = '&price_gte=',
   PriceLte = '&price_lte=',
+  Type = '&type_like=',
+  String = '&stringCount_like=',
 }
 
 const enum DefaultPriceRange {
@@ -66,5 +75,6 @@ export {
   SortTypePath,
   OrderTypePath,
   FilterPath,
-  DefaultPriceRange
+  DefaultPriceRange,
+  StringCount
 };

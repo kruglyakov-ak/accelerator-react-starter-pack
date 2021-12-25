@@ -11,7 +11,10 @@ enum ActionType {
   SetPriceRangeMin = 'filter/settPriceRangeMin',
   SetPriceRangeMax = 'filter/setPriceRangeMax',
   SetUserPriceMin = 'filter/setUserPriceMin',
-  SetUserPriceMax = 'filter/setUserPriceMax'
+  SetUserPriceMax = 'filter/setUserPriceMax',
+  SetIsAcousticCheck = 'filter/setIsAcousticCheck',
+  SetIsElectricCheck = 'filter/setIsElectricCheck',
+  SetIsUkuleleCheck = 'filter/setIsUkuleleCheck'
 }
 
 type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

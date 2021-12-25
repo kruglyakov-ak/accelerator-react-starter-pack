@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserPriceMax, setUserPriceMin } from '../../store/action';
+import { GuitarType } from '../../const';
+import {
+  setIsAcousticCheck,
+  setIsElectricCheck,
+  setIsUkuleleCheck,
+  setUserPriceMax,
+  setUserPriceMin
+} from '../../store/action';
 import { getPriceRangeMax, getPriceRangeMin } from '../../store/selectors';
 
 function CatalogFilter(): JSX.Element {
@@ -37,6 +44,20 @@ function CatalogFilter(): JSX.Element {
     dispatch(setUserPriceMax(target.value));
   };
 
+  const handleGuitarTypeCheck = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    switch (target.name) {
+      case GuitarType.Acoustic:
+        dispatch(setIsAcousticCheck(target.checked));
+        break;
+      case GuitarType.Electric:
+        dispatch(setIsElectricCheck(target.checked));
+        break;
+      case GuitarType.Ukulele:
+        dispatch(setIsUkuleleCheck(target.checked));
+        break;
+    }
+  };
+
   return (
     <form className="catalog-filter">
       <h2 className="title title--bigger catalog-filter__title">Фильтр</h2>
@@ -56,26 +77,26 @@ function CatalogFilter(): JSX.Element {
       <fieldset className="catalog-filter__block">
         <legend className="catalog-filter__block-title">Тип гитар</legend>
         <div className="form-checkbox catalog-filter__block-item">
-          <input className="visually-hidden" type="checkbox" id="acoustic" name="acoustic" />
+          <input className="visually-hidden" type="checkbox" id="acoustic" name="acoustic" onChange={handleGuitarTypeCheck} />
           <label htmlFor="acoustic">Акустические гитары</label>
         </div>
         <div className="form-checkbox catalog-filter__block-item">
-          <input className="visually-hidden" type="checkbox" id="electric" name="electric" checked />
+          <input className="visually-hidden" type="checkbox" id="electric" name="electric" onChange={handleGuitarTypeCheck} />
           <label htmlFor="electric">Электрогитары</label>
         </div>
         <div className="form-checkbox catalog-filter__block-item">
-          <input className="visually-hidden" type="checkbox" id="ukulele" name="ukulele" checked />
+          <input className="visually-hidden" type="checkbox" id="ukulele" name="ukulele" onChange={handleGuitarTypeCheck} />
           <label htmlFor="ukulele">Укулеле</label>
         </div>
       </fieldset>
       <fieldset className="catalog-filter__block">
         <legend className="catalog-filter__block-title">Количество струн</legend>
         <div className="form-checkbox catalog-filter__block-item">
-          <input className="visually-hidden" type="checkbox" id="4-strings" name="4-strings" checked />
+          <input className="visually-hidden" type="checkbox" id="4-strings" name="4-strings" />
           <label htmlFor="4-strings">4</label>
         </div>
         <div className="form-checkbox catalog-filter__block-item">
-          <input className="visually-hidden" type="checkbox" id="6-strings" name="6-strings" checked />
+          <input className="visually-hidden" type="checkbox" id="6-strings" name="6-strings" />
           <label htmlFor="6-strings">6</label>
         </div>
         <div className="form-checkbox catalog-filter__block-item">
@@ -83,7 +104,7 @@ function CatalogFilter(): JSX.Element {
           <label htmlFor="7-strings">7</label>
         </div>
         <div className="form-checkbox catalog-filter__block-item">
-          <input className="visually-hidden" type="checkbox" id="12-strings" name="12-strings" disabled />
+          <input className="visually-hidden" type="checkbox" id="12-strings" name="12-strings" />
           <label htmlFor="12-strings">12</label>
         </div>
       </fieldset>

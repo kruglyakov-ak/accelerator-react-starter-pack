@@ -9,7 +9,10 @@ import {
   loadGuitarById,
   loadGuitars,
   setUserPriceMin,
-  setUserPriceMax
+  setUserPriceMax,
+  setIsAcousticCheck,
+  setIsElectricCheck,
+  setIsUkuleleCheck
 } from './action';
 
 const initialState: State = {
@@ -21,6 +24,9 @@ const initialState: State = {
   priceRangeMax: DefaultPriceRange.Max,
   userPriceMin: '',
   userPriceMax: '',
+  isAcousticCheck: false,
+  isElectricCheck: false,
+  isUkuleleCheck: false,
 };
 
 const rootReducer = createReducer(initialState, (builder) => {
@@ -56,7 +62,23 @@ const rootReducer = createReducer(initialState, (builder) => {
     .addCase(setUserPriceMax, (state, action) => {
       const { userPriceMax } = action.payload;
       state.userPriceMax = userPriceMax;
+    })
+    .addCase(setIsAcousticCheck, (state, action) => {
+      const { isAcousticCheck } = action.payload;
+      state.isAcousticCheck = isAcousticCheck;
+
+    })
+    .addCase(setIsElectricCheck, (state, action) => {
+      const { isElectricCheck } = action.payload;
+      state.isElectricCheck = isElectricCheck;
+
+    })
+    .addCase(setIsUkuleleCheck, (state, action) => {
+      const { isUkuleleCheck } = action.payload;
+      state.isUkuleleCheck = isUkuleleCheck;
+
     });
+
 });
 
 export { rootReducer };

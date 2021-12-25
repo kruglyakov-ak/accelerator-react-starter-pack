@@ -10,6 +10,9 @@ const getPriceRangeMin = (state: State): number => state.priceRangeMin;
 const getPriceRangeMax = (state: State): number => state.priceRangeMax;
 const getUserPriceMin = (state: State): string => state.userPriceMin;
 const getUserPriceMax = (state: State): string => state.userPriceMax;
+const getIsAcousticCheck = (state: State): boolean => state.isAcousticCheck;
+const getIsElectricCheck = (state: State): boolean => state.isElectricCheck;
+const getIsUkuleleCheck = (state: State): boolean => state.isUkuleleCheck;
 
 export {
   getGuitars,
@@ -19,5 +22,8 @@ export {
   getPriceRangeMin,
   getPriceRangeMax,
   getUserPriceMin,
-  getUserPriceMax
+  getUserPriceMax,
+  getIsAcousticCheck,
+  getIsElectricCheck,
+  getIsUkuleleCheck
 };
