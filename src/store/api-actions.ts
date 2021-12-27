@@ -53,13 +53,11 @@ const fetchGuitarsAction = (
     }
     path += `${FilterPath.PaginationStart}${currentPageNumber * GUITARS_ON_PAGE}`;
     path += `${FilterPath.PaginationEnd}${(currentPageNumber + 1) * GUITARS_ON_PAGE}`;
-    // eslint-disable-next-line no-console
-    console.log(path);
     const { data, headers } = await api.get<Guitar[]>(path);
     dispatch(loadGuitars(data));
+    dispatch(setGuitarsCount(headers['x-total-count']));
     dispatch(setPriceRangeMin(data.slice().sort((a, b) => a.price - b.price)[0].price));
     dispatch(setPriceRangeMax(data.slice().sort((a, b) => b.price - a.price)[0].price));
-    dispatch(setGuitarsCount(headers['x-total-count']));
   };
 
 const fetchGuitarByIdAction = (id: number): ThunkActionResult =>
@@ -68,7 +66,16 @@ const fetchGuitarByIdAction = (id: number): ThunkActionResult =>
     dispatch(loadGuitarById(data));
   };
 
+
+const fetchGuitarPriceRange = (): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const { data } = await api.get<Guitar[]>(APIRoute.Guitars);
+    dispatch(setPriceRangeMin(data.slice().sort((a, b) => a.price - b.price)[0].price));
+    dispatch(setPriceRangeMax(data.slice().sort((a, b) => b.price - a.price)[0].price));
+  };
+
 export {
   fetchGuitarsAction,
-  fetchGuitarByIdAction
+  fetchGuitarByIdAction,
+  fetchGuitarPriceRange
 };

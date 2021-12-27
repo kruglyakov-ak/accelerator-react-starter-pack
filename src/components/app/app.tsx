@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { fetchGuitarsAction } from '../../store/api-actions';
+import { fetchGuitarPriceRange, fetchGuitarsAction } from '../../store/api-actions';
 import {
   getIsAcousticCheck,
   getIsElectricCheck,
@@ -48,6 +48,18 @@ function App(): JSX.Element {
     isSevenStringsCheck,
     isTwelveStringsCheck,
     currentPageNumber));
+
+  if (
+    !isAcousticCheck &&
+    !isElectricCheck &&
+    !isUkuleleCheck &&
+    !isFourStringsCheck &&
+    !isSixStringsCheck &&
+    !isSevenStringsCheck &&
+    !isTwelveStringsCheck
+  ) {
+    dispatch(fetchGuitarPriceRange());
+  }
 
   return (
     <Switch>
