@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  setCurrentPageNumber,
   setUserPriceMax,
   setUserPriceMin
 } from '../../store/action';
@@ -30,6 +31,7 @@ function CatalogFilterPrice(): JSX.Element {
     if (+target.value > priceMax && target.value !== '') {
       setUserPriceMinValue(`${priceMax}`);
     }
+    dispatch(setCurrentPageNumber(0));
     dispatch(setUserPriceMin(target.value));
   };
 
@@ -40,6 +42,7 @@ function CatalogFilterPrice(): JSX.Element {
     if (+target.value > priceMax && target.value !== '') {
       setUserPriceMaxValue(`${priceMax}`);
     }
+    dispatch(setCurrentPageNumber(0));
     dispatch(setUserPriceMax(target.value));
   };
 

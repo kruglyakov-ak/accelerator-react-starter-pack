@@ -110,6 +110,7 @@ const setIsFourStringsCheck = createAction(
     },
   }),
 );
+
 const setIsSixStringsCheck = createAction(
   ActionType.SetIsSixStringsCheck,
   (isSixStringsCheck: boolean) => ({
@@ -118,6 +119,7 @@ const setIsSixStringsCheck = createAction(
     },
   }),
 );
+
 const setIsSevenStringsCheck = createAction(
   ActionType.SetIsSevenStringsCheck,
   (isSevenStringsCheck: boolean) => ({
@@ -126,11 +128,30 @@ const setIsSevenStringsCheck = createAction(
     },
   }),
 );
+
 const setIsTwelveStringsCheck = createAction(
   ActionType.SetIsTwelveStringsCheck,
   (isTwelveStringsCheck: boolean) => ({
     payload: {
       isTwelveStringsCheck,
+    },
+  }),
+);
+
+const setGuitarsCount = createAction(
+  ActionType.SetGuitarsCount,
+  (guitarsCount: number) => ({
+    payload: {
+      guitarsCount,
+    },
+  }),
+);
+
+const setCurrentPageNumber = createAction(
+  ActionType.SetCurrentPageNumber,
+  (currentPageNumber: number) => ({
+    payload: {
+      currentPageNumber,
     },
   }),
 );
@@ -151,5 +172,7 @@ export {
   setIsFourStringsCheck,
   setIsSixStringsCheck,
   setIsSevenStringsCheck,
-  setIsTwelveStringsCheck
+  setIsTwelveStringsCheck,
+  setGuitarsCount,
+  setCurrentPageNumber
 };

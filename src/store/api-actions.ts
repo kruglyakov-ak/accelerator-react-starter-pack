@@ -1,6 +1,6 @@
-import { APIRoute, FilterPath, GuitarType, OrderType, OrderTypePath, SortType, SortTypePath, StringCount, StringCountNumber } from '../const';
+import { APIRoute, FilterPath, GUITARS_ON_PAGE, GuitarType, OrderType, OrderTypePath, SortType, SortTypePath, StringCount, StringCountNumber } from '../const';
 import { ThunkActionResult } from '../types/action';
-import { loadGuitarById, loadGuitars, setPriceRangeMax, setPriceRangeMin } from './action';
+import { loadGuitarById, loadGuitars, setGuitarsCount, setPriceRangeMax, setPriceRangeMin } from './action';
 import { Guitar } from '../types/guitar';
 
 const fetchGuitarsAction = (
@@ -11,12 +11,13 @@ const fetchGuitarsAction = (
   isAcousticCheck: boolean,
   isElectricCheck: boolean,
   isUkuleleCheck: boolean,
-  setIsFourStringsCheck: boolean,
-  setIsSixStringsCheck: boolean,
-  setIsSevenStringsCheck: boolean,
-  setIsTwelveStringsCheck: boolean): ThunkActionResult =>
+  isFourStringsCheck: boolean,
+  isSixStringsCheck: boolean,
+  isSevenStringsCheck: boolean,
+  isTwelveStringsCheck: boolean,
+  currentPageNumber: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    let path = `${APIRoute.Guitars}?`;
+    let path = `${APIRoute.Guitars}`;
     if (sortType) {
       path += SortTypePath[sortType];
     }
@@ -38,22 +39,27 @@ const fetchGuitarsAction = (
     if (isUkuleleCheck) {
       path += `${FilterPath.Type}${GuitarType.Ukulele}`;
     }
-    if (setIsFourStringsCheck) {
+    if (isFourStringsCheck) {
       path += `${FilterPath.String}${StringCountNumber[StringCount.FourStrings]}`;
     }
-    if (setIsSixStringsCheck) {
+    if (isSixStringsCheck) {
       path += `${FilterPath.String}${StringCountNumber[StringCount.SixStrings]}`;
     }
-    if (setIsSevenStringsCheck) {
+    if (isSevenStringsCheck) {
       path += `${FilterPath.String}${StringCountNumber[StringCount.SevenStrings]}`;
     }
-    if (setIsTwelveStringsCheck) {
+    if (isTwelveStringsCheck) {
       path += `${FilterPath.String}${StringCountNumber[StringCount.TwelveStrings]}`;
     }
-    const { data } = await api.get<Guitar[]>(path);
+    path += `${FilterPath.PaginationStart}${currentPageNumber * GUITARS_ON_PAGE}`;
+    path += `${FilterPath.PaginationEnd}${(currentPageNumber + 1) * GUITARS_ON_PAGE}`;
+    // eslint-disable-next-line no-console
+    console.log(path);
+    const { data, headers } = await api.get<Guitar[]>(path);
     dispatch(loadGuitars(data));
     dispatch(setPriceRangeMin(data.slice().sort((a, b) => a.price - b.price)[0].price));
     dispatch(setPriceRangeMax(data.slice().sort((a, b) => b.price - a.price)[0].price));
+    dispatch(setGuitarsCount(headers['x-total-count']));
   };
 
 const fetchGuitarByIdAction = (id: number): ThunkActionResult =>

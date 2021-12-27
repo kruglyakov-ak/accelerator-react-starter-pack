@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { GuitarType } from '../../const';
 import {
+  setCurrentPageNumber,
   setIsAcousticCheck,
   setIsElectricCheck,
   setIsUkuleleCheck
@@ -26,6 +27,7 @@ function CatalogFilterType(): JSX.Element {
   const isTwelveStringsCheck = useSelector(getIsTwelveStringsCheck);
 
   const handleGuitarTypeCheck = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setCurrentPageNumber(0));
     switch (target.name) {
       case GuitarType.Acoustic:
         dispatch(setIsAcousticCheck(target.checked));

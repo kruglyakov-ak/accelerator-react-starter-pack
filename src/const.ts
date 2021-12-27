@@ -64,6 +64,8 @@ const enum FilterPath {
   PriceLte = '&price_lte=',
   Type = '&type_like=',
   String = '&stringCount_like=',
+  PaginationStart = '&_start=',
+  PaginationEnd = '&_end=',
 }
 
 const enum DefaultPriceRange {
@@ -71,6 +73,7 @@ const enum DefaultPriceRange {
   Max = 30000,
 }
 
+const GUITARS_ON_PAGE = 9;
 
 export {
   AppRoute,
@@ -84,5 +87,6 @@ export {
   FilterPath,
   DefaultPriceRange,
   StringCount,
-  StringCountNumber
+  StringCountNumber,
+  GUITARS_ON_PAGE
 };

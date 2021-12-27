@@ -14,6 +14,7 @@ import {
   getUserPriceMin
 } from '../../store/catalog-filter/selectors';
 import { getOrderType, getSortType } from '../../store/catalog-sort/selectors';
+import { getCurrentPageNumber } from '../../store/page-pagination/selectors';
 import Cart from '../cart/cart';
 import MainPage from '../main-page/main-page';
 import Page404 from '../page-404/page-404';
@@ -32,6 +33,7 @@ function App(): JSX.Element {
   const isSixStringsCheck = useSelector(getIsSixStringsCheck);
   const isSevenStringsCheck = useSelector(getIsSevenStringsCheck);
   const isTwelveStringsCheck = useSelector(getIsTwelveStringsCheck);
+  const currentPageNumber = useSelector(getCurrentPageNumber);
 
   dispatch(fetchGuitarsAction(
     sortType,
@@ -44,7 +46,8 @@ function App(): JSX.Element {
     isFourStringsCheck,
     isSixStringsCheck,
     isSevenStringsCheck,
-    isTwelveStringsCheck));
+    isTwelveStringsCheck,
+    currentPageNumber));
 
   return (
     <Switch>

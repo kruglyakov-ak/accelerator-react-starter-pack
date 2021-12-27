@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { StringCount } from '../../const';
 import {
+  setCurrentPageNumber,
   setIsFourStringsCheck,
   setIsSevenStringsCheck,
   setIsSixStringsCheck,
@@ -27,6 +28,7 @@ function CatalogFilterStringCount(): JSX.Element {
   const isTwelveStringsCheck = useSelector(getIsTwelveStringsCheck);
 
   const handleGuitarStringCheck = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setCurrentPageNumber(0));
     switch (target.name) {
       case StringCount.FourStrings:
         dispatch(setIsFourStringsCheck(target.checked));

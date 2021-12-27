@@ -5,6 +5,7 @@ import Header from '../header/header';
 import CatalogSort from '../catalog-sort/catalog-sort';
 import ProductCardsList from '../product-cards-list/product-cards-list';
 import CatalogFilter from '../catalog-filter/catalog-filter';
+import PaginationList from '../pagination-list/pagination-list';
 
 function MainPage(): JSX.Element {
   return (
@@ -26,19 +27,7 @@ function MainPage(): JSX.Element {
             <CatalogFilter />
             <CatalogSort />
             <ProductCardsList />
-
-            <div className="pagination page-content__pagination">
-              <ul className="pagination__list">
-                <li className="pagination__page pagination__page--active"><a className="link pagination__page-link" href="1">1</a>
-                </li>
-                <li className="pagination__page"><a className="link pagination__page-link" href="2">2</a>
-                </li>
-                <li className="pagination__page"><a className="link pagination__page-link" href="3">3</a>
-                </li>
-                <li className="pagination__page pagination__page--next" id="next"><a className="link pagination__page-link" href="2">Далее</a>
-                </li>
-              </ul>
-            </div>
+            <PaginationList />
           </div>
         </div>
       </main>

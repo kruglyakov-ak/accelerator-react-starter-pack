@@ -28,9 +28,15 @@ type CatalogFilter = {
   isTwelveStringsCheck: boolean,
 };
 
+type PagePagination = {
+  guitarsCount: number,
+  currentPageNumber: number,
+};
+
 export type {
   State,
   GuitarData,
   CatalogSort,
-  CatalogFilter
+  CatalogFilter,
+  PagePagination
 };
