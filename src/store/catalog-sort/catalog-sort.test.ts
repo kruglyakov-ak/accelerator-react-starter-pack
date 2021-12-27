@@ -2,7 +2,7 @@ import { OrderType, SortType } from '../../const';
 import { setOrderType, setSortType } from '../action';
 import { catalogSort } from './catalog-sort';
 
-describe('Reducer: guitarData', () => {
+describe('Reducer: catalogSort', () => {
   it('without additional parameters should return initial state', () => {
     expect(catalogSort(void 0, { type: 'UNKNOWN_ACTION' }))
       .toEqual({
