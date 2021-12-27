@@ -6,6 +6,7 @@ type State = RootState;
 
 type GuitarData = {
   guitars: Guitar[],
+  guitarsWithoutFilters: Guitar[],
   guitar: Guitar | null,
 };
 

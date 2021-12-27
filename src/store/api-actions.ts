@@ -1,6 +1,6 @@
 import { APIRoute, FilterPath, GUITARS_ON_PAGE, GuitarType, OrderType, OrderTypePath, SortType, SortTypePath, StringCount, StringCountNumber } from '../const';
 import { ThunkActionResult } from '../types/action';
-import { loadGuitarById, loadGuitars, setGuitarsCount, setPriceRangeMax, setPriceRangeMin } from './action';
+import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin } from './action';
 import { Guitar } from '../types/guitar';
 
 const fetchGuitarsAction = (
@@ -56,8 +56,17 @@ const fetchGuitarsAction = (
     const { data, headers } = await api.get<Guitar[]>(path);
     dispatch(loadGuitars(data));
     dispatch(setGuitarsCount(headers['x-total-count']));
-    dispatch(setPriceRangeMin(data.slice().sort((a, b) => a.price - b.price)[0].price));
-    dispatch(setPriceRangeMax(data.slice().sort((a, b) => b.price - a.price)[0].price));
+    if (
+      isAcousticCheck ||
+      isElectricCheck ||
+      isUkuleleCheck ||
+      isFourStringsCheck ||
+      isSixStringsCheck ||
+      isSevenStringsCheck ||
+      isTwelveStringsCheck) {
+      dispatch(setPriceRangeMin(data.slice().sort((a, b) => a.price - b.price)[0].price));
+      dispatch(setPriceRangeMax(data.slice().sort((a, b) => b.price - a.price)[0].price));
+    }
   };
 
 const fetchGuitarByIdAction = (id: number): ThunkActionResult =>
@@ -67,9 +76,10 @@ const fetchGuitarByIdAction = (id: number): ThunkActionResult =>
   };
 
 
-const fetchGuitarPriceRange = (): ThunkActionResult =>
+const fetchGuitarWithoutFilters = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const { data } = await api.get<Guitar[]>(APIRoute.Guitars);
+    dispatch(loadGuitarsWithoutFilters(data));
     dispatch(setPriceRangeMin(data.slice().sort((a, b) => a.price - b.price)[0].price));
     dispatch(setPriceRangeMax(data.slice().sort((a, b) => b.price - a.price)[0].price));
   };
@@ -77,5 +87,5 @@ const fetchGuitarPriceRange = (): ThunkActionResult =>
 export {
   fetchGuitarsAction,
   fetchGuitarByIdAction,
-  fetchGuitarPriceRange
+  fetchGuitarWithoutFilters
 };

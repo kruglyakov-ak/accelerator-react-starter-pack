@@ -14,7 +14,7 @@ function MainPage(): JSX.Element {
 
       <main className="page-content">
         <div className="container">
-          <h1 className="page-content__title title title--bigger">Каталог гитар</h1>
+          <h1 className="page-content__title title title--bigger" id="top">Каталог гитар</h1>
           <ul className="breadcrumbs page-content__breadcrumbs">
             <li className="breadcrumbs__item">
               <Link to={AppRoute.Main} className="link">Главная</Link>

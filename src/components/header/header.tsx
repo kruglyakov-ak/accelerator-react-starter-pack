@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { getGuitars } from '../../store/guitar-data/selectors';
+import { getGuitarsWithoutFilters } from '../../store/guitar-data/selectors';
 
 function Header(): JSX.Element {
-  const guitars = useSelector(getGuitars);
+  const guitars = useSelector(getGuitarsWithoutFilters);
 
   const [isSearchListHidden, setIsSearchListHidden] = useState(true);
   const [searchValue, setSearchValue] = useState('');

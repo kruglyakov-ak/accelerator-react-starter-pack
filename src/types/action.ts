@@ -6,9 +6,10 @@ import { State } from './state';
 enum ActionType {
   LoadGuitars = 'data/loadGuitars',
   LoadGuitarById = 'data/loadGuitarById',
+  LoadGuitarsWithoutFilters = 'data/loadGuitarsWithoutFilters',
   SetSortType = 'sort/setSortType',
   SetOrderType = 'sort/setOrderType',
-  SetPriceRangeMin = 'filter/settPriceRangeMin',
+  SetPriceRangeMin = 'filter/setPriceRangeMin',
   SetPriceRangeMax = 'filter/setPriceRangeMax',
   SetUserPriceMin = 'filter/setUserPriceMin',
   SetUserPriceMax = 'filter/setUserPriceMax',
@@ -20,7 +21,7 @@ enum ActionType {
   SetIsSevenStringsCheck = 'filter/setIsSevenStringsCheck',
   SetIsTwelveStringsCheck = 'filter/setIsTwelveStringsCheck',
   SetGuitarsCount = 'pagination/setGuitarsCount',
-  SetCurrentPageNumber = 'pagination/setCurrentPageNumber'
+  SetCurrentPageNumber = 'pagination/setCurrentPageNumber',
 }
 
 type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

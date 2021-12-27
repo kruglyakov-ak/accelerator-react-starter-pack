@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { fetchGuitarPriceRange, fetchGuitarsAction } from '../../store/api-actions';
+import { fetchGuitarsAction, fetchGuitarWithoutFilters } from '../../store/api-actions';
 import {
   getIsAcousticCheck,
   getIsElectricCheck,
@@ -58,7 +58,7 @@ function App(): JSX.Element {
     !isSevenStringsCheck &&
     !isTwelveStringsCheck
   ) {
-    dispatch(fetchGuitarPriceRange());
+    dispatch(fetchGuitarWithoutFilters());
   }
 
   return (

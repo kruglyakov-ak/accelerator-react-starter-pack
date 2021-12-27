@@ -12,6 +12,15 @@ const loadGuitars = createAction(
   }),
 );
 
+const loadGuitarsWithoutFilters = createAction(
+  ActionType.LoadGuitarsWithoutFilters,
+  (guitarsWithoutFilters: Guitar[]) => ({
+    payload: {
+      guitarsWithoutFilters,
+    },
+  }),
+);
+
 const loadGuitarById = createAction(
   ActionType.LoadGuitarById,
   (guitar: Guitar) => ({
@@ -160,6 +169,7 @@ const setCurrentPageNumber = createAction(
 export {
   loadGuitars,
   loadGuitarById,
+  loadGuitarsWithoutFilters,
   setSortType,
   setOrderType,
   setPriceRangeMin,
