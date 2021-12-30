@@ -5,8 +5,7 @@ import { State } from '../../types/state';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import { DefaultPriceRange } from '../../const';
-import CatalogFilterPrice from './catalog-filter-price';
+import CatalogFilterStringCount from './catalog-filter-string-count';
 
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
@@ -18,20 +17,17 @@ const mockStore = configureMockStore<
 
 const store = mockStore({
   FILTER: {
-    priceRangeMin: DefaultPriceRange.Min,
-    priceRangeMax: DefaultPriceRange.Max,
   },
 });
-describe('Component: CatalogFilterPrice', () => {
+describe('Component: CatalogFilterStringCount', () => {
 
-  it('should render CatalogFilterPrice', () => {
+  it('should render CatalogFilterStringCount', () => {
     render(
       <Provider store={store}>
-        <CatalogFilterPrice />
+        <CatalogFilterStringCount />
       </Provider>);
 
-    expect(screen.getByPlaceholderText(DefaultPriceRange.Min)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(DefaultPriceRange.Max)).toBeInTheDocument();
+    expect(screen.getByText(/Количество струн/i)).toBeInTheDocument();
   });
 
 });
