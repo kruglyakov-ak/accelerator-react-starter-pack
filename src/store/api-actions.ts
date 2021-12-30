@@ -1,23 +1,27 @@
-import { APIRoute, FilterPath, GUITARS_ON_PAGE, GuitarType, OrderType, OrderTypePath, SortType, SortTypePath, StringCount, StringCountNumber } from '../const';
+import { APIRoute, FilterPath, GUITARS_ON_PAGE, GuitarType, OrderTypePath, SortTypePath, StringCount, StringCountNumber } from '../const';
 import { ThunkActionResult } from '../types/action';
 import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin } from './action';
 import { Guitar } from '../types/guitar';
+import { FetchGuitarProperty } from '../types/fetch-guitar-property';
 
-const fetchGuitarsAction = (
-  sortType: SortType,
-  orderType: OrderType,
-  userPriceMin: string,
-  userPriceMax: string,
-  isAcousticCheck: boolean,
-  isElectricCheck: boolean,
-  isUkuleleCheck: boolean,
-  isFourStringsCheck: boolean,
-  isSixStringsCheck: boolean,
-  isSevenStringsCheck: boolean,
-  isTwelveStringsCheck: boolean,
-  currentPageNumber: number): ThunkActionResult =>
+const fetchGuitarsAction = (fetchProperty: FetchGuitarProperty): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    let path = `${APIRoute.Guitars}`;
+    const {
+      sortType,
+      orderType,
+      userPriceMin,
+      userPriceMax,
+      isAcousticCheck,
+      isElectricCheck,
+      isUkuleleCheck,
+      isFourStringsCheck,
+      isSixStringsCheck,
+      isSevenStringsCheck,
+      isTwelveStringsCheck,
+      currentPageNumber,
+    } = fetchProperty;
+    let path = `${APIRoute.Guitars}?`;
+
     if (sortType) {
       path += SortTypePath[sortType];
     }

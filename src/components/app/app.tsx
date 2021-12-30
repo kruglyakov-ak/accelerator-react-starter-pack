@@ -36,18 +36,20 @@ function App(): JSX.Element {
   const currentPageNumber = useSelector(getCurrentPageNumber);
 
   dispatch(fetchGuitarsAction(
-    sortType,
-    orderType,
-    userPriceMin,
-    userPriceMax,
-    isAcousticCheck,
-    isElectricCheck,
-    isUkuleleCheck,
-    isFourStringsCheck,
-    isSixStringsCheck,
-    isSevenStringsCheck,
-    isTwelveStringsCheck,
-    currentPageNumber));
+    {
+      sortType: sortType,
+      orderType: orderType,
+      userPriceMin: userPriceMin,
+      userPriceMax: userPriceMax,
+      isAcousticCheck: isAcousticCheck,
+      isElectricCheck: isElectricCheck,
+      isUkuleleCheck: isUkuleleCheck,
+      isFourStringsCheck: isFourStringsCheck,
+      isSixStringsCheck: isSixStringsCheck,
+      isSevenStringsCheck: isSevenStringsCheck,
+      isTwelveStringsCheck: isTwelveStringsCheck,
+      currentPageNumber: currentPageNumber,
+    }));
 
   if (
     !isAcousticCheck &&
