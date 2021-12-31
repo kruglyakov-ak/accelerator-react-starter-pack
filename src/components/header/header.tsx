@@ -19,9 +19,6 @@ function Header(): JSX.Element {
     }
   };
 
-  // eslint-disable-next-line no-console
-  console.log(history.location.pathname);
-
   return (
     <header className="header" id="header">
       <div className="container header__wrapper">

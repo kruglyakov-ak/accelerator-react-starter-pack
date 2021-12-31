@@ -2,21 +2,8 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Footer from '../footer/footer';
 import Header from '../header/header';
-import CatalogSort from '../catalog-sort/catalog-sort';
-import ProductCardsList from '../product-cards-list/product-cards-list';
-import CatalogFilter from '../catalog-filter/catalog-filter';
-import PaginationList from '../pagination-list/pagination-list';
-import { getGuitars } from '../../store/guitar-data/selectors';
-import { useSelector } from 'react-redux';
-import MainPageEmpty from '../main-page-empty/main-page-empty';
 
-function MainPage(): JSX.Element {
-  const guitars = useSelector(getGuitars);
-
-  if (guitars.length === 0) {
-    return (<MainPageEmpty />);
-  }
-
+function MainPageEmpty(): JSX.Element {
   return (
     <div className="wrapper">
       <Header />
@@ -32,12 +19,7 @@ function MainPage(): JSX.Element {
               <Link to={AppRoute.Main} className="link">Каталог</Link>
             </li>
           </ul>
-          <div className="catalog">
-            <CatalogFilter />
-            <CatalogSort />
-            <ProductCardsList />
-            <PaginationList />
-          </div>
+          <h2 className="page-content__title title title--bigger">Каталог гитар не загрузился</h2>
         </div>
       </main>
 
@@ -46,4 +28,4 @@ function MainPage(): JSX.Element {
   );
 }
 
-export default MainPage;
+export default MainPageEmpty;

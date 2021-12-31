@@ -7,10 +7,8 @@ import { State } from '../../types/state';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import MainPage from './main-page';
-import { makeFakeGuitars } from '../../utils/mocks';
+import MainPage from './main-page-empty';
 
-const guitars = makeFakeGuitars();
 const history = createMemoryHistory();
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
@@ -24,7 +22,7 @@ const store = mockStore({
   FILTER: {
   },
   DATA: {
-    guitars: guitars,
+    guitars: [],
   },
   SORT: {
   },
@@ -33,9 +31,9 @@ const store = mockStore({
   },
 });
 
-describe('Component: MainPage', () => {
+describe('Component: MainPageEmpty', () => {
 
-  it('should render MainPage', () => {
+  it('should render MainPageEmpty', () => {
     render(
       <Provider store={store}>
         <Router history={history}>
@@ -43,9 +41,7 @@ describe('Component: MainPage', () => {
         </Router>
       </Provider>);
 
-    expect(screen.getByText(/Каталог гитар/i)).toBeInTheDocument();
-    expect(screen.getByText(guitars[0].name)).toBeInTheDocument();
-    expect(screen.getByText(guitars[guitars.length - 1].name)).toBeInTheDocument();
+    expect(screen.getByText(/Каталог гитар не загрузился/i)).toBeInTheDocument();
   });
 
 });
