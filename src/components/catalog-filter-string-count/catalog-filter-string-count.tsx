@@ -2,10 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StringCount } from '../../const';
 import {
   setCurrentPageNumber,
+  setIsAcousticCheck,
+  setIsElectricCheck,
   setIsFourStringsCheck,
   setIsSevenStringsCheck,
   setIsSixStringsCheck,
-  setIsTwelveStringsCheck
+  setIsTwelveStringsCheck,
+  setIsUkuleleCheck
 } from '../../store/action';
 import {
   getIsAcousticCheck,
@@ -32,15 +35,20 @@ function CatalogFilterStringCount(): JSX.Element {
     switch (target.name) {
       case StringCount.FourStrings:
         dispatch(setIsFourStringsCheck(target.checked));
+        dispatch(setIsAcousticCheck(false));
         break;
       case StringCount.SixStrings:
         dispatch(setIsSixStringsCheck(target.checked));
+        dispatch(setIsUkuleleCheck(false));
         break;
       case StringCount.SevenStrings:
         dispatch(setIsSevenStringsCheck(target.checked));
+        dispatch(setIsUkuleleCheck(false));
         break;
       case StringCount.TwelveStrings:
         dispatch(setIsTwelveStringsCheck(target.checked));
+        dispatch(setIsUkuleleCheck(false));
+        dispatch(setIsElectricCheck(false));
         break;
     }
   };
@@ -49,7 +57,8 @@ function CatalogFilterStringCount(): JSX.Element {
     <fieldset className="catalog-filter__block">
       <legend className="catalog-filter__block-title">Количество струн</legend>
       <div className="form-checkbox catalog-filter__block-item">
-        {isAcousticCheck ?
+        {isUkuleleCheck || isElectricCheck ||
+        (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
           <input
             className="visually-hidden"
             type="checkbox"
@@ -57,7 +66,6 @@ function CatalogFilterStringCount(): JSX.Element {
             name="4-strings"
             checked={isFourStringsCheck}
             onChange={handleGuitarStringCheck}
-            disabled
           /> :
           <input
             className="visually-hidden"
@@ -66,12 +74,13 @@ function CatalogFilterStringCount(): JSX.Element {
             name="4-strings"
             checked={isFourStringsCheck}
             onChange={handleGuitarStringCheck}
+            disabled
           />}
-
         <label htmlFor="4-strings">4</label>
       </div>
       <div className="form-checkbox catalog-filter__block-item">
-        {isUkuleleCheck ?
+        {isAcousticCheck || isElectricCheck ||
+        (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
           <input
             className="visually-hidden"
             type="checkbox"
@@ -79,7 +88,6 @@ function CatalogFilterStringCount(): JSX.Element {
             name="6-strings"
             checked={isSixStringsCheck}
             onChange={handleGuitarStringCheck}
-            disabled
           /> :
           <input
             className="visually-hidden"
@@ -88,11 +96,13 @@ function CatalogFilterStringCount(): JSX.Element {
             name="6-strings"
             checked={isSixStringsCheck}
             onChange={handleGuitarStringCheck}
+            disabled
           />}
         <label htmlFor="6-strings">6</label>
       </div>
       <div className="form-checkbox catalog-filter__block-item">
-        {isUkuleleCheck ?
+        {isAcousticCheck || isElectricCheck ||
+        (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
           <input
             className="visually-hidden"
             type="checkbox"
@@ -100,7 +110,6 @@ function CatalogFilterStringCount(): JSX.Element {
             name="7-strings"
             checked={isSevenStringsCheck}
             onChange={handleGuitarStringCheck}
-            disabled
           /> :
           <input
             className="visually-hidden"
@@ -109,12 +118,14 @@ function CatalogFilterStringCount(): JSX.Element {
             name="7-strings"
             checked={isSevenStringsCheck}
             onChange={handleGuitarStringCheck}
+            disabled
           />}
 
         <label htmlFor="7-strings">7</label>
       </div>
       <div className="form-checkbox catalog-filter__block-item">
-        {isElectricCheck || isUkuleleCheck ?
+        {isAcousticCheck ||
+        (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
           <input
             className="visually-hidden"
             type="checkbox"
@@ -122,7 +133,6 @@ function CatalogFilterStringCount(): JSX.Element {
             name="12-strings"
             checked={isTwelveStringsCheck}
             onChange={handleGuitarStringCheck}
-            disabled
           /> :
           <input
             className="visually-hidden"
@@ -131,6 +141,7 @@ function CatalogFilterStringCount(): JSX.Element {
             name="12-strings"
             checked={isTwelveStringsCheck}
             onChange={handleGuitarStringCheck}
+            disabled
           />}
         <label htmlFor="12-strings">12</label>
       </div>

@@ -4,6 +4,10 @@ import {
   setCurrentPageNumber,
   setIsAcousticCheck,
   setIsElectricCheck,
+  setIsFourStringsCheck,
+  setIsSevenStringsCheck,
+  setIsSixStringsCheck,
+  setIsTwelveStringsCheck,
   setIsUkuleleCheck
 } from '../../store/action';
 import {
@@ -31,12 +35,17 @@ function CatalogFilterType(): JSX.Element {
     switch (target.name) {
       case GuitarType.Acoustic:
         dispatch(setIsAcousticCheck(target.checked));
+        dispatch(setIsFourStringsCheck(false));
         break;
       case GuitarType.Electric:
         dispatch(setIsElectricCheck(target.checked));
+        dispatch(setIsTwelveStringsCheck(false));
         break;
       case GuitarType.Ukulele:
         dispatch(setIsUkuleleCheck(target.checked));
+        dispatch(setIsSevenStringsCheck(false));
+        dispatch(setIsSixStringsCheck(false));
+        dispatch(setIsTwelveStringsCheck(false));
         break;
     }
   };
@@ -45,7 +54,8 @@ function CatalogFilterType(): JSX.Element {
     <fieldset className="catalog-filter__block">
       <legend className="catalog-filter__block-title">Тип гитар</legend>
       <div className="form-checkbox catalog-filter__block-item">
-        {isFourStringsCheck ?
+        {isSixStringsCheck || isSevenStringsCheck || isTwelveStringsCheck ||
+          (!isSixStringsCheck && !isSevenStringsCheck && !isTwelveStringsCheck && !isFourStringsCheck) ?
           <input
             className="visually-hidden"
             type="checkbox"
@@ -53,7 +63,6 @@ function CatalogFilterType(): JSX.Element {
             name="acoustic"
             checked={isAcousticCheck}
             onChange={handleGuitarTypeCheck}
-            disabled
           /> :
           <input
             className="visually-hidden"
@@ -62,12 +71,14 @@ function CatalogFilterType(): JSX.Element {
             name="acoustic"
             checked={isAcousticCheck}
             onChange={handleGuitarTypeCheck}
+            disabled
           />}
 
         <label htmlFor="acoustic">Акустические гитары</label>
       </div>
       <div className="form-checkbox catalog-filter__block-item">
-        {isTwelveStringsCheck ?
+        {isSixStringsCheck || isSevenStringsCheck || isFourStringsCheck ||
+          (!isSixStringsCheck && !isSevenStringsCheck && !isTwelveStringsCheck && !isFourStringsCheck) ?
           <input
             className="visually-hidden"
             type="checkbox"
@@ -75,7 +86,6 @@ function CatalogFilterType(): JSX.Element {
             name="electric"
             checked={isElectricCheck}
             onChange={handleGuitarTypeCheck}
-            disabled
           /> :
           <input
             className="visually-hidden"
@@ -84,12 +94,14 @@ function CatalogFilterType(): JSX.Element {
             name="electric"
             checked={isElectricCheck}
             onChange={handleGuitarTypeCheck}
+            disabled
           />}
 
         <label htmlFor="electric">Электрогитары</label>
       </div>
       <div className="form-checkbox catalog-filter__block-item">
-        {isTwelveStringsCheck || isSixStringsCheck || isSevenStringsCheck ?
+        {isFourStringsCheck ||
+          (!isSixStringsCheck && !isSevenStringsCheck && !isTwelveStringsCheck && !isFourStringsCheck) ?
           <input
             className="visually-hidden"
             type="checkbox"
@@ -97,7 +109,6 @@ function CatalogFilterType(): JSX.Element {
             name="ukulele"
             checked={isUkuleleCheck}
             onChange={handleGuitarTypeCheck}
-            disabled
           /> :
           <input
             className="visually-hidden"
@@ -106,6 +117,7 @@ function CatalogFilterType(): JSX.Element {
             name="ukulele"
             checked={isUkuleleCheck}
             onChange={handleGuitarTypeCheck}
+            disabled
           />}
 
         <label htmlFor="ukulele">Укулеле</label>
