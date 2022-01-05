@@ -1,13 +1,9 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import Footer from '../footer/footer';
-import Header from '../header/header';
 
 function Page404(): JSX.Element {
   return (
     <div className="wrapper">
-      <Header />
-
       <main className="page-content">
         <div className="container">
           <div className="product-container__info-wrapper">
@@ -21,8 +17,6 @@ function Page404(): JSX.Element {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

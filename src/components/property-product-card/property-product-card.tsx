@@ -4,8 +4,6 @@ import { Link, useParams } from 'react-router-dom';
 import { AppRoute, GuitarTypeToReadable } from '../../const';
 import { fetchGuitarByIdAction } from '../../store/api-actions';
 import { getGuitarById } from '../../store/guitar-data/selectors';
-import Footer from '../footer/footer';
-import Header from '../header/header';
 import Page404 from '../page-404/page-404';
 
 type RouteParams = {
@@ -38,8 +36,6 @@ function PropertyProductCard(): JSX.Element {
 
   return (
     <div className="wrapper">
-      <Header />
-
       <main className="page-content">
         <div className="container">
           <h1 className="page-content__title title title--bigger">Товар</h1>
@@ -199,8 +195,6 @@ function PropertyProductCard(): JSX.Element {
           </section>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

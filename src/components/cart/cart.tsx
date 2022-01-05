@@ -1,13 +1,9 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import Footer from '../footer/footer';
-import Header from '../header/header';
 
 function Cart(): JSX.Element {
   return (
     <div className="wrapper">
-      <Header />
-
       <main className="page-content">
         <div className="container">
           <h1 className="title title--bigger page-content__title">Корзина</h1>
@@ -95,8 +91,6 @@ function Cart(): JSX.Element {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

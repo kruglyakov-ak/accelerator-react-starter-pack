@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { fetchGuitarsAction, fetchGuitarWithoutFilters } from '../../store/api-actions';
 import {
@@ -16,6 +16,8 @@ import {
 import { getOrderType, getSortType } from '../../store/catalog-sort/selectors';
 import { getCurrentPageNumber } from '../../store/page-pagination/selectors';
 import Cart from '../cart/cart';
+import Footer from '../footer/footer';
+import Header from '../header/header';
 import MainPage from '../main-page/main-page';
 import Page404 from '../page-404/page-404';
 import PropertyProductCard from '../property-product-card/property-product-card';
@@ -64,22 +66,26 @@ function App(): JSX.Element {
   }
 
   return (
-    <Switch>
-      <Route path={AppRoute.Main} exact>
-        <MainPage />
-      </Route>
-      <Route path={AppRoute.Cart} exact>
-        <Cart />
-      </Route>
-      <Route path={AppRoute.Product} exact>
-        <PropertyProductCard />
-      </Route>
-      <Route
-        render={() => (
-          <Page404 />
-        )}
-      />
-    </Switch>
+    <BrowserRouter>
+      <Header />
+      <Switch>
+        <Route path={AppRoute.Main} exact>
+          <MainPage />
+        </Route>
+        <Route path={AppRoute.Cart} exact>
+          <Cart />
+        </Route>
+        <Route path={AppRoute.Product} exact>
+          <PropertyProductCard />
+        </Route>
+        <Route
+          render={() => (
+            <Page404 />
+          )}
+        />
+      </Switch>
+      <Footer />
+    </BrowserRouter>
   );
 }
 
