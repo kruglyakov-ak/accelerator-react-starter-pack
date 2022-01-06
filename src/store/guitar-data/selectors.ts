@@ -4,10 +4,12 @@ import { NameSpace } from '../root-reducer';
 
 const getGuitars = (state: State): Guitar[] => state[NameSpace.Data].guitars;
 const getGuitarsWithoutFilters = (state: State): Guitar[] => state[NameSpace.Data].guitarsWithoutFilters;
+const getGuitarsOnPage = (state: State): Guitar[] => state[NameSpace.Data].guitarsOnPage;
 const getGuitarById = (state: State): Guitar | null => state[NameSpace.Data].guitar;
 
 export {
   getGuitars,
   getGuitarsWithoutFilters,
-  getGuitarById
+  getGuitarById,
+  getGuitarsOnPage
 };

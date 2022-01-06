@@ -21,6 +21,15 @@ const loadGuitarsWithoutFilters = createAction(
   }),
 );
 
+const loadGuitarsOnPage = createAction(
+  ActionType.LoadGuitarsOnPage,
+  (guitarsOnPage: Guitar[]) => ({
+    payload: {
+      guitarsOnPage,
+    },
+  }),
+);
+
 const loadGuitarById = createAction(
   ActionType.LoadGuitarById,
   (guitar: Guitar) => ({
@@ -184,5 +193,6 @@ export {
   setIsSevenStringsCheck,
   setIsTwelveStringsCheck,
   setGuitarsCount,
-  setCurrentPageNumber
+  setCurrentPageNumber,
+  loadGuitarsOnPage
 };

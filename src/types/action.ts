@@ -7,6 +7,7 @@ enum ActionType {
   LoadGuitars = 'data/loadGuitars',
   LoadGuitarById = 'data/loadGuitarById',
   LoadGuitarsWithoutFilters = 'data/loadGuitarsWithoutFilters',
+  LoadGuitarsOnPage = 'data/loadGuitarsOnPage',
   SetSortType = 'sort/setSortType',
   SetOrderType = 'sort/setOrderType',
   SetPriceRangeMin = 'filter/setPriceRangeMin',

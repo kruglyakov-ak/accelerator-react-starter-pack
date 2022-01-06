@@ -12,7 +12,6 @@ type FetchGuitarProperty = {
   isSixStringsCheck: boolean,
   isSevenStringsCheck: boolean,
   isTwelveStringsCheck: boolean,
-  currentPageNumber: number
 };
 
 export type {
