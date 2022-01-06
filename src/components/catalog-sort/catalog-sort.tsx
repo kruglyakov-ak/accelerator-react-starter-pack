@@ -1,51 +1,48 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
-import { OrderType, SortType } from '../../const';
+import { useHistory } from 'react-router-dom';
+import { AppRoute, OrderType, QueryParam, SortType } from '../../const';
 import { useQueryParams } from '../../hooks/use-query-params';
 import { setOrderType, setSortType } from '../../store/action';
 import { getOrderType, getSortType } from '../../store/catalog-sort/selectors';
 
 function CatalogSort(): JSX.Element {
   const dispatch = useDispatch();
-  const location = useLocation();
   const history = useHistory();
+  const querysParams = useQueryParams();
   const sortType = useSelector(getSortType);
   const orderType = useSelector(getOrderType);
-  const querysParams = useQueryParams();
 
   const handleSortClick = ({ currentTarget }: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     switch (currentTarget.dataset.sort) {
       case SortType.Price:
         dispatch(setSortType(currentTarget.dataset.sort));
-        querysParams.set('_sort', SortType.Price);
+        querysParams.set(QueryParam.Sort, SortType.Price);
         break;
       case SortType.Rating:
         dispatch(setSortType(currentTarget.dataset.sort));
-        querysParams.set('_sort', SortType.Rating);
+        querysParams.set(QueryParam.Sort, SortType.Rating);
         break;
     }
-    location.search = querysParams.toString();
-    history.push(`/?${location.search}`);
+    history.push(`${AppRoute.Query}${querysParams.toString()}`);
   };
 
   const handleOrderClick = ({ currentTarget }: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     switch (currentTarget.dataset.order) {
       case OrderType.Asc:
         dispatch(setOrderType(currentTarget.dataset.order));
-        querysParams.set('order', OrderType.Asc);
+        querysParams.set(QueryParam.Order, OrderType.Asc);
         break;
       case OrderType.Desc:
         dispatch(setOrderType(currentTarget.dataset.order));
-        querysParams.set('order', OrderType.Desc);
+        querysParams.set(QueryParam.Order, OrderType.Desc);
         break;
     }
     if (sortType === SortType.Default) {
       dispatch(setSortType(SortType.Price));
-      querysParams.set('_sort', SortType.Price);
+      querysParams.set(QueryParam.Sort, SortType.Price);
     }
-    location.search = querysParams.toString();
-    history.push(`/?${location.search}`);
+    history.push(`${AppRoute.Query}${querysParams.toString()}`);
   };
 
   return (

@@ -1,5 +1,6 @@
 const enum AppRoute {
   Main = '/',
+  Query = '/?',
   Cart = '/cart',
   Product = '/product/:id',
   Plug = '#'
@@ -58,6 +59,17 @@ const enum FilterPath {
   PaginationEnd = '&_end=',
 }
 
+const enum QueryParam {
+  Sort = '_sort',
+  Order = '_order',
+  PriceGte = 'price_gte',
+  PriceLte = 'price_lte',
+  Type = 'type_like',
+  String = 'stringCount_like',
+  PaginationStart = '_start',
+  PaginationEnd = '_end',
+}
+
 const enum DefaultPriceRange {
   Min = 1000,
   Max = 30000,
@@ -76,5 +88,6 @@ export {
   DefaultPriceRange,
   StringCount,
   StringCountNumber,
-  GUITARS_ON_PAGE
+  GUITARS_ON_PAGE,
+  QueryParam
 };

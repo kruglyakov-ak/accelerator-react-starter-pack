@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AppRoute, SortType } from '../../const';
+import { AppRoute, QueryParam } from '../../const';
 import CatalogSort from '../catalog-sort/catalog-sort';
 import ProductCardsList from '../product-cards-list/product-cards-list';
 import CatalogFilter from '../catalog-filter/catalog-filter';
@@ -9,18 +9,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import MainPageEmpty from '../main-page-empty/main-page-empty';
 import { useEffect } from 'react';
 import { fetchGuitarsAction, fetchGuitarsOnPageAction, fetchGuitarWithoutFilters } from '../../store/api-actions';
-import { getUserPriceMin, getUserPriceMax, getIsAcousticCheck, getIsElectricCheck, getIsUkuleleCheck, getIsFourStringsCheck, getIsSixStringsCheck, getIsSevenStringsCheck, getIsTwelveStringsCheck } from '../../store/catalog-filter/selectors';
-import { getSortType, getOrderType } from '../../store/catalog-sort/selectors';
+import { getIsAcousticCheck, getIsElectricCheck, getIsUkuleleCheck, getIsFourStringsCheck, getIsSixStringsCheck, getIsSevenStringsCheck, getIsTwelveStringsCheck } from '../../store/catalog-filter/selectors';
 import { getCurrentPageNumber } from '../../store/page-pagination/selectors';
 import { useQueryParams } from '../../hooks/use-query-params';
 import { FetchGuitarProperty } from '../../types/fetch-guitar-property';
 
 function MainPage(): JSX.Element {
   const dispatch = useDispatch();
-  const sortType = useSelector(getSortType);
-  const orderType = useSelector(getOrderType);
-  const userPriceMin = useSelector(getUserPriceMin);
-  const userPriceMax = useSelector(getUserPriceMax);
   const isAcousticCheck = useSelector(getIsAcousticCheck);
   const isElectricCheck = useSelector(getIsElectricCheck);
   const isUkuleleCheck = useSelector(getIsUkuleleCheck);
@@ -31,18 +26,17 @@ function MainPage(): JSX.Element {
   const currentPageNumber = useSelector(getCurrentPageNumber);
 
   const queryParams = useQueryParams();
-  const querySortType = queryParams.has('_sort') && queryParams.get('_sort') as SortType ? queryParams.get('_sort') : sortType;
-
-
-  // eslint-disable-next-line no-console
-  console.log(querySortType);
+  const querySortType = queryParams.has(QueryParam.Sort) ? queryParams.get(QueryParam.Sort) : '';
+  const queryOrderType = queryParams.has(QueryParam.Order) ? queryParams.get(QueryParam.Order) : '';
+  const queryUserPriceMin = queryParams.has(QueryParam.PriceGte) ? queryParams.get(QueryParam.PriceGte) : '';
+  const queryUserPriceMax = queryParams.has(QueryParam.PriceLte) ? queryParams.get(QueryParam.PriceLte) : '';
 
   useEffect(() => {
     const fetchParams: FetchGuitarProperty = {
       sortType: querySortType ? querySortType : '',
-      orderType: orderType,
-      userPriceMin: userPriceMin,
-      userPriceMax: userPriceMax,
+      orderType: queryOrderType ? queryOrderType : '',
+      userPriceMin: queryUserPriceMin ? queryUserPriceMin : '',
+      userPriceMax: queryUserPriceMax ? queryUserPriceMax : '',
       isAcousticCheck: isAcousticCheck,
       isElectricCheck: isElectricCheck,
       isUkuleleCheck: isUkuleleCheck,
@@ -66,7 +60,7 @@ function MainPage(): JSX.Element {
     dispatch(fetchGuitarsOnPageAction(fetchParams));
 
     dispatch(fetchGuitarsAction(fetchParams));
-  }, [currentPageNumber, dispatch, isAcousticCheck, isElectricCheck, isFourStringsCheck, isSevenStringsCheck, isSixStringsCheck, isTwelveStringsCheck, isUkuleleCheck, orderType, querySortType, userPriceMax, userPriceMin]);
+  }, [currentPageNumber, dispatch, isAcousticCheck, isElectricCheck, isFourStringsCheck, isSevenStringsCheck, isSixStringsCheck, isTwelveStringsCheck, isUkuleleCheck, queryOrderType, querySortType, queryUserPriceMax, queryUserPriceMin]);
 
 
   const guitars = useSelector(getGuitarsOnPage);
