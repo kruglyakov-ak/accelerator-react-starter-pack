@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, SortType } from '../../const';
 import CatalogSort from '../catalog-sort/catalog-sort';
 import ProductCardsList from '../product-cards-list/product-cards-list';
 import CatalogFilter from '../catalog-filter/catalog-filter';
@@ -12,6 +12,8 @@ import { fetchGuitarsAction, fetchGuitarsOnPageAction, fetchGuitarWithoutFilters
 import { getUserPriceMin, getUserPriceMax, getIsAcousticCheck, getIsElectricCheck, getIsUkuleleCheck, getIsFourStringsCheck, getIsSixStringsCheck, getIsSevenStringsCheck, getIsTwelveStringsCheck } from '../../store/catalog-filter/selectors';
 import { getSortType, getOrderType } from '../../store/catalog-sort/selectors';
 import { getCurrentPageNumber } from '../../store/page-pagination/selectors';
+import { useQueryParams } from '../../hooks/use-query-params';
+import { FetchGuitarProperty } from '../../types/fetch-guitar-property';
 
 function MainPage(): JSX.Element {
   const dispatch = useDispatch();
@@ -28,19 +30,16 @@ function MainPage(): JSX.Element {
   const isTwelveStringsCheck = useSelector(getIsTwelveStringsCheck);
   const currentPageNumber = useSelector(getCurrentPageNumber);
 
+  const queryParams = useQueryParams();
+  const querySortType = queryParams.has('_sort') && queryParams.get('_sort') as SortType ? queryParams.get('_sort') : sortType;
+
+
+  // eslint-disable-next-line no-console
+  console.log(querySortType);
+
   useEffect(() => {
-    if (
-      !isAcousticCheck &&
-      !isElectricCheck &&
-      !isUkuleleCheck &&
-      !isFourStringsCheck &&
-      !isSixStringsCheck &&
-      !isSevenStringsCheck &&
-      !isTwelveStringsCheck) {
-      dispatch(fetchGuitarWithoutFilters());
-    }
-    dispatch(fetchGuitarsOnPageAction( {
-      sortType: sortType,
+    const fetchParams: FetchGuitarProperty = {
+      sortType: querySortType ? querySortType : '',
       orderType: orderType,
       userPriceMin: userPriceMin,
       userPriceMax: userPriceMax,
@@ -51,23 +50,23 @@ function MainPage(): JSX.Element {
       isSixStringsCheck: isSixStringsCheck,
       isSevenStringsCheck: isSevenStringsCheck,
       isTwelveStringsCheck: isTwelveStringsCheck,
-    }, currentPageNumber));
+      currentPageNumber: currentPageNumber,
+    };
 
-    dispatch(fetchGuitarsAction(
-      {
-        sortType: sortType,
-        orderType: orderType,
-        userPriceMin: userPriceMin,
-        userPriceMax: userPriceMax,
-        isAcousticCheck: isAcousticCheck,
-        isElectricCheck: isElectricCheck,
-        isUkuleleCheck: isUkuleleCheck,
-        isFourStringsCheck: isFourStringsCheck,
-        isSixStringsCheck: isSixStringsCheck,
-        isSevenStringsCheck: isSevenStringsCheck,
-        isTwelveStringsCheck: isTwelveStringsCheck,
-      }));
-  }, [currentPageNumber, dispatch, isAcousticCheck, isElectricCheck, isFourStringsCheck, isSevenStringsCheck, isSixStringsCheck, isTwelveStringsCheck, isUkuleleCheck, orderType, sortType, userPriceMax, userPriceMin]);
+    if (
+      !isAcousticCheck &&
+      !isElectricCheck &&
+      !isUkuleleCheck &&
+      !isFourStringsCheck &&
+      !isSixStringsCheck &&
+      !isSevenStringsCheck &&
+      !isTwelveStringsCheck) {
+      dispatch(fetchGuitarWithoutFilters());
+    }
+    dispatch(fetchGuitarsOnPageAction(fetchParams));
+
+    dispatch(fetchGuitarsAction(fetchParams));
+  }, [currentPageNumber, dispatch, isAcousticCheck, isElectricCheck, isFourStringsCheck, isSevenStringsCheck, isSixStringsCheck, isTwelveStringsCheck, isUkuleleCheck, orderType, querySortType, userPriceMax, userPriceMin]);
 
 
   const guitars = useSelector(getGuitarsOnPage);

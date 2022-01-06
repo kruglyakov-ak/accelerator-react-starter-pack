@@ -57,6 +57,7 @@ describe('Async actions', () => {
       isSixStringsCheck: false,
       isSevenStringsCheck: false,
       isTwelveStringsCheck: false,
+      currentPageNumber: 0,
     }));
 
     expect(store.getActions()).toEqual([

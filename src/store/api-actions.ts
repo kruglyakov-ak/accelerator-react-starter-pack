@@ -1,4 +1,4 @@
-import { APIRoute, FilterPath, GUITARS_ON_PAGE, GuitarType, OrderTypePath, SortTypePath, StringCount, StringCountNumber } from '../const';
+import { APIRoute, FilterPath, GUITARS_ON_PAGE, GuitarType, StringCount, StringCountNumber } from '../const';
 import { ThunkActionResult } from '../types/action';
 import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin, loadGuitarsOnPage } from './action';
 import { Guitar } from '../types/guitar';
@@ -23,10 +23,10 @@ const fetchGuitarsAction = (fetchProperty: FetchGuitarProperty): ThunkActionResu
     let path = `${APIRoute.Guitars}?`;
 
     if (sortType) {
-      path += SortTypePath[sortType];
+      path += `${FilterPath.Sort}${sortType}`;
     }
     if (orderType) {
-      path += OrderTypePath[orderType];
+      path += `${FilterPath.Order}${orderType}`;
     }
     if (userPriceMin) {
       path += `${FilterPath.PriceGte}${userPriceMin}`;
@@ -70,7 +70,7 @@ const fetchGuitarsAction = (fetchProperty: FetchGuitarProperty): ThunkActionResu
     }
   };
 
-const fetchGuitarsOnPageAction = (fetchProperty: FetchGuitarProperty, currentPageNumber: number): ThunkActionResult =>
+const fetchGuitarsOnPageAction = (fetchProperty: FetchGuitarProperty): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const {
       sortType,
@@ -84,15 +84,16 @@ const fetchGuitarsOnPageAction = (fetchProperty: FetchGuitarProperty, currentPag
       isSixStringsCheck,
       isSevenStringsCheck,
       isTwelveStringsCheck,
+      currentPageNumber,
     } = fetchProperty;
 
     let path = `${APIRoute.Guitars}?${FilterPath.PaginationStart}${currentPageNumber * GUITARS_ON_PAGE}${FilterPath.PaginationEnd}${(currentPageNumber + 1) * GUITARS_ON_PAGE}`;
 
     if (sortType) {
-      path += SortTypePath[sortType];
+      path += `${FilterPath.Sort}${sortType}`;
     }
     if (orderType) {
-      path += OrderTypePath[orderType];
+      path += `${FilterPath.Order}${orderType}`;
     }
     if (userPriceMin) {
       path += `${FilterPath.PriceGte}${userPriceMin}`;

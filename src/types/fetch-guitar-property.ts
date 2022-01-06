@@ -1,8 +1,8 @@
 import { OrderType, SortType } from '../const';
 
 type FetchGuitarProperty = {
-  sortType: SortType,
-  orderType: OrderType,
+  sortType: SortType | string,
+  orderType: OrderType | string,
   userPriceMin: string,
   userPriceMax: string,
   isAcousticCheck: boolean,
@@ -12,6 +12,7 @@ type FetchGuitarProperty = {
   isSixStringsCheck: boolean,
   isSevenStringsCheck: boolean,
   isTwelveStringsCheck: boolean,
+  currentPageNumber: number
 };
 
 export type {

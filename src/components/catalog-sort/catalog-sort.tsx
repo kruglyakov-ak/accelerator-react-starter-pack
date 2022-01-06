@@ -1,37 +1,51 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 import { OrderType, SortType } from '../../const';
+import { useQueryParams } from '../../hooks/use-query-params';
 import { setOrderType, setSortType } from '../../store/action';
 import { getOrderType, getSortType } from '../../store/catalog-sort/selectors';
 
 function CatalogSort(): JSX.Element {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const history = useHistory();
   const sortType = useSelector(getSortType);
   const orderType = useSelector(getOrderType);
+  const querysParams = useQueryParams();
 
   const handleSortClick = ({ currentTarget }: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     switch (currentTarget.dataset.sort) {
       case SortType.Price:
         dispatch(setSortType(currentTarget.dataset.sort));
+        querysParams.set('_sort', SortType.Price);
         break;
       case SortType.Rating:
         dispatch(setSortType(currentTarget.dataset.sort));
+        querysParams.set('_sort', SortType.Rating);
         break;
     }
+    location.search = querysParams.toString();
+    history.push(`/?${location.search}`);
   };
 
   const handleOrderClick = ({ currentTarget }: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     switch (currentTarget.dataset.order) {
       case OrderType.Asc:
         dispatch(setOrderType(currentTarget.dataset.order));
+        querysParams.set('order', OrderType.Asc);
         break;
       case OrderType.Desc:
         dispatch(setOrderType(currentTarget.dataset.order));
+        querysParams.set('order', OrderType.Desc);
         break;
     }
     if (sortType === SortType.Default) {
       dispatch(setSortType(SortType.Price));
+      querysParams.set('_sort', SortType.Price);
     }
+    location.search = querysParams.toString();
+    history.push(`/?${location.search}`);
   };
 
   return (

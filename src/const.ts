@@ -47,19 +47,9 @@ const enum OrderType {
   Desc = 'desc',
 }
 
-const SortTypePath = {
-  [SortType.Default]: '',
-  [SortType.Price]: '&_sort=price',
-  [SortType.Rating]: '&_sort=rating',
-};
-
-const OrderTypePath = {
-  [OrderType.Default]: '',
-  [OrderType.Asc]: '&_order=asc',
-  [OrderType.Desc]: '&_order=desc',
-};
-
 const enum FilterPath {
+  Sort = '&_sort=',
+  Order = '&_order=',
   PriceGte = '&price_gte=',
   PriceLte = '&price_lte=',
   Type = '&type_like=',
@@ -82,8 +72,6 @@ export {
   GuitarTypeToReadable,
   SortType,
   OrderType,
-  SortTypePath,
-  OrderTypePath,
   FilterPath,
   DefaultPriceRange,
   StringCount,
