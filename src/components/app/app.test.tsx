@@ -7,7 +7,7 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 import { createAPI } from '../../services/api';
 import { State } from '../../types/state';
-import { AppRoute, DefaultPriceRange, OrderType, SortType } from '../../const';
+import { AppRoute, DefaultPriceRange } from '../../const';
 import { makeFakeGuitars } from '../../utils/mocks';
 import App from './app';
 
@@ -28,15 +28,9 @@ const store = mockStore({
     guitarsWithoutFilters: guitars,
     guitar: guitars[0],
   },
-  SORT: {
-    sortType: SortType.Default,
-    orderType: OrderType.Default,
-  },
   FILTER: {
     priceRangeMin: DefaultPriceRange.Min,
     priceRangeMax: DefaultPriceRange.Max,
-    userPriceMin: '',
-    userPriceMax: '',
     isAcousticCheck: false,
     isElectricCheck: false,
     isUkuleleCheck: false,

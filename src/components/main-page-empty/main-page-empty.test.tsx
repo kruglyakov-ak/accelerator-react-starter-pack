@@ -24,8 +24,6 @@ const store = mockStore({
   DATA: {
     guitars: [],
   },
-  SORT: {
-  },
   PAGINATION:{
     guitarsCount: 0,
   },

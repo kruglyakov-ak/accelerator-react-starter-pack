@@ -6,7 +6,6 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import CatalogSort from './catalog-sort';
-import { OrderType, SortType } from '../../const';
 
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
@@ -17,10 +16,6 @@ const mockStore = configureMockStore<
 >(middlewares);
 
 const store = mockStore({
-  SORT: {
-    sortType: SortType.Default,
-    orderType: OrderType.Default,
-  },
 });
 describe('Component: CatalogSort', () => {
 
