@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { AppRoute, QueryParam } from '../../const';
@@ -16,20 +16,11 @@ import {
 function CatalogFilterPrice(): JSX.Element {
   const dispatch = useDispatch();
   const history = useHistory();
-  const querysParams = useQueryParams();
+  const queryParams = useQueryParams();
   const [userPriceMinValue, setUserPriceMinValue] = useState('');
   const [userPriceMaxValue, setUserPriceMaxValue] = useState('');
   const priceMin = useSelector(getPriceRangeMin);
   const priceMax = useSelector(getPriceRangeMax);
-
-  useEffect(() => {
-    if (querysParams.has(QueryParam.PriceGte)) {
-      setUserPriceMinValue(String(querysParams.get(QueryParam.PriceGte)));
-    }
-    if (querysParams.has(QueryParam.PriceLte)) {
-      setUserPriceMaxValue(String(querysParams.get(QueryParam.PriceLte)));
-    }
-  }, [querysParams]);
 
   const handlePriceMinChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setUserPriceMinValue(target.value);
@@ -39,40 +30,48 @@ function CatalogFilterPrice(): JSX.Element {
   };
 
   const handlePriceMinBlur = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    querysParams.set(QueryParam.PriceGte, target.value);
+    queryParams.set(QueryParam.PriceGte, target.value);
     if (+target.value < priceMin && target.value !== '') {
       setUserPriceMinValue(priceMin.toString());
-      querysParams.set(QueryParam.PriceGte, priceMin.toString());
+      queryParams.set(QueryParam.PriceGte, priceMin.toString());
     }
     if (+target.value > priceMax && target.value !== '') {
       setUserPriceMinValue(priceMax.toString());
-      querysParams.set(QueryParam.PriceGte, priceMax.toString());
+      queryParams.set(QueryParam.PriceGte, priceMax.toString());
+    }
+    if (+target.value > +userPriceMaxValue && userPriceMaxValue !== '') {
+      setUserPriceMinValue(userPriceMaxValue);
+      queryParams.set(QueryParam.PriceGte, userPriceMaxValue);
     }
     dispatch(setCurrentPageNumber(0));
     dispatch(setUserPriceMin(target.value));
     if (target.value === '') {
-      querysParams.delete(QueryParam.PriceGte);
+      queryParams.delete(QueryParam.PriceGte);
     }
-    history.push(`${AppRoute.Query}${querysParams.toString()}`);
+    history.push(`${AppRoute.Query}${queryParams.toString()}`);
   };
 
   const handlePriceMaxBlur = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    querysParams.set(QueryParam.PriceLte, target.value);
+    queryParams.set(QueryParam.PriceLte, target.value);
     if (+target.value < priceMin && target.value !== '') {
       setUserPriceMaxValue(priceMin.toString());
-      querysParams.set(QueryParam.PriceLte, priceMin.toString());
+      queryParams.set(QueryParam.PriceLte, priceMin.toString());
 
     }
     if (+target.value > priceMax && target.value !== '') {
       setUserPriceMaxValue(priceMax.toString());
-      querysParams.set(QueryParam.PriceLte, priceMax.toString());
+      queryParams.set(QueryParam.PriceLte, priceMax.toString());
+    }
+    if (+target.value < +userPriceMinValue && userPriceMinValue !== '') {
+      setUserPriceMaxValue(userPriceMinValue);
+      queryParams.set(QueryParam.PriceLte, userPriceMinValue);
     }
     dispatch(setCurrentPageNumber(0));
     dispatch(setUserPriceMax(target.value));
     if (target.value === '') {
-      querysParams.delete(QueryParam.PriceLte);
+      queryParams.delete(QueryParam.PriceLte);
     }
-    history.push(`${AppRoute.Query}${querysParams.toString()}`);
+    history.push(`${AppRoute.Query}${queryParams.toString()}`);
   };
 
   return (
@@ -86,7 +85,7 @@ function CatalogFilterPrice(): JSX.Element {
             placeholder={`${priceMin}`}
             id="priceMin"
             name="от"
-            value={querysParams.has(QueryParam.PriceGte) ? Number(querysParams.get(QueryParam.PriceGte)) : userPriceMinValue}
+            value={userPriceMinValue}
             onChange={handlePriceMinChange}
             onBlur={handlePriceMinBlur}
           />
@@ -98,7 +97,7 @@ function CatalogFilterPrice(): JSX.Element {
             placeholder={`${priceMax}`}
             id="priceMax"
             name="до"
-            value={querysParams.has(QueryParam.PriceLte) ? Number(querysParams.get(QueryParam.PriceLte)) : userPriceMaxValue}
+            value={userPriceMaxValue}
             onChange={handlePriceMaxChange}
             onBlur={handlePriceMaxBlur}
           />

@@ -40,10 +40,6 @@ const store = mockStore({
     isAcousticCheck: false,
     isElectricCheck: false,
     isUkuleleCheck: false,
-    isFourStringsCheck: false,
-    isSixStringsCheck: false,
-    isSevenStringsCheck: false,
-    isTwelveStringsCheck: false,
   },
   PAGINATION: {
     guitarsCount: 0,

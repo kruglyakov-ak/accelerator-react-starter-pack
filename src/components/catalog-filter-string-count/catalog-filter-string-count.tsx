@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { StringCount } from '../../const';
+import { useHistory } from 'react-router-dom';
+import { AppRoute, QueryParam, StringCount } from '../../const';
+import { useQueryParams } from '../../hooks/use-query-params';
 import {
   setCurrentPageNumber,
   setIsAcousticCheck,
@@ -13,22 +15,16 @@ import {
 import {
   getIsAcousticCheck,
   getIsElectricCheck,
-  getIsFourStringsCheck,
-  getIsSevenStringsCheck,
-  getIsSixStringsCheck,
-  getIsTwelveStringsCheck,
   getIsUkuleleCheck
 } from '../../store/catalog-filter/selectors';
 
 function CatalogFilterStringCount(): JSX.Element {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const queryParams = useQueryParams();
   const isAcousticCheck = useSelector(getIsAcousticCheck);
   const isElectricCheck = useSelector(getIsElectricCheck);
   const isUkuleleCheck = useSelector(getIsUkuleleCheck);
-  const isFourStringsCheck = useSelector(getIsFourStringsCheck);
-  const isSixStringsCheck = useSelector(getIsSixStringsCheck);
-  const isSevenStringsCheck = useSelector(getIsSevenStringsCheck);
-  const isTwelveStringsCheck = useSelector(getIsTwelveStringsCheck);
 
   const handleGuitarStringCheck = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setCurrentPageNumber(0));
@@ -36,19 +32,27 @@ function CatalogFilterStringCount(): JSX.Element {
       case StringCount.FourStrings:
         dispatch(setIsFourStringsCheck(target.checked));
         dispatch(setIsAcousticCheck(false));
+        queryParams.set(QueryParam.FourString, String(+target.checked));
+        history.push(`${AppRoute.Query}${queryParams.toString()}`);
         break;
       case StringCount.SixStrings:
         dispatch(setIsSixStringsCheck(target.checked));
         dispatch(setIsUkuleleCheck(false));
+        queryParams.set(QueryParam.SixString, String(+target.checked));
+        history.push(`${AppRoute.Query}${queryParams.toString()}`);
         break;
       case StringCount.SevenStrings:
         dispatch(setIsSevenStringsCheck(target.checked));
+        queryParams.set(QueryParam.SevenString, String(+target.checked));
         dispatch(setIsUkuleleCheck(false));
+        history.push(`${AppRoute.Query}${queryParams.toString()}`);
         break;
       case StringCount.TwelveStrings:
         dispatch(setIsTwelveStringsCheck(target.checked));
         dispatch(setIsUkuleleCheck(false));
         dispatch(setIsElectricCheck(false));
+        queryParams.set(QueryParam.TwelveString, String(+target.checked));
+        history.push(`${AppRoute.Query}${queryParams.toString()}`);
         break;
     }
   };
@@ -58,13 +62,13 @@ function CatalogFilterStringCount(): JSX.Element {
       <legend className="catalog-filter__block-title">Количество струн</legend>
       <div className="form-checkbox catalog-filter__block-item">
         {isUkuleleCheck || isElectricCheck ||
-        (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
+          (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
           <input
             className="visually-hidden"
             type="checkbox"
-            id="4-strings"
-            name="4-strings"
-            checked={isFourStringsCheck}
+            id={StringCount.FourStrings}
+            name={StringCount.FourStrings}
+            checked={queryParams.has(QueryParam.FourString) ? Boolean(Number(queryParams.get(QueryParam.FourString))) : false}
             onChange={handleGuitarStringCheck}
           /> :
           <input
@@ -72,7 +76,7 @@ function CatalogFilterStringCount(): JSX.Element {
             type="checkbox"
             id="4-strings"
             name="4-strings"
-            checked={isFourStringsCheck}
+            checked={queryParams.has(QueryParam.FourString) ? Boolean(Number(queryParams.get(QueryParam.FourString))) : false}
             onChange={handleGuitarStringCheck}
             disabled
           />}
@@ -80,13 +84,13 @@ function CatalogFilterStringCount(): JSX.Element {
       </div>
       <div className="form-checkbox catalog-filter__block-item">
         {isAcousticCheck || isElectricCheck ||
-        (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
+          (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
           <input
             className="visually-hidden"
             type="checkbox"
             id="6-strings"
             name="6-strings"
-            checked={isSixStringsCheck}
+            checked={queryParams.has(QueryParam.SixString) ? Boolean(Number(queryParams.get(QueryParam.SixString))) : false}
             onChange={handleGuitarStringCheck}
           /> :
           <input
@@ -94,7 +98,7 @@ function CatalogFilterStringCount(): JSX.Element {
             type="checkbox"
             id="6-strings"
             name="6-strings"
-            checked={isSixStringsCheck}
+            checked={queryParams.has(QueryParam.SixString) ? Boolean(Number(queryParams.get(QueryParam.SixString))) : false}
             onChange={handleGuitarStringCheck}
             disabled
           />}
@@ -102,13 +106,13 @@ function CatalogFilterStringCount(): JSX.Element {
       </div>
       <div className="form-checkbox catalog-filter__block-item">
         {isAcousticCheck || isElectricCheck ||
-        (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
+          (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
           <input
             className="visually-hidden"
             type="checkbox"
             id="7-strings"
             name="7-strings"
-            checked={isSevenStringsCheck}
+            checked={queryParams.has(QueryParam.SevenString) ? Boolean(Number(queryParams.get(QueryParam.SevenString))) : false}
             onChange={handleGuitarStringCheck}
           /> :
           <input
@@ -116,7 +120,7 @@ function CatalogFilterStringCount(): JSX.Element {
             type="checkbox"
             id="7-strings"
             name="7-strings"
-            checked={isSevenStringsCheck}
+            checked={queryParams.has(QueryParam.SevenString) ? Boolean(Number(queryParams.get(QueryParam.SevenString))) : false}
             onChange={handleGuitarStringCheck}
             disabled
           />}
@@ -125,13 +129,13 @@ function CatalogFilterStringCount(): JSX.Element {
       </div>
       <div className="form-checkbox catalog-filter__block-item">
         {isAcousticCheck ||
-        (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
+          (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
           <input
             className="visually-hidden"
             type="checkbox"
             id="12-strings"
             name="12-strings"
-            checked={isTwelveStringsCheck}
+            checked={queryParams.has(QueryParam.TwelveString) ? Boolean(Number(queryParams.get(QueryParam.TwelveString))) : false}
             onChange={handleGuitarStringCheck}
           /> :
           <input
@@ -139,7 +143,7 @@ function CatalogFilterStringCount(): JSX.Element {
             type="checkbox"
             id="12-strings"
             name="12-strings"
-            checked={isTwelveStringsCheck}
+            checked={queryParams.has(QueryParam.TwelveString) ? Boolean(Number(queryParams.get(QueryParam.TwelveString))) : false}
             onChange={handleGuitarStringCheck}
             disabled
           />}

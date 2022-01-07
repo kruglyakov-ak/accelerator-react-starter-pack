@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MainPageEmpty from '../main-page-empty/main-page-empty';
 import { useEffect } from 'react';
 import { fetchGuitarsAction, fetchGuitarsOnPageAction, fetchGuitarWithoutFilters } from '../../store/api-actions';
-import { getIsAcousticCheck, getIsElectricCheck, getIsUkuleleCheck, getIsFourStringsCheck, getIsSixStringsCheck, getIsSevenStringsCheck, getIsTwelveStringsCheck } from '../../store/catalog-filter/selectors';
+import { getIsAcousticCheck, getIsElectricCheck, getIsUkuleleCheck } from '../../store/catalog-filter/selectors';
 import { getCurrentPageNumber } from '../../store/page-pagination/selectors';
 import { useQueryParams } from '../../hooks/use-query-params';
 import { FetchGuitarProperty } from '../../types/fetch-guitar-property';
@@ -19,10 +19,6 @@ function MainPage(): JSX.Element {
   const isAcousticCheck = useSelector(getIsAcousticCheck);
   const isElectricCheck = useSelector(getIsElectricCheck);
   const isUkuleleCheck = useSelector(getIsUkuleleCheck);
-  const isFourStringsCheck = useSelector(getIsFourStringsCheck);
-  const isSixStringsCheck = useSelector(getIsSixStringsCheck);
-  const isSevenStringsCheck = useSelector(getIsSevenStringsCheck);
-  const isTwelveStringsCheck = useSelector(getIsTwelveStringsCheck);
   const currentPageNumber = useSelector(getCurrentPageNumber);
 
   const queryParams = useQueryParams();
@@ -30,6 +26,10 @@ function MainPage(): JSX.Element {
   const queryOrderType = queryParams.has(QueryParam.Order) ? queryParams.get(QueryParam.Order) : '';
   const queryUserPriceMin = queryParams.has(QueryParam.PriceGte) ? queryParams.get(QueryParam.PriceGte) : '';
   const queryUserPriceMax = queryParams.has(QueryParam.PriceLte) ? queryParams.get(QueryParam.PriceLte) : '';
+  const queryFourString = queryParams.has(QueryParam.FourString) ? Boolean(Number(queryParams.get(QueryParam.FourString))) : false;
+  const querySixString = queryParams.has(QueryParam.SixString) ? Boolean(Number(queryParams.get(QueryParam.SixString))) : false;
+  const querySevenString = queryParams.has(QueryParam.SevenString) ? Boolean(Number(queryParams.get(QueryParam.SevenString))) : false;
+  const queryTwelveString = queryParams.has(QueryParam.TwelveString) ? Boolean(Number(queryParams.get(QueryParam.TwelveString))) : false;
 
   useEffect(() => {
     const fetchParams: FetchGuitarProperty = {
@@ -40,10 +40,10 @@ function MainPage(): JSX.Element {
       isAcousticCheck: isAcousticCheck,
       isElectricCheck: isElectricCheck,
       isUkuleleCheck: isUkuleleCheck,
-      isFourStringsCheck: isFourStringsCheck,
-      isSixStringsCheck: isSixStringsCheck,
-      isSevenStringsCheck: isSevenStringsCheck,
-      isTwelveStringsCheck: isTwelveStringsCheck,
+      isFourStringsCheck: queryFourString,
+      isSixStringsCheck: querySixString,
+      isSevenStringsCheck: querySevenString,
+      isTwelveStringsCheck: queryTwelveString,
       currentPageNumber: currentPageNumber,
     };
 
@@ -51,16 +51,16 @@ function MainPage(): JSX.Element {
       !isAcousticCheck &&
       !isElectricCheck &&
       !isUkuleleCheck &&
-      !isFourStringsCheck &&
-      !isSixStringsCheck &&
-      !isSevenStringsCheck &&
-      !isTwelveStringsCheck) {
+      !queryFourString &&
+      !querySixString &&
+      !querySevenString &&
+      !queryTwelveString) {
       dispatch(fetchGuitarWithoutFilters());
     }
     dispatch(fetchGuitarsOnPageAction(fetchParams));
 
     dispatch(fetchGuitarsAction(fetchParams));
-  }, [currentPageNumber, dispatch, isAcousticCheck, isElectricCheck, isFourStringsCheck, isSevenStringsCheck, isSixStringsCheck, isTwelveStringsCheck, isUkuleleCheck, queryOrderType, querySortType, queryUserPriceMax, queryUserPriceMin]);
+  }, [currentPageNumber, dispatch, isAcousticCheck, isElectricCheck, isUkuleleCheck, queryFourString, queryOrderType, querySevenString, querySixString, querySortType, queryTwelveString, queryUserPriceMax, queryUserPriceMin]);
 
 
   const guitars = useSelector(getGuitarsOnPage);

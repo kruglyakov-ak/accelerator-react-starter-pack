@@ -24,10 +24,6 @@ type CatalogFilter = {
   isAcousticCheck: boolean,
   isElectricCheck: boolean,
   isUkuleleCheck: boolean,
-  isFourStringsCheck: boolean,
-  isSixStringsCheck: boolean,
-  isSevenStringsCheck: boolean,
-  isTwelveStringsCheck: boolean,
 };
 
 type PagePagination = {

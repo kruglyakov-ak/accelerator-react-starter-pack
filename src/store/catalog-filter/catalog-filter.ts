@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DefaultPriceRange } from '../../const';
 import { CatalogFilter } from '../../types/state';
-import { setIsAcousticCheck, setIsElectricCheck, setIsFourStringsCheck, setIsSevenStringsCheck, setIsSixStringsCheck, setIsTwelveStringsCheck, setIsUkuleleCheck, setPriceRangeMax, setPriceRangeMin, setUserPriceMax, setUserPriceMin } from '../action';
+import { setIsAcousticCheck, setIsElectricCheck, setIsUkuleleCheck, setPriceRangeMax, setPriceRangeMin, setUserPriceMax, setUserPriceMin } from '../action';
 
 
 const initialState: CatalogFilter = {
@@ -12,10 +12,6 @@ const initialState: CatalogFilter = {
   isAcousticCheck: false,
   isElectricCheck: false,
   isUkuleleCheck: false,
-  isFourStringsCheck: false,
-  isSixStringsCheck: false,
-  isSevenStringsCheck: false,
-  isTwelveStringsCheck: false,
 };
 
 const catalogFilter = createReducer(initialState, (builder) => {
@@ -47,24 +43,7 @@ const catalogFilter = createReducer(initialState, (builder) => {
     .addCase(setIsUkuleleCheck, (state, action) => {
       const { isUkuleleCheck } = action.payload;
       state.isUkuleleCheck = isUkuleleCheck;
-    })
-    .addCase(setIsFourStringsCheck, (state, action) => {
-      const { isFourStringsCheck } = action.payload;
-      state.isFourStringsCheck = isFourStringsCheck;
-    })
-    .addCase(setIsSixStringsCheck, (state, action) => {
-      const { isSixStringsCheck } = action.payload;
-      state.isSixStringsCheck = isSixStringsCheck;
-    })
-    .addCase(setIsSevenStringsCheck, (state, action) => {
-      const { isSevenStringsCheck } = action.payload;
-      state.isSevenStringsCheck = isSevenStringsCheck;
-    })
-    .addCase(setIsTwelveStringsCheck, (state, action) => {
-      const { isTwelveStringsCheck } = action.payload;
-      state.isTwelveStringsCheck = isTwelveStringsCheck;
     });
-
 });
 
 export { catalogFilter };

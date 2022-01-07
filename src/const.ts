@@ -65,7 +65,10 @@ const enum QueryParam {
   PriceGte = 'price_gte',
   PriceLte = 'price_lte',
   Type = 'type_like',
-  String = 'stringCount_like',
+  FourString = '4stringCount',
+  SixString = '6stringCount',
+  SevenString = '7stringCount',
+  TwelveString = '12stringCount',
   PaginationStart = '_start',
   PaginationEnd = '_end',
 }

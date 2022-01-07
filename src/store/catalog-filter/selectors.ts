@@ -8,10 +8,6 @@ const getUserPriceMax = (state: State): string => state[NameSpace.Filter].userPr
 const getIsAcousticCheck = (state: State): boolean => state[NameSpace.Filter].isAcousticCheck;
 const getIsElectricCheck = (state: State): boolean => state[NameSpace.Filter].isElectricCheck;
 const getIsUkuleleCheck = (state: State): boolean => state[NameSpace.Filter].isUkuleleCheck;
-const getIsFourStringsCheck = (state: State): boolean => state[NameSpace.Filter].isFourStringsCheck;
-const getIsSixStringsCheck = (state: State): boolean => state[NameSpace.Filter].isSixStringsCheck;
-const getIsSevenStringsCheck = (state: State): boolean => state[NameSpace.Filter].isSevenStringsCheck;
-const getIsTwelveStringsCheck = (state: State): boolean => state[NameSpace.Filter].isTwelveStringsCheck;
 
 export {
   getPriceRangeMin,
@@ -20,9 +16,5 @@ export {
   getUserPriceMax,
   getIsAcousticCheck,
   getIsElectricCheck,
-  getIsUkuleleCheck,
-  getIsFourStringsCheck,
-  getIsSixStringsCheck,
-  getIsSevenStringsCheck,
-  getIsTwelveStringsCheck
+  getIsUkuleleCheck
 };

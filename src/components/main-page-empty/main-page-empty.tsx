@@ -15,7 +15,7 @@ function MainPageEmpty(): JSX.Element {
               <Link to={AppRoute.Main} className="link">Каталог</Link>
             </li>
           </ul>
-          <h2 className="page-content__title title title--bigger">Каталог гитар не загрузился</h2>
+          <h2 className="page-content__title title title--bigger">Нет данных о гитарах</h2>
         </div>
       </main>
     </div>
