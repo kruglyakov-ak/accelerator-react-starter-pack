@@ -120,42 +120,6 @@ const setIsUkuleleCheck = createAction(
   }),
 );
 
-const setIsFourStringsCheck = createAction(
-  ActionType.SetIsFourStringsCheck,
-  (isFourStringsCheck: boolean) => ({
-    payload: {
-      isFourStringsCheck,
-    },
-  }),
-);
-
-const setIsSixStringsCheck = createAction(
-  ActionType.SetIsSixStringsCheck,
-  (isSixStringsCheck: boolean) => ({
-    payload: {
-      isSixStringsCheck,
-    },
-  }),
-);
-
-const setIsSevenStringsCheck = createAction(
-  ActionType.SetIsSevenStringsCheck,
-  (isSevenStringsCheck: boolean) => ({
-    payload: {
-      isSevenStringsCheck,
-    },
-  }),
-);
-
-const setIsTwelveStringsCheck = createAction(
-  ActionType.SetIsTwelveStringsCheck,
-  (isTwelveStringsCheck: boolean) => ({
-    payload: {
-      isTwelveStringsCheck,
-    },
-  }),
-);
-
 const setGuitarsCount = createAction(
   ActionType.SetGuitarsCount,
   (guitarsCount: number) => ({
@@ -188,10 +152,6 @@ export {
   setIsAcousticCheck,
   setIsElectricCheck,
   setIsUkuleleCheck,
-  setIsFourStringsCheck,
-  setIsSixStringsCheck,
-  setIsSevenStringsCheck,
-  setIsTwelveStringsCheck,
   setGuitarsCount,
   setCurrentPageNumber,
   loadGuitarsOnPage

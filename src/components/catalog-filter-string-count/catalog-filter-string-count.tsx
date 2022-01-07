@@ -6,10 +6,6 @@ import {
   setCurrentPageNumber,
   setIsAcousticCheck,
   setIsElectricCheck,
-  setIsFourStringsCheck,
-  setIsSevenStringsCheck,
-  setIsSixStringsCheck,
-  setIsTwelveStringsCheck,
   setIsUkuleleCheck
 } from '../../store/action';
 import {
@@ -30,25 +26,21 @@ function CatalogFilterStringCount(): JSX.Element {
     dispatch(setCurrentPageNumber(0));
     switch (target.name) {
       case StringCount.FourStrings:
-        dispatch(setIsFourStringsCheck(target.checked));
         dispatch(setIsAcousticCheck(false));
         queryParams.set(QueryParam.FourString, String(+target.checked));
         history.push(`${AppRoute.Query}${queryParams.toString()}`);
         break;
       case StringCount.SixStrings:
-        dispatch(setIsSixStringsCheck(target.checked));
         dispatch(setIsUkuleleCheck(false));
         queryParams.set(QueryParam.SixString, String(+target.checked));
         history.push(`${AppRoute.Query}${queryParams.toString()}`);
         break;
       case StringCount.SevenStrings:
-        dispatch(setIsSevenStringsCheck(target.checked));
         queryParams.set(QueryParam.SevenString, String(+target.checked));
         dispatch(setIsUkuleleCheck(false));
         history.push(`${AppRoute.Query}${queryParams.toString()}`);
         break;
       case StringCount.TwelveStrings:
-        dispatch(setIsTwelveStringsCheck(target.checked));
         dispatch(setIsUkuleleCheck(false));
         dispatch(setIsElectricCheck(false));
         queryParams.set(QueryParam.TwelveString, String(+target.checked));
