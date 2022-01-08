@@ -1,48 +1,51 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { AppRoute, QueryParam, StringCount } from '../../const';
+import { AppRoute, BooleanToString, QueryParam, StringCount } from '../../const';
 import { useQueryParams } from '../../hooks/use-query-params';
 import {
-  setCurrentPageNumber,
-  setIsAcousticCheck,
-  setIsElectricCheck,
-  setIsUkuleleCheck
+  setCurrentPageNumber
 } from '../../store/action';
-import {
-  getIsAcousticCheck,
-  getIsElectricCheck,
-  getIsUkuleleCheck
-} from '../../store/catalog-filter/selectors';
 
 function CatalogFilterStringCount(): JSX.Element {
   const dispatch = useDispatch();
   const history = useHistory();
   const queryParams = useQueryParams();
-  const isAcousticCheck = useSelector(getIsAcousticCheck);
-  const isElectricCheck = useSelector(getIsElectricCheck);
-  const isUkuleleCheck = useSelector(getIsUkuleleCheck);
 
   const handleGuitarStringCheck = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setCurrentPageNumber(0));
     switch (target.name) {
       case StringCount.FourStrings:
-        dispatch(setIsAcousticCheck(false));
+        if (target.checked &&
+          (!queryParams.has(QueryParam.SixString) || queryParams.get(QueryParam.SixString) === BooleanToString.False) &&
+          (!queryParams.has(QueryParam.SevenString) || queryParams.get(QueryParam.SevenString) === BooleanToString.False) && (!queryParams.has(QueryParam.TwelveString) || queryParams.get(QueryParam.TwelveString) === BooleanToString.False)) {
+          queryParams.set(QueryParam.AcusticType, BooleanToString.False);
+        }
         queryParams.set(QueryParam.FourString, String(+target.checked));
         history.push(`${AppRoute.Query}${queryParams.toString()}`);
         break;
       case StringCount.SixStrings:
-        dispatch(setIsUkuleleCheck(false));
+        if (target.checked &&
+          (!queryParams.has(QueryParam.FourString) || queryParams.get(QueryParam.FourString) === BooleanToString.False)) {
+          queryParams.set(QueryParam.UkuleleType, BooleanToString.False);
+        }
         queryParams.set(QueryParam.SixString, String(+target.checked));
         history.push(`${AppRoute.Query}${queryParams.toString()}`);
         break;
       case StringCount.SevenStrings:
+        if (target.checked &&
+          (!queryParams.has(QueryParam.FourString) || queryParams.get(QueryParam.FourString) === BooleanToString.False)) {
+          queryParams.set(QueryParam.UkuleleType, BooleanToString.False);
+        }
         queryParams.set(QueryParam.SevenString, String(+target.checked));
-        dispatch(setIsUkuleleCheck(false));
         history.push(`${AppRoute.Query}${queryParams.toString()}`);
         break;
       case StringCount.TwelveStrings:
-        dispatch(setIsUkuleleCheck(false));
-        dispatch(setIsElectricCheck(false));
+        if (target.checked &&
+          (!queryParams.has(QueryParam.SixString) || queryParams.get(QueryParam.SixString) === BooleanToString.False) &&
+          (!queryParams.has(QueryParam.SevenString) || queryParams.get(QueryParam.SevenString) === BooleanToString.False) && (!queryParams.has(QueryParam.FourString) || queryParams.get(QueryParam.FourString) === BooleanToString.False)) {
+          queryParams.set(QueryParam.ElectricType, BooleanToString.False);
+          queryParams.set(QueryParam.UkuleleType, BooleanToString.False);
+        }
         queryParams.set(QueryParam.TwelveString, String(+target.checked));
         history.push(`${AppRoute.Query}${queryParams.toString()}`);
         break;
@@ -53,8 +56,11 @@ function CatalogFilterStringCount(): JSX.Element {
     <fieldset className="catalog-filter__block">
       <legend className="catalog-filter__block-title">Количество струн</legend>
       <div className="form-checkbox catalog-filter__block-item">
-        {isUkuleleCheck || isElectricCheck ||
-          (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
+        {(queryParams.has(QueryParam.UkuleleType) && queryParams.get(QueryParam.UkuleleType) === BooleanToString.True) ||
+          (queryParams.has(QueryParam.ElectricType) && queryParams.get(QueryParam.ElectricType) === BooleanToString.True) ||
+          ((!queryParams.has(QueryParam.AcusticType) || queryParams.get(QueryParam.AcusticType) === BooleanToString.False) &&
+            (!queryParams.has(QueryParam.ElectricType) || queryParams.get(QueryParam.ElectricType) === BooleanToString.False) &&
+            (!queryParams.has(QueryParam.UkuleleType) || queryParams.get(QueryParam.UkuleleType) === BooleanToString.False)) ?
           <input
             className="visually-hidden"
             type="checkbox"
@@ -75,8 +81,11 @@ function CatalogFilterStringCount(): JSX.Element {
         <label htmlFor="4-strings">4</label>
       </div>
       <div className="form-checkbox catalog-filter__block-item">
-        {isAcousticCheck || isElectricCheck ||
-          (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
+        {(queryParams.has(QueryParam.AcusticType) && queryParams.get(QueryParam.AcusticType) === BooleanToString.True) ||
+          (queryParams.has(QueryParam.ElectricType) && queryParams.get(QueryParam.ElectricType) === BooleanToString.True) ||
+          ((!queryParams.has(QueryParam.AcusticType) || queryParams.get(QueryParam.AcusticType) === BooleanToString.False) &&
+            (!queryParams.has(QueryParam.ElectricType) || queryParams.get(QueryParam.ElectricType) === BooleanToString.False) &&
+            (!queryParams.has(QueryParam.UkuleleType) || queryParams.get(QueryParam.UkuleleType) === BooleanToString.False)) ?
           <input
             className="visually-hidden"
             type="checkbox"
@@ -97,8 +106,11 @@ function CatalogFilterStringCount(): JSX.Element {
         <label htmlFor="6-strings">6</label>
       </div>
       <div className="form-checkbox catalog-filter__block-item">
-        {isAcousticCheck || isElectricCheck ||
-          (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
+        {(queryParams.has(QueryParam.AcusticType) && queryParams.get(QueryParam.AcusticType) === BooleanToString.True) ||
+          (queryParams.has(QueryParam.ElectricType) && queryParams.get(QueryParam.ElectricType) === BooleanToString.True) ||
+          ((!queryParams.has(QueryParam.AcusticType) || queryParams.get(QueryParam.AcusticType) === BooleanToString.False) &&
+            (!queryParams.has(QueryParam.ElectricType) || queryParams.get(QueryParam.ElectricType) === BooleanToString.False) &&
+            (!queryParams.has(QueryParam.UkuleleType) || queryParams.get(QueryParam.UkuleleType) === BooleanToString.False)) ?
           <input
             className="visually-hidden"
             type="checkbox"
@@ -120,8 +132,10 @@ function CatalogFilterStringCount(): JSX.Element {
         <label htmlFor="7-strings">7</label>
       </div>
       <div className="form-checkbox catalog-filter__block-item">
-        {isAcousticCheck ||
-          (!isUkuleleCheck && !isElectricCheck && !isAcousticCheck) ?
+        {(queryParams.has(QueryParam.AcusticType) && queryParams.get(QueryParam.AcusticType) === BooleanToString.True) ||
+          ((!queryParams.has(QueryParam.AcusticType) || queryParams.get(QueryParam.AcusticType) === BooleanToString.False) &&
+            (!queryParams.has(QueryParam.ElectricType) || queryParams.get(QueryParam.ElectricType) === BooleanToString.False) &&
+            (!queryParams.has(QueryParam.UkuleleType) || queryParams.get(QueryParam.UkuleleType) === BooleanToString.False)) ?
           <input
             className="visually-hidden"
             type="checkbox"

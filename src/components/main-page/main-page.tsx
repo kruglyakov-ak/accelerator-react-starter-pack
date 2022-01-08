@@ -9,16 +9,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import MainPageEmpty from '../main-page-empty/main-page-empty';
 import { useEffect } from 'react';
 import { fetchGuitarsAction, fetchGuitarsOnPageAction, fetchGuitarWithoutFilters } from '../../store/api-actions';
-import { getIsAcousticCheck, getIsElectricCheck, getIsUkuleleCheck } from '../../store/catalog-filter/selectors';
 import { getCurrentPageNumber } from '../../store/page-pagination/selectors';
 import { useQueryParams } from '../../hooks/use-query-params';
 import { FetchGuitarProperty } from '../../types/fetch-guitar-property';
 
 function MainPage(): JSX.Element {
   const dispatch = useDispatch();
-  const isAcousticCheck = useSelector(getIsAcousticCheck);
-  const isElectricCheck = useSelector(getIsElectricCheck);
-  const isUkuleleCheck = useSelector(getIsUkuleleCheck);
   const currentPageNumber = useSelector(getCurrentPageNumber);
 
   const queryParams = useQueryParams();
@@ -30,6 +26,9 @@ function MainPage(): JSX.Element {
   const querySixString = queryParams.has(QueryParam.SixString) ? Boolean(Number(queryParams.get(QueryParam.SixString))) : false;
   const querySevenString = queryParams.has(QueryParam.SevenString) ? Boolean(Number(queryParams.get(QueryParam.SevenString))) : false;
   const queryTwelveString = queryParams.has(QueryParam.TwelveString) ? Boolean(Number(queryParams.get(QueryParam.TwelveString))) : false;
+  const queryAcusticType = queryParams.has(QueryParam.AcusticType) ? Boolean(Number(queryParams.get(QueryParam.AcusticType))) : false;
+  const queryElectricType = queryParams.has(QueryParam.ElectricType) ? Boolean(Number(queryParams.get(QueryParam.ElectricType))) : false;
+  const queryUkuleleType = queryParams.has(QueryParam.UkuleleType) ? Boolean(Number(queryParams.get(QueryParam.UkuleleType))) : false;
 
   useEffect(() => {
     const fetchParams: FetchGuitarProperty = {
@@ -37,9 +36,9 @@ function MainPage(): JSX.Element {
       orderType: queryOrderType ? queryOrderType : '',
       userPriceMin: queryUserPriceMin ? queryUserPriceMin : '',
       userPriceMax: queryUserPriceMax ? queryUserPriceMax : '',
-      isAcousticCheck: isAcousticCheck,
-      isElectricCheck: isElectricCheck,
-      isUkuleleCheck: isUkuleleCheck,
+      isAcousticCheck: queryAcusticType,
+      isElectricCheck: queryElectricType,
+      isUkuleleCheck: queryUkuleleType,
       isFourStringsCheck: queryFourString,
       isSixStringsCheck: querySixString,
       isSevenStringsCheck: querySevenString,
@@ -48,9 +47,9 @@ function MainPage(): JSX.Element {
     };
 
     if (
-      !isAcousticCheck &&
-      !isElectricCheck &&
-      !isUkuleleCheck &&
+      !queryAcusticType &&
+      !queryElectricType &&
+      !queryUkuleleType &&
       !queryFourString &&
       !querySixString &&
       !querySevenString &&
@@ -60,7 +59,7 @@ function MainPage(): JSX.Element {
     dispatch(fetchGuitarsOnPageAction(fetchParams));
 
     dispatch(fetchGuitarsAction(fetchParams));
-  }, [currentPageNumber, dispatch, isAcousticCheck, isElectricCheck, isUkuleleCheck, queryFourString, queryOrderType, querySevenString, querySixString, querySortType, queryTwelveString, queryUserPriceMax, queryUserPriceMin]);
+  }, [currentPageNumber, dispatch, queryAcusticType, queryElectricType, queryFourString, queryOrderType, querySevenString, querySixString, querySortType, queryTwelveString, queryUkuleleType, queryUserPriceMax, queryUserPriceMin]);
 
 
   const guitars = useSelector(getGuitarsOnPage);

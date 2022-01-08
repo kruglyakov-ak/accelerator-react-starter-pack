@@ -37,13 +37,11 @@ const GuitarTypeToReadable = {
 };
 
 enum SortType {
-  Default = '',
   Price = 'price',
   Rating = 'rating',
 }
 
 const enum OrderType {
-  Default = '',
   Asc = 'asc',
   Desc = 'desc',
 }
@@ -64,7 +62,9 @@ const enum QueryParam {
   Order = '_order',
   PriceGte = 'price_gte',
   PriceLte = 'price_lte',
-  Type = 'type_like',
+  AcusticType = 'acusticType',
+  ElectricType = 'electricType',
+  UkuleleType = 'ukuleleType',
   FourString = '4stringCount',
   SixString = '6stringCount',
   SevenString = '7stringCount',
@@ -80,6 +80,11 @@ const enum DefaultPriceRange {
 
 const GUITARS_ON_PAGE = 9;
 
+const enum BooleanToString {
+  True = '1',
+  False = '0'
+}
+
 export {
   AppRoute,
   APIRoute,
@@ -92,5 +97,6 @@ export {
   StringCount,
   StringCountNumber,
   GUITARS_ON_PAGE,
-  QueryParam
+  QueryParam,
+  BooleanToString
 };

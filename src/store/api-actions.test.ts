@@ -1,7 +1,7 @@
 import { createAPI } from '../services/api';
 import { makeFakeGuitars } from '../utils/mocks';
 import { State } from '../types/state';
-import { APIRoute, OrderType, SortType } from '../const';
+import { APIRoute } from '../const';
 import { fetchGuitarByIdAction, fetchGuitarsAction, fetchGuitarWithoutFilters } from './api-actions';
 import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin } from './action';
 import MockAdapter from 'axios-mock-adapter';
@@ -46,8 +46,8 @@ describe('Async actions', () => {
 
     const store = mockStore();
     await store.dispatch(fetchGuitarsAction({
-      sortType: SortType.Default,
-      orderType: OrderType.Default,
+      sortType: '',
+      orderType: '',
       userPriceMin: '',
       userPriceMax: '',
       isAcousticCheck: false,
