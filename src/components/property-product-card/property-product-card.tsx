@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { AppRoute, GuitarTypeToReadable } from '../../const';
+import { AppRoute, GuitarTypeToReadable, RatingCountNumber } from '../../const';
 import { fetchGuitarByIdAction } from '../../store/api-actions';
 import { getGuitarById } from '../../store/guitar-data/selectors';
 import Page404 from '../page-404/page-404';
@@ -52,27 +52,27 @@ function PropertyProductCard(): JSX.Element {
               <h2 className="product-container__title title title--big title--uppercase">{name}</h2>
               <div className="rate product-container__rating" aria-hidden="true"><span className="visually-hidden">Рейтинг:</span>
                 <svg width="14" height="14" aria-hidden="true">
-                  {rating > 0 ?
+                  {rating > RatingCountNumber.Zero ?
                     <use xlinkHref="#icon-full-star"></use> :
                     <use xlinkHref="#icon-star"></use>}
                 </svg>
                 <svg width="14" height="14" aria-hidden="true">
-                  {rating > 1 ?
+                  {rating > RatingCountNumber.One ?
                     <use xlinkHref="#icon-full-star"></use> :
                     <use xlinkHref="#icon-star"></use>}
                 </svg>
                 <svg width="14" height="14" aria-hidden="true">
-                  {rating > 2 ?
+                  {rating > RatingCountNumber.Two ?
                     <use xlinkHref="#icon-full-star"></use> :
                     <use xlinkHref="#icon-star"></use>}
                 </svg>
                 <svg width="14" height="14" aria-hidden="true">
-                  {rating > 3 ?
+                  {rating > RatingCountNumber.Three ?
                     <use xlinkHref="#icon-full-star"></use> :
                     <use xlinkHref="#icon-star"></use>}
                 </svg>
                 <svg width="14" height="14" aria-hidden="true">
-                  {rating > 4 ?
+                  {rating > RatingCountNumber.Four ?
                     <use xlinkHref="#icon-full-star"></use> :
                     <use xlinkHref="#icon-star"></use>}
                 </svg>

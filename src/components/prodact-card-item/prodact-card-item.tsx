@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, RatingCountNumber } from '../../const';
 import { Guitar } from '../../types/guitar';
 
 type ProductCardItemProps = {
@@ -22,27 +22,27 @@ function ProductCardItem({ guitar }: ProductCardItemProps): JSX.Element {
         <div className="rate product-card__rate" aria-hidden="true">
           <span className="visually-hidden">Рейтинг:</span>
           <svg width="12" height="11" aria-hidden="true">
-            {rating > 0 ?
+            {rating > RatingCountNumber.Zero ?
               <use xlinkHref="#icon-full-star"></use> :
               <use xlinkHref="#icon-star"></use>}
           </svg>
           <svg width="12" height="11" aria-hidden="true">
-            {rating > 1 ?
+            {rating > RatingCountNumber.One ?
               <use xlinkHref="#icon-full-star"></use> :
               <use xlinkHref="#icon-star"></use>}
           </svg>
           <svg width="12" height="11" aria-hidden="true">
-            {rating > 2 ?
+            {rating > RatingCountNumber.Two ?
               <use xlinkHref="#icon-full-star"></use> :
               <use xlinkHref="#icon-star"></use>}
           </svg>
           <svg width="12" height="11" aria-hidden="true">
-            {rating > 3 ?
+            {rating > RatingCountNumber.Three ?
               <use xlinkHref="#icon-full-star"></use> :
               <use xlinkHref="#icon-star"></use>}
           </svg>
           <svg width="12" height="11" aria-hidden="true">
-            {rating > 4 ?
+            {rating > RatingCountNumber.Four ?
               <use xlinkHref="#icon-full-star"></use> :
               <use xlinkHref="#icon-star"></use>}
           </svg>

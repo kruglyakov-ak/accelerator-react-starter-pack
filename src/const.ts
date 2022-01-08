@@ -30,6 +30,14 @@ const enum StringCountNumber {
   TwelveStrings = 12,
 }
 
+const enum RatingCountNumber {
+  Zero = 0,
+  One = 1,
+  Two = 2,
+  Three = 3,
+  Four = 4,
+}
+
 const GuitarTypeToReadable = {
   [GuitarType.Electric]: 'Электрогитара',
   [GuitarType.Acoustic]: 'Акустическая гитара',
@@ -97,5 +105,6 @@ export {
   StringCountNumber,
   GUITARS_ON_PAGE,
   QueryParam,
-  BooleanToString
+  BooleanToString,
+  RatingCountNumber
 };
