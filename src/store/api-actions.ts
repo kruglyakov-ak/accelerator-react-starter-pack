@@ -1,4 +1,4 @@
-import { APIRoute, FilterPath, GUITARS_ON_PAGE, GuitarType, StringCount, StringCountNumber } from '../const';
+import { APIRoute, FilterPath, GUITARS_ON_PAGE, GuitarType, StringCountNumber } from '../const';
 import { ThunkActionResult } from '../types/action';
 import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin, loadGuitarsOnPage } from './action';
 import { Guitar } from '../types/guitar';
@@ -44,16 +44,16 @@ const fetchGuitarsAction = (fetchProperty: FetchGuitarProperty): ThunkActionResu
       path += `${FilterPath.Type}${GuitarType.Ukulele}`;
     }
     if (isFourStringsCheck) {
-      path += `${FilterPath.String}${StringCountNumber[StringCount.FourStrings]}`;
+      path += `${FilterPath.String}${StringCountNumber.FourStrings}`;
     }
     if (isSixStringsCheck) {
-      path += `${FilterPath.String}${StringCountNumber[StringCount.SixStrings]}`;
+      path += `${FilterPath.String}${StringCountNumber.SixStrings}`;
     }
     if (isSevenStringsCheck) {
-      path += `${FilterPath.String}${StringCountNumber[StringCount.SevenStrings]}`;
+      path += `${FilterPath.String}${StringCountNumber.SevenStrings}`;
     }
     if (isTwelveStringsCheck) {
-      path += `${FilterPath.String}${StringCountNumber[StringCount.TwelveStrings]}`;
+      path += `${FilterPath.String}${StringCountNumber.TwelveStrings}`;
     }
     const { data } = await api.get<Guitar[]>(path);
     dispatch(loadGuitars(data));
@@ -111,16 +111,16 @@ const fetchGuitarsOnPageAction = (fetchProperty: FetchGuitarProperty): ThunkActi
       path += `${FilterPath.Type}${GuitarType.Ukulele}`;
     }
     if (isFourStringsCheck) {
-      path += `${FilterPath.String}${StringCountNumber[StringCount.FourStrings]}`;
+      path += `${FilterPath.String}${StringCountNumber.FourStrings}`;
     }
     if (isSixStringsCheck) {
-      path += `${FilterPath.String}${StringCountNumber[StringCount.SixStrings]}`;
+      path += `${FilterPath.String}${StringCountNumber.SixStrings}`;
     }
     if (isSevenStringsCheck) {
-      path += `${FilterPath.String}${StringCountNumber[StringCount.SevenStrings]}`;
+      path += `${FilterPath.String}${StringCountNumber.SevenStrings}`;
     }
     if (isTwelveStringsCheck) {
-      path += `${FilterPath.String}${StringCountNumber[StringCount.TwelveStrings]}`;
+      path += `${FilterPath.String}${StringCountNumber.TwelveStrings}`;
     }
 
     const { data, headers } = await api.get<Guitar[]>(path);

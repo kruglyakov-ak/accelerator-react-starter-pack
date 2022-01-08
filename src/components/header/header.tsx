@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { getGuitarsWithoutFilters } from '../../store/guitar-data/selectors';
 
 function Header(): JSX.Element {
   const guitars = useSelector(getGuitarsWithoutFilters);
-  const history = useHistory();
+  const path = useLocation().pathname;
 
   const [isSearchListHidden, setIsSearchListHidden] = useState(true);
   const [searchValue, setSearchValue] = useState('');
@@ -28,7 +28,7 @@ function Header(): JSX.Element {
         <nav className="main-nav">
           <ul className="main-nav__list">
             <li>
-              <Link to={AppRoute.Main} className={history.location.pathname === AppRoute.Main ?
+              <Link to={AppRoute.Main} className={path === AppRoute.Main ?
                 'link main-nav__link link--current' :
                 'link main-nav__link link'}
               >
@@ -66,10 +66,7 @@ function Header(): JSX.Element {
                 .map((guitar) => (<li className="form-search__select-item" tabIndex={0} key={guitar.id}><Link to={`${AppRoute.Main}product/${guitar.id}`} className="link">{guitar.name}</Link></li>))}
             </ul>}
         </div>
-        <Link to={AppRoute.Cart} className={history.location.pathname === AppRoute.Cart ?
-          'header__cart-link--current' :
-          'header__cart-link'} aria-label="Корзина"
-        >
+        <Link to={AppRoute.Cart} className="header__cart-link" aria-label="Корзина">
           <svg className="header__cart-icon" width="14" height="14" aria-hidden="true">
             <use xlinkHref="#icon-basket"></use>
           </svg><span className="visually-hidden">Перейти в корзину</span><span className="header__cart-count">2</span>

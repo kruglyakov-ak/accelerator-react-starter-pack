@@ -23,18 +23,18 @@ const enum StringCount {
   TwelveStrings = '12-strings',
 }
 
-const StringCountNumber = {
-  [StringCount.FourStrings]: 4,
-  [StringCount.SixStrings]: 6,
-  [StringCount.SevenStrings]: 7,
-  [StringCount.TwelveStrings]: 12,
-};
+const enum StringCountNumber {
+  FourStrings = 4,
+  SixStrings = 6,
+  SevenStrings = 7,
+  TwelveStrings = 12,
+}
 
 const GuitarTypeToReadable = {
   [GuitarType.Electric]: 'Электрогитара',
   [GuitarType.Acoustic]: 'Акустическая гитара',
   [GuitarType.Ukulele]: 'Укулеле',
-};
+} as const;
 
 enum SortType {
   Price = 'price',
