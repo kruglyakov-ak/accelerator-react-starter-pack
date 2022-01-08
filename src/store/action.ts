@@ -83,16 +83,6 @@ const setGuitarsCount = createAction(
   }),
 );
 
-const setCurrentPageNumber = createAction(
-  ActionType.SetCurrentPageNumber,
-  (currentPageNumber: number) => ({
-    payload: {
-      currentPageNumber,
-    },
-  }),
-);
-
-
 export {
   loadGuitars,
   loadGuitarById,
@@ -102,6 +92,5 @@ export {
   setUserPriceMin,
   setUserPriceMax,
   setGuitarsCount,
-  setCurrentPageNumber,
   loadGuitarsOnPage
 };

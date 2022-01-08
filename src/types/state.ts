@@ -17,7 +17,6 @@ type CatalogFilter = {
 
 type PagePagination = {
   guitarsCount: number,
-  currentPageNumber: number,
 };
 
 export type {

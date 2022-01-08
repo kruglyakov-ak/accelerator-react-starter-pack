@@ -1,5 +1,6 @@
-import { useDispatch } from 'react-redux';
-import { setCurrentPageNumber } from '../../store/action';
+import { useHistory } from 'react-router-dom';
+import { QueryParam, AppRoute } from '../../const';
+import { useQueryParams } from '../../hooks/use-query-params';
 
 type PaginationItemProps = {
   pageCount: number,
@@ -7,10 +8,12 @@ type PaginationItemProps = {
 }
 
 function PaginationItem({ pageCount, activePage }: PaginationItemProps): JSX.Element {
-  const dispatch = useDispatch();
+  const history = useHistory();
+  const queryParams = useQueryParams();
 
   const handlePageLinkClick = () => {
-    dispatch(setCurrentPageNumber(pageCount - 1));
+    queryParams.set(QueryParam.CurrentPageNumber, String(pageCount - 1));
+    history.push(`${AppRoute.Query}${queryParams.toString()}`);
   };
 
   return (

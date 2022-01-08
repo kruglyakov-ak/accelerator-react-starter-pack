@@ -34,7 +34,6 @@ const store = mockStore({
   },
   PAGINATION: {
     guitarsCount: 0,
-    currentPageNumber: 0,
   },
 });
 

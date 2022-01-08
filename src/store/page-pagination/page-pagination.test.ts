@@ -1,4 +1,4 @@
-import { setCurrentPageNumber, setGuitarsCount } from '../action';
+import { setGuitarsCount } from '../action';
 import { pagePagination } from './page-pagination';
 
 describe('Reducer: page-pagination', () => {
@@ -19,18 +19,6 @@ describe('Reducer: page-pagination', () => {
       .toEqual({
         guitarsCount: 1,
         currentPageNumber: 0,
-      });
-  });
-
-  it('should update currentPageNumber by change current page number', () => {
-    const state = {
-      guitarsCount: 0,
-      currentPageNumber: 0,
-    };
-    expect(pagePagination(state, setCurrentPageNumber(1)))
-      .toEqual({
-        guitarsCount: 0,
-        currentPageNumber: 1,
       });
   });
 });

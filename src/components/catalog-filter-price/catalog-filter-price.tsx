@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { AppRoute, QueryParam } from '../../const';
 import { useQueryParams } from '../../hooks/use-query-params';
 import {
-  setCurrentPageNumber,
   setUserPriceMax,
   setUserPriceMin
 } from '../../store/action';
@@ -43,7 +42,7 @@ function CatalogFilterPrice(): JSX.Element {
       setUserPriceMinValue(userPriceMaxValue);
       queryParams.set(QueryParam.PriceGte, userPriceMaxValue);
     }
-    dispatch(setCurrentPageNumber(0));
+    queryParams.set(QueryParam.CurrentPageNumber, '0');
     dispatch(setUserPriceMin(target.value));
     if (target.value === '') {
       queryParams.delete(QueryParam.PriceGte);
@@ -66,7 +65,7 @@ function CatalogFilterPrice(): JSX.Element {
       setUserPriceMaxValue(userPriceMinValue);
       queryParams.set(QueryParam.PriceLte, userPriceMinValue);
     }
-    dispatch(setCurrentPageNumber(0));
+    queryParams.set(QueryParam.CurrentPageNumber, '0');
     dispatch(setUserPriceMax(target.value));
     if (target.value === '') {
       queryParams.delete(QueryParam.PriceLte);

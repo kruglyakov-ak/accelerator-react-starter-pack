@@ -18,7 +18,6 @@ const mockStore = configureMockStore<
 const store = mockStore({
   PAGINATION: {
     guitarsCount: 27,
-    currentPageNumber: 0,
   },
 });
 

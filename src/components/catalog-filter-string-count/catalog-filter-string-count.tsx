@@ -1,18 +1,13 @@
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { AppRoute, BooleanToString, QueryParam, StringCount } from '../../const';
 import { useQueryParams } from '../../hooks/use-query-params';
-import {
-  setCurrentPageNumber
-} from '../../store/action';
 
 function CatalogFilterStringCount(): JSX.Element {
-  const dispatch = useDispatch();
   const history = useHistory();
   const queryParams = useQueryParams();
 
   const handleGuitarStringCheck = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setCurrentPageNumber(0));
+    queryParams.set(QueryParam.CurrentPageNumber, '0');
     switch (target.name) {
       case StringCount.FourStrings:
         if (target.checked &&

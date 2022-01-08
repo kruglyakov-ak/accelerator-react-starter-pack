@@ -1,17 +1,12 @@
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { AppRoute, BooleanToString, GuitarType, QueryParam } from '../../const';
 import { useQueryParams } from '../../hooks/use-query-params';
-import {
-  setCurrentPageNumber
-} from '../../store/action';
 
 function CatalogFilterType(): JSX.Element {
-  const dispatch = useDispatch();
   const history = useHistory();
   const queryParams = useQueryParams();
   const handleGuitarTypeCheck = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setCurrentPageNumber(0));
+    queryParams.set(QueryParam.CurrentPageNumber, '0');
     switch (target.name) {
       case GuitarType.Acoustic:
         if (target.checked &&

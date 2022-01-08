@@ -69,8 +69,7 @@ const enum QueryParam {
   SixString = '6stringCount',
   SevenString = '7stringCount',
   TwelveString = '12stringCount',
-  PaginationStart = '_start',
-  PaginationEnd = '_end',
+  CurrentPageNumber = 'page',
 }
 
 const enum DefaultPriceRange {

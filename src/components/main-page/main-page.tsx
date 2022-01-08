@@ -9,13 +9,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import MainPageEmpty from '../main-page-empty/main-page-empty';
 import { useEffect } from 'react';
 import { fetchGuitarsAction, fetchGuitarsOnPageAction, fetchGuitarWithoutFilters } from '../../store/api-actions';
-import { getCurrentPageNumber } from '../../store/page-pagination/selectors';
 import { useQueryParams } from '../../hooks/use-query-params';
 import { FetchGuitarProperty } from '../../types/fetch-guitar-property';
 
 function MainPage(): JSX.Element {
   const dispatch = useDispatch();
-  const currentPageNumber = useSelector(getCurrentPageNumber);
 
   const queryParams = useQueryParams();
   const querySortType = queryParams.has(QueryParam.Sort) ? queryParams.get(QueryParam.Sort) : '';
@@ -29,6 +27,7 @@ function MainPage(): JSX.Element {
   const queryAcusticType = queryParams.has(QueryParam.AcusticType) ? Boolean(Number(queryParams.get(QueryParam.AcusticType))) : false;
   const queryElectricType = queryParams.has(QueryParam.ElectricType) ? Boolean(Number(queryParams.get(QueryParam.ElectricType))) : false;
   const queryUkuleleType = queryParams.has(QueryParam.UkuleleType) ? Boolean(Number(queryParams.get(QueryParam.UkuleleType))) : false;
+  const queryCurrentPage = queryParams.has(QueryParam.CurrentPageNumber) ? Number(queryParams.get(QueryParam.CurrentPageNumber)) : 0;
 
   useEffect(() => {
     const fetchParams: FetchGuitarProperty = {
@@ -43,7 +42,7 @@ function MainPage(): JSX.Element {
       isSixStringsCheck: querySixString,
       isSevenStringsCheck: querySevenString,
       isTwelveStringsCheck: queryTwelveString,
-      currentPageNumber: currentPageNumber,
+      currentPageNumber: queryCurrentPage,
     };
 
     if (
@@ -59,8 +58,7 @@ function MainPage(): JSX.Element {
     dispatch(fetchGuitarsOnPageAction(fetchParams));
 
     dispatch(fetchGuitarsAction(fetchParams));
-  }, [currentPageNumber, dispatch, queryAcusticType, queryElectricType, queryFourString, queryOrderType, querySevenString, querySixString, querySortType, queryTwelveString, queryUkuleleType, queryUserPriceMax, queryUserPriceMin]);
-
+  }, [dispatch, queryAcusticType, queryCurrentPage, queryElectricType, queryFourString, queryOrderType, querySevenString, querySixString, querySortType, queryTwelveString, queryUkuleleType, queryUserPriceMax, queryUserPriceMin]);
 
   const guitars = useSelector(getGuitarsOnPage);
 
