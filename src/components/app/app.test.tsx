@@ -31,9 +31,6 @@ const store = mockStore({
   FILTER: {
     priceRangeMin: DefaultPriceRange.Min,
     priceRangeMax: DefaultPriceRange.Max,
-    isAcousticCheck: false,
-    isElectricCheck: false,
-    isUkuleleCheck: false,
   },
   PAGINATION: {
     guitarsCount: 0,

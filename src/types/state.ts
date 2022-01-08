@@ -13,9 +13,6 @@ type GuitarData = {
 type CatalogFilter = {
   priceRangeMin: number,
   priceRangeMax: number,
-  isAcousticCheck: boolean,
-  isElectricCheck: boolean,
-  isUkuleleCheck: boolean,
 };
 
 type PagePagination = {

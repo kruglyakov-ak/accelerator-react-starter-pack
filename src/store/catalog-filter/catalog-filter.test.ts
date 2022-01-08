@@ -1,5 +1,5 @@
 import { DefaultPriceRange } from '../../const';
-import { setIsAcousticCheck, setIsElectricCheck, setIsUkuleleCheck, setPriceRangeMax, setPriceRangeMin, setUserPriceMax, setUserPriceMin } from '../action';
+import { setPriceRangeMax, setPriceRangeMin, setUserPriceMax, setUserPriceMin } from '../action';
 import { catalogFilter } from './catalog-filter';
 
 describe('Reducer: catalogFilter', () => {
@@ -10,13 +10,6 @@ describe('Reducer: catalogFilter', () => {
         priceRangeMax: DefaultPriceRange.Max,
         userPriceMin: '',
         userPriceMax: '',
-        isAcousticCheck: false,
-        isElectricCheck: false,
-        isUkuleleCheck: false,
-        isFourStringsCheck: false,
-        isSixStringsCheck: false,
-        isSevenStringsCheck: false,
-        isTwelveStringsCheck: false,
       });
   });
 
@@ -26,13 +19,6 @@ describe('Reducer: catalogFilter', () => {
       priceRangeMax: DefaultPriceRange.Max,
       userPriceMin: '',
       userPriceMax: '',
-      isAcousticCheck: false,
-      isElectricCheck: false,
-      isUkuleleCheck: false,
-      isFourStringsCheck: false,
-      isSixStringsCheck: false,
-      isSevenStringsCheck: false,
-      isTwelveStringsCheck: false,
     };
     expect(catalogFilter(state, setPriceRangeMin(1000)))
       .toEqual({
@@ -40,13 +26,6 @@ describe('Reducer: catalogFilter', () => {
         priceRangeMax: DefaultPriceRange.Max,
         userPriceMin: '',
         userPriceMax: '',
-        isAcousticCheck: false,
-        isElectricCheck: false,
-        isUkuleleCheck: false,
-        isFourStringsCheck: false,
-        isSixStringsCheck: false,
-        isSevenStringsCheck: false,
-        isTwelveStringsCheck: false,
       });
   });
 
@@ -56,13 +35,6 @@ describe('Reducer: catalogFilter', () => {
       priceRangeMax: DefaultPriceRange.Max,
       userPriceMin: '',
       userPriceMax: '',
-      isAcousticCheck: false,
-      isElectricCheck: false,
-      isUkuleleCheck: false,
-      isFourStringsCheck: false,
-      isSixStringsCheck: false,
-      isSevenStringsCheck: false,
-      isTwelveStringsCheck: false,
     };
     expect(catalogFilter(state, setPriceRangeMax(1000)))
       .toEqual({
@@ -70,13 +42,6 @@ describe('Reducer: catalogFilter', () => {
         priceRangeMax: 1000,
         userPriceMin: '',
         userPriceMax: '',
-        isAcousticCheck: false,
-        isElectricCheck: false,
-        isUkuleleCheck: false,
-        isFourStringsCheck: false,
-        isSixStringsCheck: false,
-        isSevenStringsCheck: false,
-        isTwelveStringsCheck: false,
       });
   });
 
@@ -86,13 +51,6 @@ describe('Reducer: catalogFilter', () => {
       priceRangeMax: DefaultPriceRange.Max,
       userPriceMin: '',
       userPriceMax: '',
-      isAcousticCheck: false,
-      isElectricCheck: false,
-      isUkuleleCheck: false,
-      isFourStringsCheck: false,
-      isSixStringsCheck: false,
-      isSevenStringsCheck: false,
-      isTwelveStringsCheck: false,
     };
     expect(catalogFilter(state, setUserPriceMin('1000')))
       .toEqual({
@@ -100,13 +58,6 @@ describe('Reducer: catalogFilter', () => {
         priceRangeMax: DefaultPriceRange.Max,
         userPriceMin: '1000',
         userPriceMax: '',
-        isAcousticCheck: false,
-        isElectricCheck: false,
-        isUkuleleCheck: false,
-        isFourStringsCheck: false,
-        isSixStringsCheck: false,
-        isSevenStringsCheck: false,
-        isTwelveStringsCheck: false,
       });
   });
 
@@ -117,13 +68,6 @@ describe('Reducer: catalogFilter', () => {
       priceRangeMax: DefaultPriceRange.Max,
       userPriceMin: '',
       userPriceMax: '',
-      isAcousticCheck: false,
-      isElectricCheck: false,
-      isUkuleleCheck: false,
-      isFourStringsCheck: false,
-      isSixStringsCheck: false,
-      isSevenStringsCheck: false,
-      isTwelveStringsCheck: false,
     };
     expect(catalogFilter(state, setUserPriceMax('1000')))
       .toEqual({
@@ -131,103 +75,6 @@ describe('Reducer: catalogFilter', () => {
         priceRangeMax: DefaultPriceRange.Max,
         userPriceMin: '',
         userPriceMax: '1000',
-        isAcousticCheck: false,
-        isElectricCheck: false,
-        isUkuleleCheck: false,
-        isFourStringsCheck: false,
-        isSixStringsCheck: false,
-        isSevenStringsCheck: false,
-        isTwelveStringsCheck: false,
-      });
-  });
-
-  it('should update isAcousticCheck by change filter Acoustic', () => {
-    const state = {
-      priceRangeMin: DefaultPriceRange.Min,
-      priceRangeMax: DefaultPriceRange.Max,
-      userPriceMin: '',
-      userPriceMax: '',
-      isAcousticCheck: false,
-      isElectricCheck: false,
-      isUkuleleCheck: false,
-      isFourStringsCheck: false,
-      isSixStringsCheck: false,
-      isSevenStringsCheck: false,
-      isTwelveStringsCheck: false,
-    };
-    expect(catalogFilter(state, setIsAcousticCheck(true)))
-      .toEqual({
-        priceRangeMin: DefaultPriceRange.Min,
-        priceRangeMax: DefaultPriceRange.Max,
-        userPriceMin: '',
-        userPriceMax: '',
-        isAcousticCheck: true,
-        isElectricCheck: false,
-        isUkuleleCheck: false,
-        isFourStringsCheck: false,
-        isSixStringsCheck: false,
-        isSevenStringsCheck: false,
-        isTwelveStringsCheck: false,
-      });
-  });
-
-  it('should update isElectricCheck by change filter Electric', () => {
-    const state = {
-      priceRangeMin: DefaultPriceRange.Min,
-      priceRangeMax: DefaultPriceRange.Max,
-      userPriceMin: '',
-      userPriceMax: '',
-      isAcousticCheck: false,
-      isElectricCheck: false,
-      isUkuleleCheck: false,
-      isFourStringsCheck: false,
-      isSixStringsCheck: false,
-      isSevenStringsCheck: false,
-      isTwelveStringsCheck: false,
-    };
-    expect(catalogFilter(state, setIsElectricCheck(true)))
-      .toEqual({
-        priceRangeMin: DefaultPriceRange.Min,
-        priceRangeMax: DefaultPriceRange.Max,
-        userPriceMin: '',
-        userPriceMax: '',
-        isAcousticCheck: false,
-        isElectricCheck: true,
-        isUkuleleCheck: false,
-        isFourStringsCheck: false,
-        isSixStringsCheck: false,
-        isSevenStringsCheck: false,
-        isTwelveStringsCheck: false,
-      });
-  });
-
-  it('should update isUkuleleCheck by change filter Ukulele', () => {
-    const state = {
-      priceRangeMin: DefaultPriceRange.Min,
-      priceRangeMax: DefaultPriceRange.Max,
-      userPriceMin: '',
-      userPriceMax: '',
-      isAcousticCheck: false,
-      isElectricCheck: false,
-      isUkuleleCheck: false,
-      isFourStringsCheck: false,
-      isSixStringsCheck: false,
-      isSevenStringsCheck: false,
-      isTwelveStringsCheck: false,
-    };
-    expect(catalogFilter(state, setIsUkuleleCheck(true)))
-      .toEqual({
-        priceRangeMin: DefaultPriceRange.Min,
-        priceRangeMax: DefaultPriceRange.Max,
-        userPriceMin: '',
-        userPriceMax: '',
-        isAcousticCheck: false,
-        isElectricCheck: false,
-        isUkuleleCheck: true,
-        isFourStringsCheck: false,
-        isSixStringsCheck: false,
-        isSevenStringsCheck: false,
-        isTwelveStringsCheck: false,
       });
   });
 });
