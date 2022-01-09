@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { AppRoute, GuitarTypeToReadable, RatingCountNumber } from '../../const';
+import { AppRoute, RatingCountNumber } from '../../const';
 import { fetchGuitarByIdAction } from '../../store/api-actions';
 import { getGuitarById } from '../../store/guitar-data/selectors';
+import { changeGuitarTypeToReadable } from '../../utils/utils';
 import Page404 from '../page-404/page-404';
 
 type RouteParams = {
@@ -87,7 +88,7 @@ function PropertyProductCard(): JSX.Element {
                     </tr>
                     <tr className="tabs__table-row">
                       <td className="tabs__title">Тип:</td>
-                      <td className="tabs__value">{GuitarTypeToReadable[type]}</td>
+                      <td className="tabs__value">{changeGuitarTypeToReadable(type)}</td>
                     </tr>
                     <tr className="tabs__table-row">
                       <td className="tabs__title">Количество струн:</td>

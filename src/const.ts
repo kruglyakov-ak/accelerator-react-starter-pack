@@ -16,6 +16,13 @@ const enum GuitarType {
   Ukulele = 'ukulele',
 }
 
+
+const enum GuitarTypeToReadable {
+  Electric = 'Электрогитара',
+  Acoustic = 'Акустическая гитара',
+  Ukulele = 'Укулеле',
+}
+
 const enum StringCount {
   FourStrings = '4-strings',
   SixStrings = '6-strings',
@@ -37,12 +44,6 @@ const enum RatingCountNumber {
   Three = 3,
   Four = 4,
 }
-
-const GuitarTypeToReadable = {
-  [GuitarType.Electric]: 'Электрогитара',
-  [GuitarType.Acoustic]: 'Акустическая гитара',
-  [GuitarType.Ukulele]: 'Укулеле',
-} as const;
 
 enum SortType {
   Price = 'price',
@@ -96,7 +97,6 @@ export {
   AppRoute,
   APIRoute,
   GuitarType,
-  GuitarTypeToReadable,
   SortType,
   OrderType,
   FilterPath,
@@ -106,5 +106,6 @@ export {
   GUITARS_ON_PAGE,
   QueryParam,
   BooleanToString,
-  RatingCountNumber
+  RatingCountNumber,
+  GuitarTypeToReadable
 };

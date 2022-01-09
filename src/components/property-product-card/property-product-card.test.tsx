@@ -9,7 +9,7 @@ import { Action } from 'redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { makeFakeGuitars } from '../../utils/mocks';
 import PropertyProductCard from './property-product-card';
-import { GuitarTypeToReadable } from '../../const';
+import { changeGuitarTypeToReadable } from '../../utils/utils';
 
 const guitars = makeFakeGuitars();
 const history = createMemoryHistory();
@@ -38,7 +38,7 @@ describe('Component: PropertyProductCard', () => {
       </Provider>);
 
     expect(screen.getByText(guitars[0].name)).toBeInTheDocument();
-    expect(screen.getByText(GuitarTypeToReadable[guitars[0].type])).toBeInTheDocument();
+    expect(screen.getByText(changeGuitarTypeToReadable(guitars[0].type))).toBeInTheDocument();
   });
 
 });
