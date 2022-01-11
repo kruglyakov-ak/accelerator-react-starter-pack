@@ -62,7 +62,7 @@ function Header(): JSX.Element {
             <ul className="form-search__select-list hidden"></ul> :
             <ul className="form-search__select-list">
               {guitars
-                .filter((guitar) => guitar.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+                .filter((guitar) => guitar.name.toLowerCase().includes(searchValue.toLowerCase()) &&
                 guitar.name.toLowerCase()[0] === searchValue.toLowerCase()[0])
                 .map((guitar) => (<li className="form-search__select-item" key={guitar.id}><Link to={`${AppRoute.Main}product/${guitar.id}`} className="link">{guitar.name}</Link></li>))}
             </ul>}
