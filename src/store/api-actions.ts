@@ -1,6 +1,6 @@
 import { APIRoute, FilterPath, GUITARS_ON_PAGE, GuitarType, StringCountNumber } from '../const';
 import { ThunkActionResult } from '../types/action';
-import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin, loadGuitarsOnPage } from './action';
+import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin, loadGuitarsOnPage, setIsDataLoaded } from './action';
 import { Guitar } from '../types/guitar';
 import { FetchGuitarProperty } from '../types/fetch-guitar-property';
 
@@ -126,6 +126,7 @@ const fetchGuitarsOnPageAction = (fetchProperty: FetchGuitarProperty): ThunkActi
     const { data, headers } = await api.get<Guitar[]>(path);
     dispatch(loadGuitarsOnPage(data));
     dispatch(setGuitarsCount(+headers['x-total-count']));
+    dispatch(setIsDataLoaded(true));
   };
 
 const fetchGuitarByIdAction = (id: number): ThunkActionResult =>

@@ -8,6 +8,7 @@ type GuitarData = {
   guitarsOnPage: Guitar[],
   guitarsWithoutFilters: Guitar[],
   guitar: Guitar | null,
+  isDataLoaded: boolean,
 };
 
 type CatalogFilter = {

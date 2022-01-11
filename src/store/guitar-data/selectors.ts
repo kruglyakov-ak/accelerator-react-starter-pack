@@ -6,10 +6,12 @@ const getGuitars = (state: State): Guitar[] => state[NameSpace.Data].guitars;
 const getGuitarsWithoutFilters = (state: State): Guitar[] => state[NameSpace.Data].guitarsWithoutFilters;
 const getGuitarsOnPage = (state: State): Guitar[] => state[NameSpace.Data].guitarsOnPage;
 const getGuitarById = (state: State): Guitar | null => state[NameSpace.Data].guitar;
+const getIsDataLoaded = (state: State): boolean => state[NameSpace.Data].isDataLoaded;
 
 export {
   getGuitars,
   getGuitarsWithoutFilters,
   getGuitarById,
-  getGuitarsOnPage
+  getGuitarsOnPage,
+  getIsDataLoaded
 };

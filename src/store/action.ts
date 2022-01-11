@@ -83,6 +83,15 @@ const setGuitarsCount = createAction(
   }),
 );
 
+const setIsDataLoaded = createAction(
+  ActionType.SetIsDataLoaded,
+  (isDataLoaded: boolean) => ({
+    payload: {
+      isDataLoaded,
+    },
+  }),
+);
+
 export {
   loadGuitars,
   loadGuitarById,
@@ -92,5 +101,6 @@ export {
   setUserPriceMin,
   setUserPriceMax,
   setGuitarsCount,
-  loadGuitarsOnPage
+  loadGuitarsOnPage,
+  setIsDataLoaded
 };
