@@ -63,7 +63,7 @@ function Header(): JSX.Element {
             <ul className="form-search__select-list">
               {guitars
                 .filter((guitar) => guitar.name.toLowerCase().includes(searchValue.toLowerCase()))
-                .map((guitar) => (<li className="form-search__select-item" tabIndex={0} key={guitar.id}><Link to={`${AppRoute.Main}product/${guitar.id}`} className="link">{guitar.name}</Link></li>))}
+                .map((guitar) => (<li className="form-search__select-item" key={guitar.id}><Link to={`${AppRoute.Main}product/${guitar.id}`} className="link">{guitar.name}</Link></li>))}
             </ul>}
         </div>
         <Link to={AppRoute.Cart} className="header__cart-link" aria-label="Корзина">
