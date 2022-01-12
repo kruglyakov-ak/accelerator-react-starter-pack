@@ -66,7 +66,26 @@ function MainPage(): JSX.Element {
 
   if (!isDataLoaded) {
     return (
-      <LoadingScreen />
+      <div className="wrapper">
+        <main className="page-content">
+          <div className="container">
+            <h1 className="page-content__title title title--bigger" id="top">Каталог гитар</h1>
+            <ul className="breadcrumbs page-content__breadcrumbs">
+              <li className="breadcrumbs__item">
+                <Link to={AppRoute.Main} className="link">Главная</Link>
+              </li>
+              <li className="breadcrumbs__item">
+                <Link to={AppRoute.Main} className="link">Каталог</Link>
+              </li>
+            </ul>
+            <div className="catalog">
+              <CatalogFilter />
+              <CatalogSort />
+              <LoadingScreen />
+            </div>
+          </div>
+        </main>
+      </div>
     );
   }
 
@@ -76,7 +95,6 @@ function MainPage(): JSX.Element {
 
   return (
     <div className="wrapper">
-
       <main className="page-content">
         <div className="container">
           <h1 className="page-content__title title title--bigger" id="top">Каталог гитар</h1>

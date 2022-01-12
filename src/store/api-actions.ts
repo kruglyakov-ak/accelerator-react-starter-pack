@@ -122,11 +122,15 @@ const fetchGuitarsOnPageAction = (fetchProperty: FetchGuitarProperty): ThunkActi
     if (isTwelveStringsCheck) {
       path += `${FilterPath.String}${StringCountNumber.TwelveStrings}`;
     }
-
-    const { data, headers } = await api.get<Guitar[]>(path);
-    dispatch(loadGuitarsOnPage(data));
-    dispatch(setGuitarsCount(+headers['x-total-count']));
-    dispatch(setIsDataLoaded(true));
+    dispatch(setIsDataLoaded(false));
+    try {
+      const { data, headers } = await api.get<Guitar[]>(path);
+      dispatch(loadGuitarsOnPage(data));
+      dispatch(setGuitarsCount(+headers['x-total-count']));
+      dispatch(setIsDataLoaded(true));
+    } catch (error) {
+      dispatch(setIsDataLoaded(true));
+    }
   };
 
 const fetchGuitarByIdAction = (id: number): ThunkActionResult =>
