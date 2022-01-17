@@ -1,5 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { ActionType } from '../types/action';
+import { Comment } from '../types/comment';
 import { Guitar } from '../types/guitar';
 
 const loadGuitars = createAction(
@@ -34,6 +35,15 @@ const loadGuitarById = createAction(
   (guitar: Guitar) => ({
     payload: {
       guitar,
+    },
+  }),
+);
+
+const loadComments = createAction(
+  ActionType.LoadComments,
+  (comments: Comment[]) => ({
+    payload: {
+      comments,
     },
   }),
 );
@@ -112,5 +122,6 @@ export {
   setGuitarsCount,
   loadGuitarsOnPage,
   setIsDataLoaded,
-  setIsProductCardLoaded
+  setIsProductCardLoaded,
+  loadComments
 };

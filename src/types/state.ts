@@ -1,4 +1,5 @@
 import { RootState } from '../store/root-reducer';
+import { Comment } from './comment';
 import { Guitar } from './guitar';
 
 type State = RootState;
@@ -21,9 +22,14 @@ type PagePagination = {
   guitarsCount: number,
 };
 
+type CommentData = {
+  comments: Comment[],
+};
+
 export type {
   State,
   GuitarData,
   CatalogFilter,
-  PagePagination
+  PagePagination,
+  CommentData
 };
