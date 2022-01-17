@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import ModalNewComment from '../modal-new-comment/modal-new-comment';
 import ModalSuccessComment from '../modal-success-coment/modal-success-comment';
-import ProductCardCommentsList from '../product-card-comments-item/product-card-comments-list';
+import ProductCardCommentsList from '../product-card-comments-list/product-card-comments-list';
 
 type ProductCardCommentsProps = {
   name: string,

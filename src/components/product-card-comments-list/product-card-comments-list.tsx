@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { MIN_COMMENT_LENGTH } from '../../const';
 import { getComments, getIsCommentsLoaded } from '../../store/comment-data/selectors';
 import LoadingScreen from '../loading-screen/loading-screen';
-import ProductCardCommentsItem from '../product-card-comments-list/product-card-comments-item';
+import ProductCardCommentsItem from '../product-card-comments-item/product-card-comments-item';
 
 function ProductCardCommentsList(): JSX.Element {
   const comments = useSelector(getComments);
