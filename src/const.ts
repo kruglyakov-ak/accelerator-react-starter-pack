@@ -93,6 +93,8 @@ const enum BooleanToString {
   False = '0'
 }
 
+const MIN_COMMENT_LENGTH = 3;
+
 export {
   AppRoute,
   APIRoute,
@@ -107,5 +109,6 @@ export {
   QueryParam,
   BooleanToString,
   RatingCountNumber,
-  GuitarTypeToReadable
+  GuitarTypeToReadable,
+  MIN_COMMENT_LENGTH
 };

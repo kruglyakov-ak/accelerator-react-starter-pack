@@ -111,6 +111,15 @@ const setIsProductCardLoaded = createAction(
   }),
 );
 
+const setIsCommentsLoaded = createAction(
+  ActionType.SetIsCommentsLoaded,
+  (isCommentsLoaded: boolean) => ({
+    payload: {
+      isCommentsLoaded,
+    },
+  }),
+);
+
 export {
   loadGuitars,
   loadGuitarById,
@@ -123,5 +132,6 @@ export {
   loadGuitarsOnPage,
   setIsDataLoaded,
   setIsProductCardLoaded,
-  loadComments
+  loadComments,
+  setIsCommentsLoaded
 };

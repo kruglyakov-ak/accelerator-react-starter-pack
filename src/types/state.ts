@@ -24,6 +24,7 @@ type PagePagination = {
 
 type CommentData = {
   comments: Comment[],
+  isCommentsLoaded: boolean
 };
 
 export type {

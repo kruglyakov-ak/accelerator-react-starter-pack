@@ -1,8 +1,9 @@
 import { APIRoute, FilterPath, GUITARS_ON_PAGE, GuitarType, StringCountNumber } from '../const';
 import { ThunkActionResult } from '../types/action';
-import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin, loadGuitarsOnPage, setIsDataLoaded, setIsProductCardLoaded } from './action';
+import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin, loadGuitarsOnPage, setIsDataLoaded, setIsProductCardLoaded, loadComments, setIsCommentsLoaded } from './action';
 import { Guitar } from '../types/guitar';
 import { FetchGuitarProperty } from '../types/fetch-guitar-property';
+import { Comment } from '../types/comment';
 
 const fetchGuitarsAction = (fetchProperty: FetchGuitarProperty): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
@@ -145,6 +146,18 @@ const fetchGuitarByIdAction = (id: number): ThunkActionResult =>
     }
   };
 
+const fetchCommentsByIdAction = (id: number): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    dispatch(setIsCommentsLoaded(false));
+    try {
+      const { data } = await api.get<Comment[]>(`${APIRoute.Guitars}/${id}/comments`);
+      dispatch(loadComments(data));
+      dispatch(setIsCommentsLoaded(true));
+    } catch (error) {
+      dispatch(setIsCommentsLoaded(true));
+    }
+  };
+
 
 const fetchGuitarWithoutFilters = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
@@ -158,5 +171,6 @@ export {
   fetchGuitarsAction,
   fetchGuitarByIdAction,
   fetchGuitarWithoutFilters,
-  fetchGuitarsOnPageAction
+  fetchGuitarsOnPageAction,
+  fetchCommentsByIdAction
 };

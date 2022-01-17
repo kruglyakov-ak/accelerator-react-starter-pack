@@ -25,7 +25,8 @@ enum ActionType {
   SetIsTwelveStringsCheck = 'filter/setIsTwelveStringsCheck',
   SetGuitarsCount = 'pagination/setGuitarsCount',
   SetCurrentPageNumber = 'pagination/setCurrentPageNumber',
-  LoadComments = 'comments/loadComments'
+  LoadComments = 'comments/loadComments',
+  SetIsCommentsLoaded = 'comments/setIsCommentsLoaded'
 }
 
 type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;
