@@ -1,17 +1,11 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { MIN_COMMENT_LENGTH } from '../../const';
-import { fetchCommentsByIdAction } from '../../store/api-actions';
 import { getComments, getIsCommentsLoaded } from '../../store/comment-data/selectors';
 import LoadingScreen from '../loading-screen/loading-screen';
 import ProductCardCommentsItem from '../product-card-comments-list/product-card-comments-item';
 
-type ProductCardCommentsListProps = {
-  id: string
-}
-
-function ProductCardCommentsList({ id }: ProductCardCommentsListProps): JSX.Element {
-  const dispatch = useDispatch();
+function ProductCardCommentsList(): JSX.Element {
   const comments = useSelector(getComments);
   const isCommentsLoaded = useSelector(getIsCommentsLoaded);
   const [isAllCommentsShow, setIsAllCommentsShow] = useState(false);
@@ -19,10 +13,6 @@ function ProductCardCommentsList({ id }: ProductCardCommentsListProps): JSX.Elem
   const handleShowMoreClick = () => {
     setIsAllCommentsShow(true);
   };
-
-  useEffect(() => {
-    dispatch(fetchCommentsByIdAction(+id));
-  }, [id, dispatch]);
 
   if (!isCommentsLoaded) {
     return (

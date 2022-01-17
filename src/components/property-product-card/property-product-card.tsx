@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { AppRoute, RatingCountNumber } from '../../const';
-import { fetchGuitarByIdAction } from '../../store/api-actions';
+import { fetchCommentsByIdAction, fetchGuitarByIdAction } from '../../store/api-actions';
+import { getComments } from '../../store/comment-data/selectors';
 import { getGuitarById, getIsProductCardLoaded } from '../../store/guitar-data/selectors';
 import { changeGuitarTypeToReadable } from '../../utils/utils';
 import LoadingScreen from '../loading-screen/loading-screen';
@@ -18,6 +19,7 @@ function PropertyProductCard(): JSX.Element {
   const { id } = useParams<RouteParams>();
   const dispatch = useDispatch();
   const guitar = useSelector(getGuitarById);
+  const comments = useSelector(getComments);
   const isProductCardLoaded = useSelector(getIsProductCardLoaded);
   const [isSpecificationsTabOpen, setIsSpecificationsTabOpen] = useState(true);
 
@@ -32,6 +34,7 @@ function PropertyProductCard(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchGuitarByIdAction(+id));
+    dispatch(fetchCommentsByIdAction(+id));
   }, [id, dispatch]);
 
   if (!guitar) {
@@ -128,7 +131,7 @@ function PropertyProductCard(): JSX.Element {
                     <use xlinkHref="#icon-full-star"></use> :
                     <use xlinkHref="#icon-star"></use>}
                 </svg>
-                <span className="rate__count"></span><span className="rate__message"></span>
+                <span className="rate__count">{comments.length}</span><span className="rate__message"></span>
               </div>
               <div className="tabs">
                 <button className={isSpecificationsTabOpen ? 'button button--medium tabs__button' : 'button button--black-border button--medium tabs__button'} onClick={handleSpecificationsTabsClick}>Характеристики</button>
@@ -160,7 +163,7 @@ function PropertyProductCard(): JSX.Element {
               <button className="button button--red button--big product-container__button">Добавить в корзину</button>
             </div>
           </div>
-          <ProductCardCommentsList id={id} />
+          <ProductCardCommentsList />
         </div>
       </main>
     </div>
