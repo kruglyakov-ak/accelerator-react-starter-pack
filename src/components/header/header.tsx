@@ -19,6 +19,11 @@ function Header(): JSX.Element {
     }
   };
 
+  const handleSearchLinkClick = () => {
+    setSearchValue('');
+    setIsSearchListHidden(true);
+  };
+
   return (
     <header className="header" id="header">
       <div className="container header__wrapper">
@@ -54,6 +59,7 @@ function Header(): JSX.Element {
               type="text"
               autoComplete="off"
               placeholder="что вы ищите?"
+              value={searchValue}
               onChange={handleSearchChange}
             />
             <label className="visually-hidden" htmlFor="search">Поиск</label>
@@ -63,8 +69,8 @@ function Header(): JSX.Element {
             <ul className="form-search__select-list">
               {guitars
                 .filter((guitar) => guitar.name.toLowerCase().includes(searchValue.toLowerCase()) &&
-                guitar.name.toLowerCase()[0] === searchValue.toLowerCase()[0])
-                .map((guitar) => (<li className="form-search__select-item" key={guitar.id}><Link to={`${AppRoute.Main}product/${guitar.id}`} className="link">{guitar.name}</Link></li>))}
+                  guitar.name.toLowerCase()[0] === searchValue.toLowerCase()[0])
+                .map((guitar) => (<li className="form-search__select-item" key={guitar.id}><Link to={`${AppRoute.Main}product/${guitar.id}`} className="link" onClick={handleSearchLinkClick}>{guitar.name}</Link></li>))}
             </ul>}
         </div>
         <Link to={AppRoute.Cart} className="header__cart-link" aria-label="Корзина">

@@ -1,6 +1,6 @@
 import { APIRoute, FilterPath, GUITARS_ON_PAGE, GuitarType, StringCountNumber } from '../const';
 import { ThunkActionResult } from '../types/action';
-import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin, loadGuitarsOnPage, setIsDataLoaded } from './action';
+import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin, loadGuitarsOnPage, setIsDataLoaded, setIsProductCardLoaded } from './action';
 import { Guitar } from '../types/guitar';
 import { FetchGuitarProperty } from '../types/fetch-guitar-property';
 
@@ -135,8 +135,14 @@ const fetchGuitarsOnPageAction = (fetchProperty: FetchGuitarProperty): ThunkActi
 
 const fetchGuitarByIdAction = (id: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const { data } = await api.get<Guitar>(`${APIRoute.Guitars}/${id}`);
-    dispatch(loadGuitarById(data));
+    dispatch(setIsProductCardLoaded(false));
+    try {
+      const { data } = await api.get<Guitar>(`${APIRoute.Guitars}/${id}`);
+      dispatch(loadGuitarById(data));
+      dispatch(setIsProductCardLoaded(true));
+    } catch (error) {
+      dispatch(setIsProductCardLoaded(true));
+    }
   };
 
 

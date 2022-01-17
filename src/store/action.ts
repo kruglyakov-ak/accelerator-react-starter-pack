@@ -92,6 +92,15 @@ const setIsDataLoaded = createAction(
   }),
 );
 
+const setIsProductCardLoaded = createAction(
+  ActionType.SetIsProductCardLoaded,
+  (isProductCardLoaded: boolean) => ({
+    payload: {
+      isProductCardLoaded,
+    },
+  }),
+);
+
 export {
   loadGuitars,
   loadGuitarById,
@@ -102,5 +111,6 @@ export {
   setUserPriceMax,
   setGuitarsCount,
   loadGuitarsOnPage,
-  setIsDataLoaded
+  setIsDataLoaded,
+  setIsProductCardLoaded
 };

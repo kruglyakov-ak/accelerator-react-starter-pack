@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { AppRoute, RatingCountNumber } from '../../const';
 import { fetchGuitarByIdAction } from '../../store/api-actions';
-import { getGuitarById } from '../../store/guitar-data/selectors';
+import { getGuitarById, getIsProductCardLoaded } from '../../store/guitar-data/selectors';
 import { changeGuitarTypeToReadable } from '../../utils/utils';
+import LoadingScreen from '../loading-screen/loading-screen';
 import Page404 from '../page-404/page-404';
 
 type RouteParams = {
@@ -15,13 +16,61 @@ function PropertyProductCard(): JSX.Element {
   const { id } = useParams<RouteParams>();
   const dispatch = useDispatch();
   const guitar = useSelector(getGuitarById);
+  const isProductCardLoaded = useSelector(getIsProductCardLoaded);
+  const [isSpecificationsTabOpen, setIsSpecificationsTabOpen] = useState(true);
+
+  const handleSpecificationsTabsClick = () => {
+    setIsSpecificationsTabOpen(true);
+  };
+
+  const handleDescriptionTabsClick = () => {
+    setIsSpecificationsTabOpen(false);
+  };
+
 
   useEffect(() => {
     dispatch(fetchGuitarByIdAction(+id));
   }, [id, dispatch]);
 
   if (!guitar) {
-    return (<Page404 />);
+    return (isProductCardLoaded ? <Page404 /> :
+      <div className="wrapper">
+        <main className="page-content">
+          <div className="container">
+            <h1 className="page-content__title title title--bigger">Товар</h1>
+            <ul className="breadcrumbs page-content__breadcrumbs">
+              <li className="breadcrumbs__item"><Link to={AppRoute.Main} className="link">Главная</Link>
+              </li>
+              <li className="breadcrumbs__item"><Link to={AppRoute.Main} className="link">Каталог</Link>
+              </li>
+              <li className="breadcrumbs__item"><Link to={AppRoute.Product} className="link">Товар</Link>
+              </li>
+            </ul>
+            <LoadingScreen />
+          </div>
+        </main>
+      </div>);
+  }
+
+  if (!isProductCardLoaded) {
+    return (
+      <div className="wrapper">
+        <main className="page-content">
+          <div className="container">
+            <h1 className="page-content__title title title--bigger">Товар</h1>
+            <ul className="breadcrumbs page-content__breadcrumbs">
+              <li className="breadcrumbs__item"><Link to={AppRoute.Main} className="link">Главная</Link>
+              </li>
+              <li className="breadcrumbs__item"><Link to={AppRoute.Main} className="link">Каталог</Link>
+              </li>
+              <li className="breadcrumbs__item"><Link to={AppRoute.Product} className="link">Товар</Link>
+              </li>
+            </ul>
+            <LoadingScreen />
+          </div>
+        </main>
+      </div>
+    );
   }
 
   const {
@@ -39,13 +88,13 @@ function PropertyProductCard(): JSX.Element {
     <div className="wrapper">
       <main className="page-content">
         <div className="container">
-          <h1 className="page-content__title title title--bigger">Товар</h1>
+          <h1 className="page-content__title title title--bigger">{name}</h1>
           <ul className="breadcrumbs page-content__breadcrumbs">
             <li className="breadcrumbs__item"><Link to={AppRoute.Main} className="link">Главная</Link>
             </li>
             <li className="breadcrumbs__item"><Link to={AppRoute.Main} className="link">Каталог</Link>
             </li>
-            <li className="breadcrumbs__item"><Link to={AppRoute.Product} className="link">Товар</Link>
+            <li className="breadcrumbs__item"><Link to={AppRoute.Product} className="link">{name}</Link>
             </li>
           </ul>
           <div className="product-container"><img className="product-container__img" src={`/${previewImg}`} width="90" height="235" alt="" />
@@ -79,9 +128,11 @@ function PropertyProductCard(): JSX.Element {
                 </svg>
                 <span className="rate__count"></span><span className="rate__message"></span>
               </div>
-              <div className="tabs"><a className="button button--medium tabs__button" href="#characteristics">Характеристики</a><a className="button button--black-border button--medium tabs__button" href="#description">Описание</a>
+              <div className="tabs">
+                <button className={isSpecificationsTabOpen ? 'button button--medium tabs__button' : 'button button--black-border button--medium tabs__button'} onClick={handleSpecificationsTabsClick}>Характеристики</button>
+                <button className={isSpecificationsTabOpen ? 'button button--black-border button--medium tabs__button' : 'button button--medium tabs__button'} onClick={handleDescriptionTabsClick}>Описание</button>
                 <div className="tabs__content" id="characteristics">
-                  <table className="tabs__table">
+                  <table className={isSpecificationsTabOpen ? 'tabs__table' : 'tabs__table hidden'}>
                     <tr className="tabs__table-row">
                       <td className="tabs__title">Артикул:</td>
                       <td className="tabs__value">{vendorCode}</td>
@@ -95,7 +146,9 @@ function PropertyProductCard(): JSX.Element {
                       <td className="tabs__value">{stringCount} струнная</td>
                     </tr>
                   </table>
-                  <p className="tabs__product-description hidden">{description}</p>
+                  <p className={isSpecificationsTabOpen ? 'tabs__product-description hidden' : 'tabs__product-description'}>
+                    {description}
+                  </p>
                 </div>
               </div>
             </div>
@@ -192,7 +245,7 @@ function PropertyProductCard(): JSX.Element {
               <h4 className="review__title title title--lesser">Комментарий:</h4>
               <p className="review__value">У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня. У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня. У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня. У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня. </p>
             </div>
-            <button className="button button--medium reviews__more-button">Показать еще отзывы</button><a className="button button--up button--red-border button--big reviews__up-button" href="#header">Наверх</a>
+            <button className="button button--medium reviews__more-button">Показать еще отзывы</button><a className="button button--up button--red-border button--big reviews__up-button" href="#top">Наверх</a>
           </section>
         </div>
       </main>

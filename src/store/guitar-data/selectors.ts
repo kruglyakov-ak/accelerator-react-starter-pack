@@ -7,11 +7,13 @@ const getGuitarsWithoutFilters = (state: State): Guitar[] => state[NameSpace.Dat
 const getGuitarsOnPage = (state: State): Guitar[] => state[NameSpace.Data].guitarsOnPage;
 const getGuitarById = (state: State): Guitar | null => state[NameSpace.Data].guitar;
 const getIsDataLoaded = (state: State): boolean => state[NameSpace.Data].isDataLoaded;
+const getIsProductCardLoaded = (state: State): boolean => state[NameSpace.Data].isProductCardLoaded;
 
 export {
   getGuitars,
   getGuitarsWithoutFilters,
   getGuitarById,
   getGuitarsOnPage,
-  getIsDataLoaded
+  getIsDataLoaded,
+  getIsProductCardLoaded
 };
