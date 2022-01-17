@@ -34,8 +34,8 @@ function ProductCardCommentsList(): JSX.Element {
           {comments.length > MIN_COMMENT_LENGTH &&
             <button className="button button--medium reviews__more-button" onClick={handleShowMoreClick}>Показать еще отзывы</button>}
         </>}
-
-      <a className="button button--up button--red-border button--big reviews__up-button" href="#top">Наверх</a>
+      {comments.length !== 0 &&
+        <a className="button button--up button--red-border button--big reviews__up-button" href="#top">Наверх</a>}
     </>
   );
 }

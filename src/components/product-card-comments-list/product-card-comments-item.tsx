@@ -6,11 +6,10 @@ type ProductCardCommentsItemProps = {
 }
 
 function ProductCardCommentsItem({ review }: ProductCardCommentsItemProps): JSX.Element {
-
   const {
     userName,
-    advantages,
-    disadvantages,
+    advantage,
+    disadvantage,
     comment,
     rating,
     createAt,
@@ -61,9 +60,9 @@ function ProductCardCommentsItem({ review }: ProductCardCommentsItemProps): JSX.
         <span className="rate__count"></span><span className="rate__message"></span>
       </div>
       <h4 className="review__title title title--lesser">Достоинства:</h4>
-      <p className="review__value">{advantages}</p>
+      <p className="review__value">{advantage}</p>
       <h4 className="review__title title title--lesser">Недостатки:</h4>
-      <p className="review__value">{disadvantages}</p>
+      <p className="review__value">{disadvantage}</p>
       <h4 className="review__title title title--lesser">Комментарий:</h4>
       <p className="review__value">{comment}</p>
     </div>

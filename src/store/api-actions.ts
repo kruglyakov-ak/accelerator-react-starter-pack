@@ -4,6 +4,7 @@ import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount
 import { Guitar } from '../types/guitar';
 import { FetchGuitarProperty } from '../types/fetch-guitar-property';
 import { Comment } from '../types/comment';
+import { PostComment } from '../types/post-comment';
 
 const fetchGuitarsAction = (fetchProperty: FetchGuitarProperty): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
@@ -146,6 +147,14 @@ const fetchGuitarByIdAction = (id: number): ThunkActionResult =>
     }
   };
 
+const fetchGuitarWithoutFilters = (): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const { data } = await api.get<Guitar[]>(APIRoute.Guitars);
+    dispatch(loadGuitarsWithoutFilters(data));
+    dispatch(setPriceRangeMin(data.slice().sort((a, b) => a.price - b.price)[0].price));
+    dispatch(setPriceRangeMax(data.slice().sort((a, b) => b.price - a.price)[0].price));
+  };
+
 const fetchCommentsByIdAction = (id: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     dispatch(setIsCommentsLoaded(false));
@@ -158,13 +167,18 @@ const fetchCommentsByIdAction = (id: number): ThunkActionResult =>
     }
   };
 
-
-const fetchGuitarWithoutFilters = (): ThunkActionResult =>
+const postComments = (id: string, postComment: PostComment, onSuccessPost: () => void): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const { data } = await api.get<Guitar[]>(APIRoute.Guitars);
-    dispatch(loadGuitarsWithoutFilters(data));
-    dispatch(setPriceRangeMin(data.slice().sort((a, b) => a.price - b.price)[0].price));
-    dispatch(setPriceRangeMax(data.slice().sort((a, b) => b.price - a.price)[0].price));
+    await api.post(APIRoute.Comments, postComment);
+    onSuccessPost();
+    dispatch(setIsCommentsLoaded(false));
+    try {
+      const { data } = await api.get<Comment[]>(`${APIRoute.Guitars}/${id}/comments`);
+      dispatch(loadComments(data));
+      dispatch(setIsCommentsLoaded(true));
+    } catch (error) {
+      dispatch(setIsCommentsLoaded(true));
+    }
   };
 
 export {
@@ -172,5 +186,6 @@ export {
   fetchGuitarByIdAction,
   fetchGuitarWithoutFilters,
   fetchGuitarsOnPageAction,
-  fetchCommentsByIdAction
+  fetchCommentsByIdAction,
+  postComments
 };

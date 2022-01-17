@@ -8,6 +8,7 @@ const enum AppRoute {
 
 const enum APIRoute {
   Guitars = '/guitars',
+  Comments  = '/comments',
 }
 
 const enum GuitarType {

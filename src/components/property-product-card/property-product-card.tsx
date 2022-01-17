@@ -140,7 +140,7 @@ function PropertyProductCard(): JSX.Element {
               <button className="button button--red button--big product-container__button">Добавить в корзину</button>
             </div>
           </div>
-          <ProductCardComments name={name} />
+          <ProductCardComments name={name} guitarId={id}/>
         </div>
       </main>
     </div>
