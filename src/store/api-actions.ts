@@ -160,7 +160,8 @@ const fetchCommentsByIdAction = (id: number): ThunkActionResult =>
     dispatch(setIsCommentsLoaded(false));
     try {
       const { data } = await api.get<Comment[]>(`${APIRoute.Guitars}/${id}/comments`);
-      dispatch(loadComments(data));
+      dispatch(loadComments(data
+        .sort((prev, next) => new Date(next.createAt).getTime() - new Date(prev.createAt).getTime())));
       dispatch(setIsCommentsLoaded(true));
     } catch (error) {
       dispatch(setIsCommentsLoaded(true));
@@ -174,7 +175,8 @@ const postComments = (id: string, postComment: PostComment, onSuccessPost: () =>
     dispatch(setIsCommentsLoaded(false));
     try {
       const { data } = await api.get<Comment[]>(`${APIRoute.Guitars}/${id}/comments`);
-      dispatch(loadComments(data));
+      dispatch(loadComments(data
+        .sort((prev, next) => new Date(next.createAt).getTime() - new Date(prev.createAt).getTime())));
       dispatch(setIsCommentsLoaded(true));
     } catch (error) {
       dispatch(setIsCommentsLoaded(true));
