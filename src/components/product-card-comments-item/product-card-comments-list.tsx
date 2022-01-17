@@ -24,9 +24,7 @@ function ProductCardCommentsList(): JSX.Element {
   }
 
   return (
-    <section className="reviews">
-      <h3 className="reviews__title title title--bigger">Отзывы</h3>
-      <button className="button button--red-border button--big reviews__sumbit-button">Оставить отзыв</button>
+    <>
       {isAllCommentsShow ?
         <>
           {comments.map((comment) => <ProductCardCommentsItem review={comment} key={comment.id} />)}
@@ -38,7 +36,7 @@ function ProductCardCommentsList(): JSX.Element {
         </>}
 
       <a className="button button--up button--red-border button--big reviews__up-button" href="#top">Наверх</a>
-    </section>
+    </>
   );
 }
 
