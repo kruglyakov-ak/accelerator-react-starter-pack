@@ -16,10 +16,21 @@ function ProductCardCommentsItem({ review }: ProductCardCommentsItemProps): JSX.
     createAt,
   } = review;
 
+  const commentDate = new Date(createAt);
+
   return (
     <div className="review">
       <div className="review__wrapper">
-        <h4 className="review__title review__title--author title title--lesser">{userName}</h4><span className="review__date">{createAt}</span>
+        <h4 className="review__title review__title--author title title--lesser">{userName}</h4>
+        <span className="review__date">
+          {
+            commentDate
+              .toLocaleString('ru', {
+                day: 'numeric',
+                month: 'long',
+              })
+          }
+        </span>
       </div>
       <div className="rate review__rating-panel" aria-hidden="true"><span className="visually-hidden">Рейтинг:</span>
         <svg width="16" height="16" aria-hidden="true">
