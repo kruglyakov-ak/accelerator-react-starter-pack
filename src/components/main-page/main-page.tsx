@@ -8,10 +8,11 @@ import { getGuitarsOnPage, getIsDataLoaded } from '../../store/guitar-data/selec
 import { useDispatch, useSelector } from 'react-redux';
 import MainPageEmpty from '../main-page-empty/main-page-empty';
 import { useEffect } from 'react';
-import { fetchGuitarsAction, fetchGuitarsOnPageAction, fetchGuitarWithoutFilters } from '../../store/api-actions';
+import { fetchCommentsAction, fetchGuitarsAction, fetchGuitarsOnPageAction, fetchGuitarWithoutFilters } from '../../store/api-actions';
 import { useQueryParams } from '../../hooks/use-query-params';
 import { FetchGuitarProperty } from '../../types/fetch-guitar-property';
 import LoadingScreen from '../loading-screen/loading-screen';
+import { getComments } from '../../store/comment-data/selectors';
 
 function MainPage(): JSX.Element {
   const dispatch = useDispatch();
@@ -58,11 +59,12 @@ function MainPage(): JSX.Element {
       dispatch(fetchGuitarWithoutFilters());
     }
     dispatch(fetchGuitarsOnPageAction(fetchParams));
-
     dispatch(fetchGuitarsAction(fetchParams));
+    dispatch(fetchCommentsAction());
   }, [dispatch, queryAcusticType, queryCurrentPage, queryElectricType, queryFourString, queryOrderType, querySevenString, querySixString, querySortType, queryTwelveString, queryUkuleleType, queryUserPriceMax, queryUserPriceMin]);
 
   const guitars = useSelector(getGuitarsOnPage);
+  const comments = useSelector(getComments);
 
   if (!isDataLoaded) {
     return (
@@ -109,7 +111,7 @@ function MainPage(): JSX.Element {
           <div className="catalog">
             <CatalogFilter />
             <CatalogSort />
-            <ProductCardsList guitars={guitars} />
+            <ProductCardsList guitars={guitars} comments={comments}/>
             <PaginationList />
           </div>
         </div>

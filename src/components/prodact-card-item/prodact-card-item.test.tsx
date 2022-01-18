@@ -41,6 +41,7 @@ describe('Component: ProductCardItem', () => {
             rating: 0,
             price: 1000,
           }}
+          comments={[]}
           />
         </Router>
       </Provider>);

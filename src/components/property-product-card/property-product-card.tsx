@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { AppRoute, RatingCountNumber } from '../../const';
-import { fetchCommentsByIdAction, fetchGuitarByIdAction } from '../../store/api-actions';
-import { getComments } from '../../store/comment-data/selectors';
+import { fetchCommentsByGuitarIdAction, fetchGuitarByIdAction } from '../../store/api-actions';
+import { getCommentsByGuitarId } from '../../store/comment-data/selectors';
 import { getGuitarById, getIsProductCardLoaded } from '../../store/guitar-data/selectors';
 import { changeGuitarTypeToReadable } from '../../utils/utils';
 import LoadingScreen from '../loading-screen/loading-screen';
@@ -18,7 +18,7 @@ function PropertyProductCard(): JSX.Element {
   const { id } = useParams<RouteParams>();
   const dispatch = useDispatch();
   const guitar = useSelector(getGuitarById);
-  const comments = useSelector(getComments);
+  const comments = useSelector(getCommentsByGuitarId);
   const isProductCardLoaded = useSelector(getIsProductCardLoaded);
   const [isSpecificationsTabOpen, setIsSpecificationsTabOpen] = useState(true);
 
@@ -32,7 +32,7 @@ function PropertyProductCard(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchGuitarByIdAction(+id));
-    dispatch(fetchCommentsByIdAction(+id));
+    dispatch(fetchCommentsByGuitarIdAction(+id));
   }, [id, dispatch]);
 
   if (!guitar || !isProductCardLoaded) {

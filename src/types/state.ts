@@ -24,6 +24,7 @@ type PagePagination = {
 
 type CommentData = {
   comments: Comment[],
+  commentsByGuitarId: Comment[],
   isCommentsLoaded: boolean
 };
 

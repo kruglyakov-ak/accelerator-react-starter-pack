@@ -1,6 +1,6 @@
 import { APIRoute, FilterPath, GUITARS_ON_PAGE, GuitarType, StringCountNumber } from '../const';
 import { ThunkActionResult } from '../types/action';
-import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin, loadGuitarsOnPage, setIsDataLoaded, setIsProductCardLoaded, loadComments, setIsCommentsLoaded } from './action';
+import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin, loadGuitarsOnPage, setIsDataLoaded, setIsProductCardLoaded, loadCommentsByGuitarId, setIsCommentsLoaded, loadComments } from './action';
 import { Guitar } from '../types/guitar';
 import { FetchGuitarProperty } from '../types/fetch-guitar-property';
 import { Comment } from '../types/comment';
@@ -155,12 +155,18 @@ const fetchGuitarWithoutFilters = (): ThunkActionResult =>
     dispatch(setPriceRangeMax(data.slice().sort((a, b) => b.price - a.price)[0].price));
   };
 
-const fetchCommentsByIdAction = (id: number): ThunkActionResult =>
+const fetchCommentsAction = (): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const { data } = await api.get<Comment[]>(APIRoute.Comments);
+    dispatch(loadComments(data));
+  };
+
+const fetchCommentsByGuitarIdAction = (id: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     dispatch(setIsCommentsLoaded(false));
     try {
       const { data } = await api.get<Comment[]>(`${APIRoute.Guitars}/${id}/comments`);
-      dispatch(loadComments(data
+      dispatch(loadCommentsByGuitarId(data
         .sort((prev, next) => new Date(next.createAt).getTime() - new Date(prev.createAt).getTime())));
       dispatch(setIsCommentsLoaded(true));
     } catch (error) {
@@ -175,7 +181,7 @@ const postComments = (id: string, postComment: PostComment, onSuccessPost: () =>
     dispatch(setIsCommentsLoaded(false));
     try {
       const { data } = await api.get<Comment[]>(`${APIRoute.Guitars}/${id}/comments`);
-      dispatch(loadComments(data
+      dispatch(loadCommentsByGuitarId(data
         .sort((prev, next) => new Date(next.createAt).getTime() - new Date(prev.createAt).getTime())));
       dispatch(setIsCommentsLoaded(true));
     } catch (error) {
@@ -188,6 +194,7 @@ export {
   fetchGuitarByIdAction,
   fetchGuitarWithoutFilters,
   fetchGuitarsOnPageAction,
-  fetchCommentsByIdAction,
+  fetchCommentsAction,
+  fetchCommentsByGuitarIdAction,
   postComments
 };

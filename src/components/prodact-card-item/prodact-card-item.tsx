@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, RatingCountNumber } from '../../const';
+import { Comment } from '../../types/comment';
 import { Guitar } from '../../types/guitar';
 
 type ProductCardItemProps = {
   guitar: Guitar,
+  comments: Comment[],
 }
 
-function ProductCardItem({ guitar }: ProductCardItemProps): JSX.Element {
+function ProductCardItem({ guitar, comments }: ProductCardItemProps): JSX.Element {
   const {
     name,
     previewImg,
@@ -46,7 +48,7 @@ function ProductCardItem({ guitar }: ProductCardItemProps): JSX.Element {
               <use xlinkHref="#icon-full-star"></use> :
               <use xlinkHref="#icon-star"></use>}
           </svg>
-          <span className="rate__count">{rating}</span><span className="rate__message"></span>
+          <span className="rate__count">{comments.length}</span><span className="rate__message"></span>
         </div>
         <p className="product-card__title">{name}</p>
         <p className="product-card__price"><span className="visually-hidden">Цена:</span>{price} ₽
