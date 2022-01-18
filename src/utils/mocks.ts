@@ -1,5 +1,6 @@
 import { datatype, image, lorem } from 'faker';
 import { GuitarType } from '../const';
+import { Comment } from '../types/comment';
 import { Guitar } from '../types/guitar';
 import { getRandomNumberInRange } from './utils';
 
@@ -17,4 +18,20 @@ const makeFakeGuitars = (): Guitar[] => (
   }))
 );
 
-export { makeFakeGuitars };
+const makeFakeComments = (): Comment[] => (
+  new Array(getRandomNumberInRange(1, 5)).fill(null).map(() => ({
+    id: lorem.word(),
+    userName: lorem.words(),
+    advantage: lorem.words(),
+    disadvantage: lorem.words(),
+    comment: lorem.words(),
+    rating: datatype.number(5),
+    createAt: String(datatype.datetime(1)),
+    guitarId: datatype.number(5),
+  }))
+);
+
+export {
+  makeFakeGuitars,
+  makeFakeComments
+};

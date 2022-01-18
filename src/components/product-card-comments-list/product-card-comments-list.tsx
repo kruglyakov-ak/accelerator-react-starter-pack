@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { MIN_COMMENT_LENGTH } from '../../const';
-import { getCommentsByGuitarId, getIsCommentsLoaded } from '../../store/comment-data/selectors';
-import LoadingScreen from '../loading-screen/loading-screen';
+import { getCommentsByGuitarId } from '../../store/comment-data/selectors';
 import ProductCardCommentsItem from '../product-card-comments-item/product-card-comments-item';
 
 function ProductCardCommentsList(): JSX.Element {
   const comments = useSelector(getCommentsByGuitarId);
-  const isCommentsLoaded = useSelector(getIsCommentsLoaded);
   const [isAllCommentsShow, setIsAllCommentsShow] = useState(false);
   const [scroll, setScroll] = useState(0);
 
@@ -27,16 +25,6 @@ function ProductCardCommentsList(): JSX.Element {
     }
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isAllCommentsShow, scroll]);
-
-
-  if (!isCommentsLoaded) {
-    return (
-      <section className="reviews">
-        <h3 className="reviews__title title title--bigger">Отзывы</h3>
-        <LoadingScreen />
-      </section>
-    );
-  }
 
   return (
     <>

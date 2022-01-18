@@ -1,4 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getIsCommentsLoaded } from '../../store/comment-data/selectors';
+import LoadingScreen from '../loading-screen/loading-screen';
 import ModalNewComment from '../modal-new-comment/modal-new-comment';
 import ModalSuccessComment from '../modal-success-coment/modal-success-comment';
 import ProductCardCommentsList from '../product-card-comments-list/product-card-comments-list';
@@ -9,6 +12,7 @@ type ProductCardCommentsProps = {
 }
 
 function ProductCardComments({ name, guitarId }: ProductCardCommentsProps): JSX.Element {
+  const isCommentsLoaded = useSelector(getIsCommentsLoaded);
   const [isModalReviewFormOpen, setIsModalReviewFormOpen] = useState(false);
   const [isModalSuccessOpen, setIsModalSuccessOpen] = useState(false);
 
@@ -54,6 +58,15 @@ function ProductCardComments({ name, guitarId }: ProductCardCommentsProps): JSX.
       document.body.addEventListener('keydown', handleEscapeKeyDown) :
       document.body.removeEventListener('keydown', handleEscapeKeyDown);
   }, [handleEscapeKeyDown, isModalSuccessOpen]);
+
+  if (!isCommentsLoaded) {
+    return (
+      <section className="reviews">
+        <h3 className="reviews__title title title--bigger">Отзывы</h3>
+        <LoadingScreen />
+      </section>
+    );
+  }
 
   return (
     <section className="reviews">
