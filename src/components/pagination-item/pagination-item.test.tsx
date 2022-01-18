@@ -6,7 +6,10 @@ import { Action } from 'redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import PaginationItem from './pagination-item';
 import { Provider } from 'react-redux';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 
+const history = createMemoryHistory();
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
 const mockStore = configureMockStore<
@@ -22,7 +25,9 @@ describe('Component: PaginationItem', () => {
   it('should render PaginationItem', () => {
     render(
       <Provider store={store}>
-        <PaginationItem pageCount={0} activePage={0} />
+        <Router history={history}>
+          <PaginationItem pageCount={0} activePage={0} />
+        </Router>
       </Provider>);
 
     expect(screen.getByText(/0/i)).toBeInTheDocument();
