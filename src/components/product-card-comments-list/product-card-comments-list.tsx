@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { MIN_COMMENT_LENGTH } from '../../const';
 import { getComments, getIsCommentsLoaded } from '../../store/comment-data/selectors';
@@ -9,10 +9,25 @@ function ProductCardCommentsList(): JSX.Element {
   const comments = useSelector(getComments);
   const isCommentsLoaded = useSelector(getIsCommentsLoaded);
   const [isAllCommentsShow, setIsAllCommentsShow] = useState(false);
+  const [scroll, setScroll] = useState(0);
 
   const handleShowMoreClick = () => {
     setIsAllCommentsShow(true);
+    document.documentElement.scrollTo();
   };
+
+  const handleScroll = () => {
+    setScroll(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    if (scroll > document.documentElement.scrollHeight - document.documentElement.clientHeight - 275) {
+      setIsAllCommentsShow(true);
+    }
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isAllCommentsShow, scroll]);
+
 
   if (!isCommentsLoaded) {
     return (
