@@ -89,8 +89,8 @@ function ModalNewComment({ name, handleReviewModalClose, isModalReviewFormOpen, 
 
                 <label className="form-review__label form-review__label--required" htmlFor="user-name">Ваше Имя</label>
                 <input
-                  className="form-review__input form-review__input--name"
                   id="user-name"
+                  className="form-review__input form-review__input--name"
                   type="text"
                   autoComplete="off"
                   value={nameValue}
@@ -118,44 +118,46 @@ function ModalNewComment({ name, handleReviewModalClose, isModalReviewFormOpen, 
                 </div>
               </div>
             </div>
-
-            <label className="form-review__label form-review__label--required" htmlFor="user-name">Достоинства</label>
-            <input
-              className="form-review__input"
-              id="pros"
-              type="text"
-              autoComplete="off"
-              value={advantagesValue}
-              onChange={handleAdvantagesInputChange}
-              required
-            />
-            {advantagesValue === '' && <span className="form-review__warning">Заполните поле</span>}
-
-            <label className="form-review__label form-review__label--required" htmlFor="user-name">Недостатки</label>
-            <input
-              className="form-review__input"
-              id="user-name"
-              type="text"
-              autoComplete="off"
-              value={disadvantagesValue}
-              onChange={handleDisadvantagesInputChange}
-              required
-            />
-            {disadvantagesValue === '' && <span className="form-review__warning">Заполните поле</span>}
-
-            <label className="form-review__label form-review__label--required" htmlFor="user-name">Комментарий</label>
-            <textarea
-              className="form-review__input form-review__input--textarea"
-              id="user-name"
-              rows={10}
-              autoComplete="off"
-              onChange={handleCommentInputChange}
-              value={commentValue}
-              required
-            >
-            </textarea>
-            {commentValue === '' && <span className="form-review__warning">Заполните поле</span>}
-
+            <div>
+              <label className="form-review__label form-review__label--required" htmlFor="user-advantages">Достоинства</label>
+              <input
+                id="user-advantages"
+                className="form-review__input"
+                type="text"
+                autoComplete="off"
+                value={advantagesValue}
+                onChange={handleAdvantagesInputChange}
+                required
+              />
+              {advantagesValue === '' && <span className="form-review__warning">Заполните поле</span>}
+            </div>
+            <div>
+              <label className="form-review__label form-review__label--required" htmlFor="user-disadvantages">Недостатки</label>
+              <input
+                className="form-review__input"
+                id="user-disadvantages"
+                type="text"
+                autoComplete="off"
+                value={disadvantagesValue}
+                onChange={handleDisadvantagesInputChange}
+                required
+              />
+              {disadvantagesValue === '' && <span className="form-review__warning">Заполните поле</span>}
+            </div>
+            <div>
+              <label className="form-review__label form-review__label--required" htmlFor="user-comment">Комментарий</label>
+              <textarea
+                className="form-review__input form-review__input--textarea"
+                id="user-comment"
+                rows={10}
+                autoComplete="off"
+                onChange={handleCommentInputChange}
+                value={commentValue}
+                required
+              >
+              </textarea>
+              {commentValue === '' && <span className="form-review__warning">Заполните поле</span>}
+            </div>
             <button className="button button--medium-20 form-review__button" type="submit">Отправить отзыв</button>
           </form>
           <button className="modal__close-btn button-cross" type="button" aria-label="Закрыть" onClick={handleReviewModalClose}><span className="button-cross__icon"></span><span className="modal__close-btn-interactive-area"></span>
