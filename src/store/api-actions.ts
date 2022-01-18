@@ -72,6 +72,12 @@ const fetchGuitarsAction = (fetchProperty: FetchGuitarProperty): ThunkActionResu
     }
   };
 
+const fetchCommentsAction = (): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const { data } = await api.get<Comment[]>(APIRoute.Comments);
+    dispatch(loadComments(data));
+  };
+
 const fetchGuitarsOnPageAction = (fetchProperty: FetchGuitarProperty): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const {
@@ -127,6 +133,7 @@ const fetchGuitarsOnPageAction = (fetchProperty: FetchGuitarProperty): ThunkActi
     dispatch(setIsDataLoaded(false));
     try {
       const { data, headers } = await api.get<Guitar[]>(path);
+      await dispatch(fetchCommentsAction());
       dispatch(loadGuitarsOnPage(data));
       dispatch(setGuitarsCount(+headers['x-total-count']));
       dispatch(setIsDataLoaded(true));
@@ -147,18 +154,13 @@ const fetchGuitarByIdAction = (id: number): ThunkActionResult =>
     }
   };
 
+
 const fetchGuitarWithoutFilters = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const { data } = await api.get<Guitar[]>(APIRoute.Guitars);
     dispatch(loadGuitarsWithoutFilters(data));
     dispatch(setPriceRangeMin(data.slice().sort((a, b) => a.price - b.price)[0].price));
     dispatch(setPriceRangeMax(data.slice().sort((a, b) => b.price - a.price)[0].price));
-  };
-
-const fetchCommentsAction = (): ThunkActionResult =>
-  async (dispatch, _getState, api): Promise<void> => {
-    const { data } = await api.get<Comment[]>(APIRoute.Comments);
-    dispatch(loadComments(data));
   };
 
 const fetchCommentsByGuitarIdAction = (id: number): ThunkActionResult =>
@@ -194,7 +196,6 @@ export {
   fetchGuitarByIdAction,
   fetchGuitarWithoutFilters,
   fetchGuitarsOnPageAction,
-  fetchCommentsAction,
   fetchCommentsByGuitarIdAction,
   postComments
 };
