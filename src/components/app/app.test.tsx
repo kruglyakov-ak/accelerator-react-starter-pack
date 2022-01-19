@@ -2,15 +2,16 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
+import { AppRoute, DefaultPriceRange } from '../../const';
 import { render, screen } from '@testing-library/react';
+import App from './app';
 import thunk, { ThunkDispatch } from 'redux-thunk';
-import { Action } from 'redux';
 import { createAPI } from '../../services/api';
 import { State } from '../../types/state';
-import { AppRoute, DefaultPriceRange } from '../../const';
-import { makeFakeGuitars } from '../../utils/mocks';
-import App from './app';
+import { Action } from 'redux';
+import { makeFakeComments, makeFakeGuitars } from '../../utils/mocks';
 
+const history = createMemoryHistory();
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
 
@@ -21,12 +22,21 @@ const mockStore = configureMockStore<
 >(middlewares);
 
 const guitars = makeFakeGuitars();
+const comments = makeFakeComments();
 
 const store = mockStore({
   DATA: {
     guitars: guitars,
+    guitarsOnPage: guitars,
     guitarsWithoutFilters: guitars,
     guitar: guitars[0],
+    isDataLoaded: true,
+    isProductCardLoaded: true,
+  },
+  COMMENT: {
+    comments: comments,
+    commentsByGuitarId: comments,
+    isCommentsLoaded: true,
   },
   FILTER: {
     priceRangeMin: DefaultPriceRange.Min,
@@ -37,7 +47,6 @@ const store = mockStore({
   },
 });
 
-const history = createMemoryHistory();
 const fakeApp = (
   <Provider store={store}>
     <Router history={history}>
@@ -47,12 +56,15 @@ const fakeApp = (
 );
 
 describe('Application Routing', () => {
+
   it('should render "MainPage" when user navigate to "/"', () => {
     history.push(AppRoute.Main);
     render(fakeApp);
 
     expect(screen.getByText(/Каталог гитар/i)).toBeInTheDocument();
     expect(screen.getByText(/Фильтр/i)).toBeInTheDocument();
+    expect(screen.getByText(/Сортировать:/i)).toBeInTheDocument();
+    expect(screen.getByText(guitars[0].name)).toBeInTheDocument();
   });
 
   it('should render "cart" when user navigate to "/cart"', () => {
@@ -62,6 +74,8 @@ describe('Application Routing', () => {
   });
 
   it('should render "ProdactCard" when user navigate to "/product/:id"', () => {
+    // eslint-disable-next-line no-console
+    console.log(history);
     history.push(AppRoute.Product);
     render(fakeApp);
 
@@ -70,3 +84,4 @@ describe('Application Routing', () => {
     expect(screen.getByText(/Количество струн/i)).toBeInTheDocument();
   });
 });
+
