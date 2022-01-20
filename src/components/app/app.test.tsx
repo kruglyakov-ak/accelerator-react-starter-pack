@@ -74,8 +74,6 @@ describe('Application Routing', () => {
   });
 
   it('should render "ProdactCard" when user navigate to "/product/:id"', () => {
-    // eslint-disable-next-line no-console
-    console.log(history);
     history.push(AppRoute.Product);
     render(fakeApp);
 

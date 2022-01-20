@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Cart from '../cart/cart';
 import Footer from '../footer/footer';
@@ -9,7 +9,7 @@ import PropertyProductCard from '../property-product-card/property-product-card'
 
 function App(): JSX.Element {
   return (
-    <BrowserRouter>
+    <>
       <Header />
       <Switch>
         <Route path={AppRoute.Main} exact>
@@ -28,7 +28,7 @@ function App(): JSX.Element {
         />
       </Switch>
       <Footer />
-    </BrowserRouter>
+    </>
   );
 }
 
