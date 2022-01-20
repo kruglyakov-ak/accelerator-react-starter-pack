@@ -6,6 +6,8 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import CatalogFilterType from './catalog-filter-type';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
@@ -19,12 +21,16 @@ const store = mockStore({
   FILTER: {
   },
 });
+const history = createMemoryHistory();
+
 describe('Component: CatalogFilterType', () => {
 
   it('should render CatalogFilterType', () => {
     render(
       <Provider store={store}>
-        <CatalogFilterType />
+        <Router history={history}>
+          <CatalogFilterType />
+        </Router>
       </Provider>);
 
     expect(screen.getByText(/Тип гитар/i)).toBeInTheDocument();

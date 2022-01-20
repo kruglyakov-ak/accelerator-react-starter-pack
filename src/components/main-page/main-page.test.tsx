@@ -24,10 +24,14 @@ const store = mockStore({
   FILTER: {
   },
   DATA: {
-    guitars: guitars,
+    guitarsOnPage: guitars,
+    isDataLoaded: true,
   },
   PAGINATION:{
     guitarsCount: 0,
+  },
+  COMMENT:{
+    comments:[],
   },
 });
 

@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 
 function Cart(): JSX.Element {
+  // eslint-disable-next-line no-console
+  console.log('ok');
   return (
     <div className="wrapper">
       <main className="page-content">

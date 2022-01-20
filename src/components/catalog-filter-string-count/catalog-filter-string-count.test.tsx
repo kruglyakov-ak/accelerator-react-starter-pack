@@ -6,6 +6,8 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import CatalogFilterStringCount from './catalog-filter-string-count';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
@@ -19,12 +21,16 @@ const store = mockStore({
   FILTER: {
   },
 });
+const history = createMemoryHistory();
+
 describe('Component: CatalogFilterStringCount', () => {
 
   it('should render CatalogFilterStringCount', () => {
     render(
       <Provider store={store}>
-        <CatalogFilterStringCount />
+        <Router history={history}>
+          <CatalogFilterStringCount />
+        </Router>
       </Provider>);
 
     expect(screen.getByText(/Количество струн/i)).toBeInTheDocument();

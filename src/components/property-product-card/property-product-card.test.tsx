@@ -24,6 +24,11 @@ const mockStore = configureMockStore<
 const store = mockStore({
   DATA: {
     guitar: guitars[0],
+    isProductCardLoaded: true,
+  },
+  COMMENT: {
+    commentsByGuitarId: [],
+    isCommentsLoaded: true,
   },
 });
 
@@ -37,7 +42,7 @@ describe('Component: PropertyProductCard', () => {
         </Router>
       </Provider>);
 
-    expect(screen.getByText(guitars[0].name)).toBeInTheDocument();
+    expect(screen.getByText(guitars[0].vendorCode)).toBeInTheDocument();
     expect(screen.getByText(changeGuitarTypeToReadable(guitars[0].type))).toBeInTheDocument();
   });
 

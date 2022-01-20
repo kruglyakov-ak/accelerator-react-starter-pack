@@ -39,7 +39,7 @@ describe('Component: MainPageEmpty', () => {
         </Router>
       </Provider>);
 
-    expect(screen.getByText(/Каталог гитар не загрузился/i)).toBeInTheDocument();
+    expect(screen.getByText(/Нет данных о гитарах/i)).toBeInTheDocument();
   });
 
 });

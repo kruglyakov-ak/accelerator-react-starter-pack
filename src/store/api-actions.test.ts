@@ -3,7 +3,7 @@ import { makeFakeGuitars } from '../utils/mocks';
 import { State } from '../types/state';
 import { APIRoute } from '../const';
 import { fetchGuitarByIdAction, fetchGuitarsAction, fetchGuitarWithoutFilters } from './api-actions';
-import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin } from './action';
+import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setIsProductCardLoaded, setPriceRangeMax, setPriceRangeMin } from './action';
 import MockAdapter from 'axios-mock-adapter';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import { configureMockStore } from '@jedmao/redux-mock-store';
@@ -15,9 +15,7 @@ describe('Async actions', () => {
   const api = createAPI();
   const mockAPI = new MockAdapter(api);
   const middlewares = [thunk.withExtraArgument(api)];
-  const headers = {
-    'x-total-count': guitars.length,
-  };
+
   const mockStore = configureMockStore<
     State,
     Action,
@@ -41,8 +39,8 @@ describe('Async actions', () => {
 
   it('should dispatch loadGuitars when GET /gutars', async () => {
     mockAPI
-      .onGet('guitars?&_start=0&_end=9')
-      .reply(200, guitars, headers);
+      .onGet(`${APIRoute.Guitars}?`)
+      .reply(200, guitars);
 
     const store = mockStore();
     await store.dispatch(fetchGuitarsAction({
@@ -62,7 +60,6 @@ describe('Async actions', () => {
 
     expect(store.getActions()).toEqual([
       loadGuitars(guitars),
-      setGuitarsCount(guitars.length),
     ]);
   });
 
@@ -75,7 +72,9 @@ describe('Async actions', () => {
     await store.dispatch(fetchGuitarByIdAction(guitars[0].id));
 
     expect(store.getActions()).toEqual([
+      setIsProductCardLoaded(false),
       loadGuitarById(guitars[0]),
+      setIsProductCardLoaded(true),
     ]);
   });
 });

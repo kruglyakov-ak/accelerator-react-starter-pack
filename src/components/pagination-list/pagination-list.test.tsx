@@ -6,6 +6,8 @@ import { Action } from 'redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Provider } from 'react-redux';
 import PaginationList from './pagination-list';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
@@ -20,14 +22,18 @@ const store = mockStore({
     guitarsCount: 27,
   },
 });
+const history = createMemoryHistory();
+
 
 describe('Component: PaginationList', () => {
 
   it('should render PaginationList', () => {
     render(
       <Provider store={store}>
-        <PaginationList />
-      </Provider>);
+        <Router history={history}>
+          <PaginationList />
+        </Router>
+      </Provider >);
 
     expect(screen.getByText(/Далее/i)).toBeInTheDocument();
   });
