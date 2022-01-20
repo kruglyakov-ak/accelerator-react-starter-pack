@@ -47,7 +47,6 @@ describe('Component: MainPage', () => {
 
     expect(screen.getByText(/Каталог гитар/i)).toBeInTheDocument();
     expect(screen.getByText(guitars[0].name)).toBeInTheDocument();
-    expect(screen.getByText(guitars[guitars.length - 1].name)).toBeInTheDocument();
   });
 
 });
