@@ -7,6 +7,8 @@ import { Action } from 'redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { DefaultPriceRange } from '../../const';
 import CatalogFilterPrice from './catalog-filter-price';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
@@ -22,12 +24,16 @@ const store = mockStore({
     priceRangeMax: DefaultPriceRange.Max,
   },
 });
+const history = createMemoryHistory();
+
 describe('Component: CatalogFilterPrice', () => {
 
   it('should render CatalogFilterPrice', () => {
     render(
       <Provider store={store}>
-        <CatalogFilterPrice />
+        <Router history={history}>
+          <CatalogFilterPrice />
+        </Router>
       </Provider>);
 
     expect(screen.getByPlaceholderText(DefaultPriceRange.Min)).toBeInTheDocument();
