@@ -25,7 +25,7 @@ describe('Component: ModalNewComment', () => {
   it('should render ModalNewComment', () => {
     render(
       <Provider store={store}>
-        <ModalNewComment isModalReviewFormOpen={false} name={'Guitar'} guitarId={''} handleReviewModalClose={onFakeHandleReviewModalClose} handleSuccessModalOpen={onFakeHandleSuccessModalOpen} />
+        <ModalNewComment isModalReviewFormOpen={false} name={'Guitar'} guitarId={''} onReviewModalClose={onFakeHandleReviewModalClose} onSuccessModalOpen={onFakeHandleSuccessModalOpen} />
       </Provider>);
 
     expect(screen.getByText(/Guitar/i)).toBeInTheDocument();
