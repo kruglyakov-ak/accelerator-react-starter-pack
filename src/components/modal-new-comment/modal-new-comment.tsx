@@ -7,11 +7,11 @@ type ModalNewCommentProps = {
   isModalReviewFormOpen: boolean,
   name: string,
   guitarId: string,
-  handleReviewModalClose: () => void
-  handleSuccessModalOpen: () => void
+  onReviewModalClose: () => void
+  onSuccessModalOpen: () => void
 }
 
-function ModalNewComment({ name, handleReviewModalClose, isModalReviewFormOpen, guitarId, handleSuccessModalOpen }: ModalNewCommentProps): JSX.Element {
+function ModalNewComment({ name, onReviewModalClose, isModalReviewFormOpen, guitarId, onSuccessModalOpen }: ModalNewCommentProps): JSX.Element {
   const dispatch = useDispatch();
   const [nameValue, setNameValue] = useState('');
   const [rateValue, setRateValue] = useState('');
@@ -40,8 +40,8 @@ function ModalNewComment({ name, handleReviewModalClose, isModalReviewFormOpen, 
   };
 
   const onSuccessPost = () => {
-    handleReviewModalClose();
-    handleSuccessModalOpen();
+    onReviewModalClose();
+    onSuccessModalOpen();
   };
 
   const handleSubmitComment = (evt: InvalidEvent<HTMLFormElement>) => {
@@ -79,7 +79,7 @@ function ModalNewComment({ name, handleReviewModalClose, isModalReviewFormOpen, 
         'modal modal--review modal-for-ui-kit'}
     >
       <div className="modal__wrapper" >
-        <div className="modal__overlay" data-close-modal="" onClick={handleReviewModalClose}></div>
+        <div className="modal__overlay" data-close-modal="" onClick={onReviewModalClose}></div>
         <div className="modal__content">
           <h2 className="modal__header modal__header--review title title--medium">Оставить отзыв</h2>
           <h3 className="modal__product-name title title--medium-20 title--uppercase">{name}</h3>
@@ -160,7 +160,7 @@ function ModalNewComment({ name, handleReviewModalClose, isModalReviewFormOpen, 
             </div>
             <button className="button button--medium-20 form-review__button" type="submit">Отправить отзыв</button>
           </form>
-          <button className="modal__close-btn button-cross" type="button" aria-label="Закрыть" onClick={handleReviewModalClose}><span className="button-cross__icon"></span><span className="modal__close-btn-interactive-area"></span>
+          <button className="modal__close-btn button-cross" type="button" aria-label="Закрыть" onClick={onReviewModalClose}><span className="button-cross__icon"></span><span className="modal__close-btn-interactive-area"></span>
           </button>
         </div>
       </div>

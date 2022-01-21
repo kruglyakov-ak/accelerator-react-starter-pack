@@ -30,19 +30,19 @@ function ProductCardComments({ name, guitarId }: ProductCardCommentsProps): JSX.
     setIsModalReviewFormOpen(true);
   };
 
-  const handleReviewModalClose = () => {
+  const onReviewModalClose = () => {
     document.body.classList.remove('unscrollable');
     document.body.removeEventListener('keydown', handleEscapeKeyDown);
     setIsModalReviewFormOpen(false);
   };
 
-  const handleSuccessModalClose = () => {
+  const onSuccessModalClose = () => {
     document.body.classList.remove('unscrollable');
     document.body.removeEventListener('keydown', handleEscapeKeyDown);
     setIsModalSuccessOpen(false);
   };
 
-  const handleSuccessModalOpen = () => {
+  const onSuccessModalOpen = () => {
     document.body.classList.add('unscrollable');
     setIsModalSuccessOpen(true);
   };
@@ -73,8 +73,8 @@ function ProductCardComments({ name, guitarId }: ProductCardCommentsProps): JSX.
       <h3 className="reviews__title title title--bigger">Отзывы</h3>
       <button className="button button--red-border button--big reviews__sumbit-button" onClick={handleNewReviewButtonClick}>Оставить отзыв</button>
       <ProductCardCommentsList />
-      {<ModalNewComment guitarId={guitarId} isModalReviewFormOpen={isModalReviewFormOpen} name={name} handleReviewModalClose={handleReviewModalClose} handleSuccessModalOpen={handleSuccessModalOpen} />}
-      {<ModalSuccessComment isModalSuccessOpen={isModalSuccessOpen} handleSuccessModalClose={handleSuccessModalClose} />}
+      {<ModalNewComment guitarId={guitarId} isModalReviewFormOpen={isModalReviewFormOpen} name={name} onReviewModalClose={onReviewModalClose} onSuccessModalOpen={onSuccessModalOpen} />}
+      {<ModalSuccessComment isModalSuccessOpen={isModalSuccessOpen} onSuccessModalClose={onSuccessModalClose} />}
     </section>
   );
 }
