@@ -5,6 +5,7 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import ModalNewComment from '../modal-new-comment/modal-new-comment';
 import ModalSuccessComment from '../modal-success-coment/modal-success-comment';
 import ProductCardCommentsList from '../product-card-comments-list/product-card-comments-list';
+import FocusLock from 'react-focus-lock';
 
 type ProductCardCommentsProps = {
   name: string,
@@ -73,8 +74,14 @@ function ProductCardComments({ name, guitarId }: ProductCardCommentsProps): JSX.
       <h3 className="reviews__title title title--bigger">Отзывы</h3>
       <button className="button button--red-border button--big reviews__sumbit-button" onClick={handleNewReviewButtonClick}>Оставить отзыв</button>
       <ProductCardCommentsList />
-      {<ModalNewComment guitarId={guitarId} isModalReviewFormOpen={isModalReviewFormOpen} name={name} onReviewModalClose={onReviewModalClose} onSuccessModalOpen={onSuccessModalOpen} />}
-      {<ModalSuccessComment isModalSuccessOpen={isModalSuccessOpen} onSuccessModalClose={onSuccessModalClose} />}
+      {isModalReviewFormOpen &&
+        <FocusLock>
+          <ModalNewComment guitarId={guitarId} isModalReviewFormOpen={isModalReviewFormOpen} name={name} onReviewModalClose={onReviewModalClose} onSuccessModalOpen={onSuccessModalOpen} />
+        </FocusLock>}
+      {isModalSuccessOpen &&
+        <FocusLock>
+          <ModalSuccessComment onSuccessModalClose={onSuccessModalClose} />
+        </FocusLock>}
     </section>
   );
 }

@@ -1,14 +1,10 @@
 type ModalSuccessCommentProps = {
-  isModalSuccessOpen: boolean,
   onSuccessModalClose: () => void
 }
 
-function ModalSuccessComment({ onSuccessModalClose, isModalSuccessOpen }: ModalSuccessCommentProps): JSX.Element {
+function ModalSuccessComment({ onSuccessModalClose }: ModalSuccessCommentProps): JSX.Element {
   return (
-    <div className={isModalSuccessOpen ?
-      'modal is-active modal--success modal-for-ui-kit' :
-      'modal modal--success modal-for-ui-kit'}
-    >
+    <div className="modal is-active modal--success modal-for-ui-kit">
       <div className="modal__wrapper">
         <div className="modal__overlay" data-close-modal="" onClick={onSuccessModalClose}></div>
         <div className="modal__content">

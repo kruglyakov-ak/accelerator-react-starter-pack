@@ -73,11 +73,7 @@ function ModalNewComment({ name, onReviewModalClose, isModalReviewFormOpen, guit
   }, [isModalReviewFormOpen]);
 
   return (
-    <div
-      className={isModalReviewFormOpen ?
-        'modal is-active modal--review modal-for-ui-kit' :
-        'modal modal--review modal-for-ui-kit'}
-    >
+    <div className="modal is-active modal--review modal-for-ui-kit">
       <div className="modal__wrapper" >
         <div className="modal__overlay" data-close-modal="" onClick={onReviewModalClose}></div>
         <div className="modal__content">

@@ -7,7 +7,7 @@ describe('Component: ModalSuccessComment', () => {
 
   it('should render ModalSuccessComment', () => {
     render(
-      <ModalSuccessComment isModalSuccessOpen onSuccessModalClose={onFakeHandleSuccessModalClose}/>);
+      <ModalSuccessComment onSuccessModalClose={onFakeHandleSuccessModalClose}/>);
 
     expect(screen.getByText(/Спасибо за ваш отзыв!/i)).toBeInTheDocument();
     expect(screen.getByText(/К покупкам!/i)).toBeInTheDocument();
