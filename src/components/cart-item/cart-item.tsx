@@ -31,7 +31,6 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
     }
   };
 
-
   const handleIncreaseButtonClick = () => {
     if (guitarCount < MAX_COUNT_GUITAR_IN_CART) {
       setGuitarCount(guitarCount + 1);
@@ -51,9 +50,15 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
     }
   };
 
+  const handleDeleteButtonClick = () => {
+    dispatch(deleteGuitarInCart(guitar));
+  };
+
   return (
     <div className="cart-item">
-      <button className="cart-item__close-button button-cross" type="button" aria-label="Удалить"><span className="button-cross__icon"></span><span className="cart-item__close-button-interactive-area"></span>
+      <button className="cart-item__close-button button-cross" type="button" aria-label="Удалить" onClick={handleDeleteButtonClick}>
+        <span className="button-cross__icon"></span>
+        <span className="cart-item__close-button-interactive-area"></span>
       </button>
       <div className="cart-item__image"><img src={`/${previewImg}`} width="55" height="130" alt={name} />
       </div>
