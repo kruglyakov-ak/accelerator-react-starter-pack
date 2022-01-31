@@ -1,12 +1,21 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { GuitarData } from '../../types/state';
-import { loadGuitarById, loadGuitars, loadGuitarsOnPage, loadGuitarsWithoutFilters, setIsDataLoaded, setIsProductCardLoaded } from '../action';
+import {
+  loadGuitarById,
+  loadGuitars,
+  loadGuitarsOnPage,
+  loadGuitarsWithoutFilters,
+  setIsDataLoaded,
+  setIsProductCardLoaded,
+  setGuitarsInCart
+} from '../action';
 
 const initialState: GuitarData = {
   guitars: [],
   guitarsOnPage: [],
   guitarsWithoutFilters: [],
   guitar: null,
+  guitarsInCart: [],
   isDataLoaded: false,
   isProductCardLoaded: false,
 };
@@ -28,6 +37,10 @@ const guitarData = createReducer(initialState, (builder) => {
     .addCase(loadGuitarById, (state, action) => {
       const { guitar } = action.payload;
       state.guitar = guitar;
+    })
+    .addCase(setGuitarsInCart, (state, action) => {
+      const { guitarsInCart } = action.payload;
+      state.guitarsInCart = guitarsInCart;
     })
     .addCase(setIsDataLoaded, (state, action) => {
       const { isDataLoaded } = action.payload;

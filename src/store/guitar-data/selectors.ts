@@ -6,6 +6,7 @@ const getGuitars = (state: State): Guitar[] => state[NameSpace.Data].guitars;
 const getGuitarsWithoutFilters = (state: State): Guitar[] => state[NameSpace.Data].guitarsWithoutFilters;
 const getGuitarsOnPage = (state: State): Guitar[] => state[NameSpace.Data].guitarsOnPage;
 const getGuitarById = (state: State): Guitar | null => state[NameSpace.Data].guitar;
+const getGuitarsInCart = (state: State): Guitar[] => state[NameSpace.Data].guitarsInCart;
 const getIsDataLoaded = (state: State): boolean => state[NameSpace.Data].isDataLoaded;
 const getIsProductCardLoaded = (state: State): boolean => state[NameSpace.Data].isProductCardLoaded;
 
@@ -15,5 +16,6 @@ export {
   getGuitarById,
   getGuitarsOnPage,
   getIsDataLoaded,
-  getIsProductCardLoaded
+  getIsProductCardLoaded,
+  getGuitarsInCart
 };

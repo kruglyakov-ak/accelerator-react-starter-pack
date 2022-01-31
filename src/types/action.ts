@@ -9,6 +9,7 @@ enum ActionType {
   LoadGuitarsWithoutFilters = 'data/loadGuitarsWithoutFilters',
   LoadGuitarsOnPage = 'data/loadGuitarsOnPage',
   SetIsDataLoaded = 'data/setIsDataLoaded',
+  SetGuitarsInCart = 'data/setGuitarsInCart',
   SetIsProductCardLoaded = 'data/setIsProductCardLoaded',
   SetSortType = 'sort/setSortType',
   SetOrderType = 'sort/setOrderType',

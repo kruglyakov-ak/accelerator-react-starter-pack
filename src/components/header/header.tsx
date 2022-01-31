@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { getGuitarsWithoutFilters } from '../../store/guitar-data/selectors';
+import { getGuitarsInCart, getGuitarsWithoutFilters } from '../../store/guitar-data/selectors';
 
 function Header(): JSX.Element {
   const guitars = useSelector(getGuitarsWithoutFilters);
+  const guitarsInCart = useSelector(getGuitarsInCart);
   const path = useLocation().pathname;
 
   const [isSearchListHidden, setIsSearchListHidden] = useState(true);
@@ -80,7 +81,9 @@ function Header(): JSX.Element {
         >
           <svg className="header__cart-icon" width="14" height="14" aria-hidden="true">
             <use xlinkHref="#icon-basket"></use>
-          </svg><span className="visually-hidden">Перейти в корзину</span><span className="header__cart-count">2</span>
+          </svg>
+          <span className="visually-hidden">Перейти в корзину</span>
+          {guitarsInCart.length !== 0 && <span className="header__cart-count">{guitarsInCart.length}</span>}
         </Link>
       </div>
     </header>

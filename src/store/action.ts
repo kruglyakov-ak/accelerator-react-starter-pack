@@ -57,6 +57,15 @@ const loadCommentsByGuitarId = createAction(
   }),
 );
 
+const setGuitarsInCart = createAction(
+  ActionType.SetGuitarsInCart,
+  (guitarsInCart: Guitar[]) => ({
+    payload: {
+      guitarsInCart,
+    },
+  }),
+);
+
 const setPriceRangeMin = createAction(
   ActionType.SetPriceRangeMin,
   (priceRangeMin: number) => ({
@@ -143,5 +152,6 @@ export {
   setIsProductCardLoaded,
   loadComments,
   loadCommentsByGuitarId,
-  setIsCommentsLoaded
+  setIsCommentsLoaded,
+  setGuitarsInCart
 };
