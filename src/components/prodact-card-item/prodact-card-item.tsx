@@ -1,10 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useEffect, useState } from 'react';
+import {  useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute, RatingCountNumber } from '../../const';
-import { setGuitarsInCart, setTotalPrices } from '../../store/action';
 import { getGuitarsInCart } from '../../store/cart-data/selectors';
 import { Comment } from '../../types/comment';
 import { Guitar } from '../../types/guitar';
+import ModalAddToCart from '../modal-add-to-cart/modal-add-to-cart';
+import ModalSuccessAddToCart from '../modal-success-add-to-cart/modal-success-add-to-cart';
 
 type ProductCardItemProps = {
   guitar: Guitar,
@@ -12,8 +14,9 @@ type ProductCardItemProps = {
 }
 
 function ProductCardItem({ guitar, comments }: ProductCardItemProps): JSX.Element {
-  const dispatch = useDispatch();
   const guitarsInCart = useSelector(getGuitarsInCart);
+  const [isModalAddToCardOpen, setIsModalAddToCardOpen] = useState(false);
+  const [isModalSuccessOpen, setIsModalSuccessOpen] = useState(false);
 
   const {
     name,
@@ -23,12 +26,41 @@ function ProductCardItem({ guitar, comments }: ProductCardItemProps): JSX.Elemen
     id,
   } = guitar;
 
-  const handleAddToCartClick = () => {
-    if (!guitarsInCart.some((guitarInCart) => guitarInCart.id === guitar.id)) {
-      dispatch(setGuitarsInCart(guitar));
-      dispatch(setTotalPrices(guitar.price));
+  const handleEscapeKeyDown = useCallback((evt: { key: string; }) => {
+    if (evt.key === 'Escape') {
+      setIsModalAddToCardOpen(false);
+      setIsModalSuccessOpen(false);
+      document.body.removeEventListener('keydown', handleEscapeKeyDown);
     }
+  }, []);
+
+  const handleAddToCartClick = () => {
+    setIsModalAddToCardOpen(true);
   };
+
+  const onAddToCardModalClose= () => {
+    setIsModalAddToCardOpen(false);
+  };
+
+  const onSuccessModalOpen= () => {
+    setIsModalSuccessOpen(true);
+  };
+
+  const onSuccessModalClose= () => {
+    setIsModalSuccessOpen(false);
+  };
+
+  useEffect(() => {
+    isModalAddToCardOpen ?
+      document.body.addEventListener('keydown', handleEscapeKeyDown) :
+      document.body.removeEventListener('keydown', handleEscapeKeyDown);
+  }, [handleEscapeKeyDown, isModalAddToCardOpen]);
+
+  useEffect(() => {
+    isModalSuccessOpen ?
+      document.body.addEventListener('keydown', handleEscapeKeyDown) :
+      document.body.removeEventListener('keydown', handleEscapeKeyDown);
+  }, [handleEscapeKeyDown, isModalSuccessOpen]);
 
   return (
     <div className="product-card">
@@ -73,6 +105,9 @@ function ProductCardItem({ guitar, comments }: ProductCardItemProps): JSX.Elemen
           <Link to={AppRoute.Cart} className="button button--red-border button--mini button--in-cart">В Корзине</Link> :
           <button className="button button--red button--mini button--add-to-cart" onClick={handleAddToCartClick}>Купить</button>}
       </div>
+
+      {isModalAddToCardOpen && <ModalAddToCart guitar={guitar} onAddToCardModalClose={onAddToCardModalClose} onSuccessModalOpen={onSuccessModalOpen}/>}
+      {isModalSuccessOpen && <ModalSuccessAddToCart onSuccessModalClose={onSuccessModalClose}/>}
     </div>
   );
 }

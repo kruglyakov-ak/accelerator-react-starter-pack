@@ -5,7 +5,6 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import ModalNewComment from '../modal-new-comment/modal-new-comment';
 import ModalSuccessComment from '../modal-success-coment/modal-success-comment';
 import ProductCardCommentsList from '../product-card-comments-list/product-card-comments-list';
-import FocusLock from 'react-focus-lock';
 
 type ProductCardCommentsProps = {
   name: string,
@@ -22,29 +21,24 @@ function ProductCardComments({ name, guitarId }: ProductCardCommentsProps): JSX.
       setIsModalReviewFormOpen(false);
       setIsModalSuccessOpen(false);
       document.body.removeEventListener('keydown', handleEscapeKeyDown);
-      document.body.classList.remove('unscrollable');
     }
   }, []);
 
   const handleNewReviewButtonClick = () => {
-    document.body.classList.add('unscrollable');
     setIsModalReviewFormOpen(true);
   };
 
   const onReviewModalClose = () => {
-    document.body.classList.remove('unscrollable');
     document.body.removeEventListener('keydown', handleEscapeKeyDown);
     setIsModalReviewFormOpen(false);
   };
 
   const onSuccessModalClose = () => {
-    document.body.classList.remove('unscrollable');
     document.body.removeEventListener('keydown', handleEscapeKeyDown);
     setIsModalSuccessOpen(false);
   };
 
   const onSuccessModalOpen = () => {
-    document.body.classList.add('unscrollable');
     setIsModalSuccessOpen(true);
   };
 
@@ -75,13 +69,9 @@ function ProductCardComments({ name, guitarId }: ProductCardCommentsProps): JSX.
       <button className="button button--red-border button--big reviews__sumbit-button" onClick={handleNewReviewButtonClick}>Оставить отзыв</button>
       <ProductCardCommentsList />
       {isModalReviewFormOpen &&
-        <FocusLock>
-          <ModalNewComment guitarId={guitarId} isModalReviewFormOpen={isModalReviewFormOpen} name={name} onReviewModalClose={onReviewModalClose} onSuccessModalOpen={onSuccessModalOpen} />
-        </FocusLock>}
+        <ModalNewComment guitarId={guitarId} isModalReviewFormOpen={isModalReviewFormOpen} name={name} onReviewModalClose={onReviewModalClose} onSuccessModalOpen={onSuccessModalOpen} />}
       {isModalSuccessOpen &&
-        <FocusLock>
-          <ModalSuccessComment onSuccessModalClose={onSuccessModalClose} />
-        </FocusLock>}
+          <ModalSuccessComment onSuccessModalClose={onSuccessModalClose} />}
     </section>
   );
 }

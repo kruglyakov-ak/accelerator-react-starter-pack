@@ -24,8 +24,6 @@ const cartData = createReducer(initialState, (builder) => {
     })
     .addCase(setTotalPrices, (state, action) => {
       const { totalPrice } = action.payload;
-      // eslint-disable-next-line no-console
-      console.log(totalPrice);
       state.totalPrices.push(totalPrice);
     });
 });
