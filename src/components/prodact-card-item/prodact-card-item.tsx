@@ -1,5 +1,8 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute, RatingCountNumber } from '../../const';
+import { setGuitarsInCart } from '../../store/action';
+import { getGuitarsInCart } from '../../store/guitar-data/selectors';
 import { Comment } from '../../types/comment';
 import { Guitar } from '../../types/guitar';
 
@@ -9,6 +12,9 @@ type ProductCardItemProps = {
 }
 
 function ProductCardItem({ guitar, comments }: ProductCardItemProps): JSX.Element {
+  const dispatch = useDispatch();
+  const guitarsInCart = useSelector(getGuitarsInCart);
+
   const {
     name,
     previewImg,
@@ -16,6 +22,12 @@ function ProductCardItem({ guitar, comments }: ProductCardItemProps): JSX.Elemen
     rating,
     id,
   } = guitar;
+
+  const handleAddToCartClick = () => {
+    if (!guitarsInCart.some((guitarInCart) => guitarInCart.id === guitar.id)) {
+      dispatch(setGuitarsInCart(guitar));
+    }
+  };
 
   return (
     <div className="product-card">
@@ -56,7 +68,9 @@ function ProductCardItem({ guitar, comments }: ProductCardItemProps): JSX.Elemen
       </div>
       <div className="product-card__buttons">
         <Link to={`${AppRoute.Main}product/${id}`} className="button button--mini">Подробнее</Link>
-        <button className="button button--red button--mini button--add-to-cart">Купить</button>
+        {guitarsInCart.some((guitarInCart) => guitarInCart.id === guitar.id) ?
+          <Link to={AppRoute.Cart} className="button button--red-border button--mini button--in-cart">В Корзине</Link> :
+          <button className="button button--red button--mini button--add-to-cart" onClick={handleAddToCartClick}>Купить</button>}
       </div>
     </div>
   );

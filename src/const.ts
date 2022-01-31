@@ -8,7 +8,7 @@ const enum AppRoute {
 
 const enum APIRoute {
   Guitars = '/guitars',
-  Comments  = '/comments',
+  Comments = '/comments',
 }
 
 const enum GuitarType {
@@ -97,6 +97,9 @@ const enum BooleanToString {
 
 const MIN_COMMENT_LENGTH = 3;
 
+const MIN_COUNT_GUITAR_IN_CART = 1;
+const MAX_COUNT_GUITAR_IN_CART = 99;
+
 export {
   AppRoute,
   APIRoute,
@@ -112,5 +115,7 @@ export {
   BooleanToString,
   RatingCountNumber,
   GuitarTypeToReadable,
-  MIN_COMMENT_LENGTH
+  MIN_COMMENT_LENGTH,
+  MIN_COUNT_GUITAR_IN_CART,
+  MAX_COUNT_GUITAR_IN_CART
 };

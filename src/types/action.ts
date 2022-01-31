@@ -11,6 +11,7 @@ enum ActionType {
   SetIsDataLoaded = 'data/setIsDataLoaded',
   SetGuitarsInCart = 'data/setGuitarsInCart',
   SetIsProductCardLoaded = 'data/setIsProductCardLoaded',
+  DeleteGuitarInCart = 'data/deleteGuitarInCart',
   SetSortType = 'sort/setSortType',
   SetOrderType = 'sort/setOrderType',
   SetPriceRangeMin = 'filter/setPriceRangeMin',

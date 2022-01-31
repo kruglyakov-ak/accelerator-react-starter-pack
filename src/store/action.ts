@@ -59,9 +59,18 @@ const loadCommentsByGuitarId = createAction(
 
 const setGuitarsInCart = createAction(
   ActionType.SetGuitarsInCart,
-  (guitarsInCart: Guitar[]) => ({
+  (guitarInCart: Guitar) => ({
     payload: {
-      guitarsInCart,
+      guitarInCart,
+    },
+  }),
+);
+
+const deleteGuitarInCart = createAction(
+  ActionType.DeleteGuitarInCart,
+  (deletedGuitarInCart: Guitar) => ({
+    payload: {
+      deletedGuitarInCart,
     },
   }),
 );
@@ -153,5 +162,6 @@ export {
   loadComments,
   loadCommentsByGuitarId,
   setIsCommentsLoaded,
-  setGuitarsInCart
+  setGuitarsInCart,
+  deleteGuitarInCart
 };
