@@ -73,7 +73,11 @@ function Header(): JSX.Element {
                 .map((guitar) => (<li className="form-search__select-item" key={guitar.id}><Link to={`${AppRoute.Main}product/${guitar.id}`} className="link" onClick={handleSearchLinkClick}>{guitar.name}</Link></li>))}
             </ul>}
         </div>
-        <Link to={AppRoute.Cart} className="header__cart-link" aria-label="Корзина">
+        <Link to={AppRoute.Cart}
+          className={path === AppRoute.Cart ?
+            'link header__cart-link link--current' :
+            'link header__cart-link link'} aria-label="Корзина"
+        >
           <svg className="header__cart-icon" width="14" height="14" aria-hidden="true">
             <use xlinkHref="#icon-basket"></use>
           </svg><span className="visually-hidden">Перейти в корзину</span><span className="header__cart-count">2</span>
