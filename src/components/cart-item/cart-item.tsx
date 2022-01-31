@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { MIN_COUNT_GUITAR_IN_CART, MAX_COUNT_GUITAR_IN_CART } from '../../const';
-import { deleteGuitarInCart, setTotalPrices } from '../../store/action';
+import { setTotalPrices } from '../../store/action';
 import { Guitar } from '../../types/guitar';
 import { changeGuitarTypeToReadable } from '../../utils/utils';
+import ModalDelete from '../modal-delete/modal-delete';
 
 type CartItemProps = {
   guitar: Guitar,
@@ -12,6 +13,24 @@ type CartItemProps = {
 function CartItem({ guitar }: CartItemProps): JSX.Element {
   const dispatch = useDispatch();
   const [guitarCount, setGuitarCount] = useState(1);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const handleEscapeKeyDown = useCallback((evt: { key: string; }) => {
+    if (evt.key === 'Escape') {
+      setIsDeleteModalOpen(false);
+      document.body.removeEventListener('keydown', handleEscapeKeyDown);
+    }
+  }, []);
+
+  const onDeleteModalClose = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  useEffect(() => {
+    isDeleteModalOpen ?
+      document.body.addEventListener('keydown', handleEscapeKeyDown) :
+      document.body.removeEventListener('keydown', handleEscapeKeyDown);
+  }, [handleEscapeKeyDown, isDeleteModalOpen]);
 
   const {
     previewImg,
@@ -28,8 +47,7 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
       setGuitarCount(guitarCount - 1);
       dispatch(setTotalPrices(-price));
     } else {
-      dispatch(deleteGuitarInCart(guitar));
-      dispatch(setTotalPrices(-price));
+      setIsDeleteModalOpen(true);
     }
   };
 
@@ -56,8 +74,7 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
   };
 
   const handleDeleteButtonClick = () => {
-    dispatch(deleteGuitarInCart(guitar));
-    dispatch(setTotalPrices(-price));
+    setIsDeleteModalOpen(true);
   };
 
   return (
@@ -88,6 +105,7 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
         </button>
       </div>
       <div className="cart-item__price-total">{guitarCount < MIN_COUNT_GUITAR_IN_CART ? MIN_COUNT_GUITAR_IN_CART * price : guitarCount * price} ₽</div>
+      {isDeleteModalOpen && <ModalDelete onDeleteModalClose={onDeleteModalClose} guitar={guitar} totalPrice={guitarCount * price}/>}
     </div>
   );
 }
