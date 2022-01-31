@@ -6,9 +6,7 @@ import {
   loadGuitarsOnPage,
   loadGuitarsWithoutFilters,
   setIsDataLoaded,
-  setIsProductCardLoaded,
-  setGuitarsInCart,
-  deleteGuitarInCart
+  setIsProductCardLoaded
 } from '../action';
 
 const initialState: GuitarData = {
@@ -16,7 +14,6 @@ const initialState: GuitarData = {
   guitarsOnPage: [],
   guitarsWithoutFilters: [],
   guitar: null,
-  guitarsInCart: [],
   isDataLoaded: false,
   isProductCardLoaded: false,
 };
@@ -38,15 +35,6 @@ const guitarData = createReducer(initialState, (builder) => {
     .addCase(loadGuitarById, (state, action) => {
       const { guitar } = action.payload;
       state.guitar = guitar;
-    })
-    .addCase(setGuitarsInCart, (state, action) => {
-      const { guitarInCart } = action.payload;
-      state.guitarsInCart.push(guitarInCart);
-    })
-    .addCase(deleteGuitarInCart, (state, action) => {
-      const { deletedGuitarInCart } = action.payload;
-      const index = state.guitarsInCart.findIndex((guitar) => guitar.id === deletedGuitarInCart.id);
-      state.guitarsInCart.splice(index, 1);
     })
     .addCase(setIsDataLoaded, (state, action) => {
       const { isDataLoaded } = action.payload;

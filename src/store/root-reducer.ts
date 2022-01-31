@@ -1,4 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
+import { cartData } from './cart-data/cart-data';
 import { catalogFilter } from './catalog-filter/catalog-filter';
 import { commentData } from './comment-data/comment-data';
 import { guitarData } from './guitar-data/guitar-data';
@@ -8,7 +9,8 @@ enum NameSpace {
   Data = 'DATA',
   Filter = 'FILTER',
   Pagination = 'PAGINATION',
-  Comment = 'COMMENT'
+  Comment = 'COMMENT',
+  Cart = 'CART'
 }
 
 const rootReducer = combineReducers({
@@ -16,6 +18,7 @@ const rootReducer = combineReducers({
   [NameSpace.Filter]: catalogFilter,
   [NameSpace.Pagination]: pagePagination,
   [NameSpace.Comment]: commentData,
+  [NameSpace.Cart]: cartData,
 });
 
 type RootState = ReturnType<typeof rootReducer>;

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { getGuitarsInCart, getGuitarsWithoutFilters } from '../../store/guitar-data/selectors';
+import { getGuitarsInCart } from '../../store/cart-data/selectors';
+import { getGuitarsWithoutFilters } from '../../store/guitar-data/selectors';
 
 function Header(): JSX.Element {
   const guitars = useSelector(getGuitarsWithoutFilters);

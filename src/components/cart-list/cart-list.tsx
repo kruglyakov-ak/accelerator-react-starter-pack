@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { getGuitarsInCart } from '../../store/guitar-data/selectors';
+import { getGuitarsInCart } from '../../store/cart-data/selectors';
 import CartItem from '../cart-item/cart-item';
 
 function CartList(): JSX.Element {

@@ -57,24 +57,6 @@ const loadCommentsByGuitarId = createAction(
   }),
 );
 
-const setGuitarsInCart = createAction(
-  ActionType.SetGuitarsInCart,
-  (guitarInCart: Guitar) => ({
-    payload: {
-      guitarInCart,
-    },
-  }),
-);
-
-const deleteGuitarInCart = createAction(
-  ActionType.DeleteGuitarInCart,
-  (deletedGuitarInCart: Guitar) => ({
-    payload: {
-      deletedGuitarInCart,
-    },
-  }),
-);
-
 const setPriceRangeMin = createAction(
   ActionType.SetPriceRangeMin,
   (priceRangeMin: number) => ({
@@ -147,6 +129,33 @@ const setIsCommentsLoaded = createAction(
   }),
 );
 
+const setGuitarsInCart = createAction(
+  ActionType.SetGuitarsInCart,
+  (guitarInCart: Guitar) => ({
+    payload: {
+      guitarInCart,
+    },
+  }),
+);
+
+const deleteGuitarInCart = createAction(
+  ActionType.DeleteGuitarInCart,
+  (deletedGuitarInCart: Guitar) => ({
+    payload: {
+      deletedGuitarInCart,
+    },
+  }),
+);
+
+const setTotalPrices = createAction(
+  ActionType.SetTotalPrice,
+  (totalPrice: number) => ({
+    payload: {
+      totalPrice,
+    },
+  }),
+);
+
 export {
   loadGuitars,
   loadGuitarById,
@@ -163,5 +172,6 @@ export {
   loadCommentsByGuitarId,
   setIsCommentsLoaded,
   setGuitarsInCart,
-  deleteGuitarInCart
+  deleteGuitarInCart,
+  setTotalPrices
 };

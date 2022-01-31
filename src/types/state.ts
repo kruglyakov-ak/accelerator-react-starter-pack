@@ -9,9 +9,13 @@ type GuitarData = {
   guitarsOnPage: Guitar[],
   guitarsWithoutFilters: Guitar[],
   guitar: Guitar | null,
-  guitarsInCart: Guitar[],
   isDataLoaded: boolean,
   isProductCardLoaded: boolean,
+};
+
+type CartData = {
+  guitarsInCart: Guitar[],
+  totalPrices: number[],
 };
 
 type CatalogFilter = {
@@ -34,5 +38,6 @@ export type {
   GuitarData,
   CatalogFilter,
   PagePagination,
-  CommentData
+  CommentData,
+  CartData
 };
