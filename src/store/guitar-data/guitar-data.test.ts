@@ -14,7 +14,6 @@ describe('Reducer: guitarData', () => {
         guitar: null,
         isDataLoaded: false,
         isProductCardLoaded: false,
-        guitarsInCart: [],
       });
   });
 
@@ -26,7 +25,6 @@ describe('Reducer: guitarData', () => {
       guitar: null,
       isDataLoaded: false,
       isProductCardLoaded: false,
-      guitarsInCart: [],
     };
     expect(guitarData(state, loadGuitars(guitars)))
       .toEqual({
@@ -36,7 +34,6 @@ describe('Reducer: guitarData', () => {
         guitar: null,
         isDataLoaded: false,
         isProductCardLoaded: false,
-        guitarsInCart: [],
       });
   });
 
@@ -48,7 +45,6 @@ describe('Reducer: guitarData', () => {
       guitar: null,
       isDataLoaded: false,
       isProductCardLoaded: false,
-      guitarsInCart: [],
     };
     expect(guitarData(state, loadGuitarsWithoutFilters(guitars)))
       .toEqual({
@@ -58,7 +54,6 @@ describe('Reducer: guitarData', () => {
         guitar: null,
         isDataLoaded: false,
         isProductCardLoaded: false,
-        guitarsInCart: [],
       });
   });
 
@@ -70,7 +65,6 @@ describe('Reducer: guitarData', () => {
       guitar: null,
       isDataLoaded: false,
       isProductCardLoaded: false,
-      guitarsInCart: [],
     };
     expect(guitarData(state, loadGuitarById(guitars[0])))
       .toEqual({
@@ -80,7 +74,6 @@ describe('Reducer: guitarData', () => {
         guitar: guitars[0],
         isDataLoaded: false,
         isProductCardLoaded: false,
-        guitarsInCart: [],
       });
   });
 });

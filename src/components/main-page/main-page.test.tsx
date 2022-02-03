@@ -33,6 +33,9 @@ const store = mockStore({
   COMMENT:{
     comments:[],
   },
+  CART: {
+    guitarsInCart: [],
+  },
 });
 
 describe('Component: MainPage', () => {

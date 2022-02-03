@@ -21,6 +21,9 @@ const mockStore = configureMockStore<
 const store = mockStore({
   DATA: {
   },
+  CART: {
+    guitarsInCart: [],
+  },
 });
 describe('Component: Header', () => {
 

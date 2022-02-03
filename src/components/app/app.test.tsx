@@ -45,6 +45,10 @@ const store = mockStore({
   PAGINATION: {
     guitarsCount: 0,
   },
+  CART: {
+    totalPrices: [],
+    guitarsInCart: [],
+  },
 });
 
 const fakeApp = (
