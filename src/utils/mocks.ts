@@ -5,7 +5,7 @@ import { Guitar } from '../types/guitar';
 import { getRandomNumberInRange } from './utils';
 
 const makeFakeGuitars = (): Guitar[] => (
-  new Array(getRandomNumberInRange(1, 5)).fill(null).map(() => ({
+  new Array(getRandomNumberInRange(2, 5)).fill(null).map(() => ({
     id: datatype.number(5),
     name: lorem.word(),
     vendorCode: lorem.word(),
