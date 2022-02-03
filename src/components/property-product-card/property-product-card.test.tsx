@@ -30,6 +30,9 @@ const store = mockStore({
     commentsByGuitarId: [],
     isCommentsLoaded: true,
   },
+  CART: {
+    guitarsInCart: [],
+  },
 });
 
 describe('Component: PropertyProductCard', () => {
