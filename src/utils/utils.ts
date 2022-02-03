@@ -1,4 +1,4 @@
-import { GuitarType, GuitarTypeToReadable } from '../const';
+import { GuitarType, GuitarTypeToReadable, PromoCode } from '../const';
 
 const getRandomNumberInRange = (min = 0, max = 1, numberSymbolsAfterComma = 0): number => {
   const lower = Math.min(Math.abs(min), Math.abs(max));
@@ -18,7 +18,21 @@ const changeGuitarTypeToReadable = (type: GuitarType) => {
   }
 };
 
+const convertPromoCodeToDiscount = (promoCode: PromoCode = PromoCode.Unvalid) => {
+  switch (promoCode) {
+    case PromoCode.Light:
+      return 3000;
+    case PromoCode.Medium:
+      return 4000;
+    case PromoCode.Height:
+      return 5000;
+    default:
+      return 0;
+  }
+};
+
 export {
   getRandomNumberInRange,
-  changeGuitarTypeToReadable
+  changeGuitarTypeToReadable,
+  convertPromoCodeToDiscount
 };

@@ -100,6 +100,19 @@ const MIN_COMMENT_LENGTH = 3;
 const MIN_COUNT_GUITAR_IN_CART = 1;
 const MAX_COUNT_GUITAR_IN_CART = 99;
 
+enum PromoCode {
+  Unvalid = '',
+  Light = 'light-333',
+  Medium = 'medium-444',
+  Height = 'height-555'
+}
+
+const enum PromoCodeValidate {
+  Unknown = 'unknown',
+  True = 'true',
+  False = 'false'
+}
+
 export {
   AppRoute,
   APIRoute,
@@ -117,5 +130,7 @@ export {
   GuitarTypeToReadable,
   MIN_COMMENT_LENGTH,
   MIN_COUNT_GUITAR_IN_CART,
-  MAX_COUNT_GUITAR_IN_CART
+  MAX_COUNT_GUITAR_IN_CART,
+  PromoCode,
+  PromoCodeValidate
 };
