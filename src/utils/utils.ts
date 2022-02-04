@@ -18,7 +18,7 @@ const changeGuitarTypeToReadable = (type: GuitarType) => {
   }
 };
 
-const convertPromoCodeToDiscount = (promoCode: PromoCode = PromoCode.Unvalid) => {
+const convertPromoCodeToDiscount = (promoCode: PromoCode = PromoCode.Empty) => {
   switch (promoCode) {
     case PromoCode.Light:
       return 3000;

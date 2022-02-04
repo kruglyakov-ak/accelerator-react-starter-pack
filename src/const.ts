@@ -101,7 +101,7 @@ const MIN_COUNT_GUITAR_IN_CART = 1;
 const MAX_COUNT_GUITAR_IN_CART = 99;
 
 enum PromoCode {
-  Unvalid = '',
+  Empty = '',
   Light = 'light-333',
   Medium = 'medium-444',
   Height = 'height-555'

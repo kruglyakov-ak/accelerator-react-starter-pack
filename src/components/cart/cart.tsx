@@ -19,9 +19,11 @@ function Cart(): JSX.Element {
 
   const handleCouponFormSubmit = (evt: InvalidEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if (Object.values(PromoCode).includes(couponValue as PromoCode)) {
+    if (Object.values(PromoCode).includes(couponValue as PromoCode) && couponValue !== PromoCode.Empty) {
       setIsCouponValid(PromoCodeValidate.True);
       setDiscount(convertPromoCodeToDiscount(couponValue as PromoCode));
+    } else if (couponValue === PromoCode.Empty) {
+      setIsCouponValid(PromoCodeValidate.Unknown);
     } else {
       setIsCouponValid(PromoCodeValidate.False);
       setDiscount(convertPromoCodeToDiscount());
