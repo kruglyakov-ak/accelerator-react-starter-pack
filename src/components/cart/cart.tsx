@@ -98,7 +98,7 @@ function Cart(): JSX.Element {
                 </p>
                 <p className="cart__total-item">
                   <span className="cart__total-value-name">Скидка:</span>
-                  {discount === 0 ? <span className="cart__total-value">0 ₽</span> : <span className="cart__total-value cart__total-value--bonus">{-priceWithDiscount} ₽</span>}
+                  {priceWithDiscount === 0 ? <span className="cart__total-value">0 ₽</span> : <span className="cart__total-value cart__total-value--bonus">{-priceWithDiscount} ₽</span>}
                 </p>
                 <p className="cart__total-item">
                   <span className="cart__total-value-name">К оплате:</span>
