@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute, RatingCountNumber } from '../../const';
-import { setGuitarsInCartCount } from '../../store/action';
 import { getGuitarsInCart } from '../../store/cart-data/selectors';
 import { Comment } from '../../types/comment';
 import { Guitar } from '../../types/guitar';
@@ -15,7 +14,6 @@ type ProductCardItemProps = {
 }
 
 function ProductCardItem({ guitar, comments }: ProductCardItemProps): JSX.Element {
-  const dispatch = useDispatch();
   const guitarsInCart = useSelector(getGuitarsInCart);
   const [isModalAddToCardOpen, setIsModalAddToCardOpen] = useState(false);
   const [isModalSuccessOpen, setIsModalSuccessOpen] = useState(false);
@@ -51,10 +49,6 @@ function ProductCardItem({ guitar, comments }: ProductCardItemProps): JSX.Elemen
 
   const onSuccessModalClose = () => {
     setIsModalSuccessOpen(false);
-  };
-
-  const onAddToCartClick = () => {
-    dispatch(setGuitarsInCartCount({ id: +id, count: 1 }));
   };
 
   useEffect(() => {
@@ -113,7 +107,7 @@ function ProductCardItem({ guitar, comments }: ProductCardItemProps): JSX.Elemen
           <button className="button button--red button--mini button--add-to-cart" onClick={handleAddToCartClick}>Купить</button>}
       </div>
 
-      {isModalAddToCardOpen && <ModalAddToCart guitar={guitar} onAddToCardModalClose={onAddToCardModalClose} onSuccessModalOpen={onSuccessModalOpen} onAddToCartClick={onAddToCartClick} />}
+      {isModalAddToCardOpen && <ModalAddToCart guitar={guitar} onAddToCardModalClose={onAddToCardModalClose} onSuccessModalOpen={onSuccessModalOpen}/>}
       {isModalSuccessOpen && <ModalSuccessAddToCart onSuccessModalClose={onSuccessModalClose} />}
     </div>
   );

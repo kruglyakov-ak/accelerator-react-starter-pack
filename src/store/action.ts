@@ -175,15 +175,6 @@ const setDiscount = createAction(
   }),
 );
 
-const increaseGuitarsInCartCount = createAction(
-  ActionType.IncreaseGuitarsInCartCount,
-  (id: number) => ({
-    payload: {
-      id,
-    },
-  }),
-);
-
 export {
   loadGuitars,
   loadGuitarById,
@@ -203,6 +194,5 @@ export {
   deleteGuitarInCart,
   setTotalPrice,
   setGuitarsInCartCount,
-  setDiscount,
-  increaseGuitarsInCartCount
+  setDiscount
 };

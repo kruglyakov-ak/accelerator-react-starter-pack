@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { AppRoute, RatingCountNumber } from '../../const';
-import { setGuitarsInCartCount } from '../../store/action';
 import { fetchCommentsByGuitarIdAction, fetchGuitarByIdAction } from '../../store/api-actions';
 import { getCommentsByGuitarId } from '../../store/comment-data/selectors';
 import { getGuitarById, getIsProductCardLoaded } from '../../store/guitar-data/selectors';
@@ -58,10 +57,6 @@ function PropertyProductCard(): JSX.Element {
 
   const handleDescriptionTabsClick = () => {
     setIsSpecificationsTabOpen(false);
-  };
-
-  const onAddToCartClick = () => {
-    dispatch(setGuitarsInCartCount({ id: +id, count: 1 }));
   };
 
   useEffect(() => {
@@ -191,7 +186,7 @@ function PropertyProductCard(): JSX.Element {
           <ProductCardComments name={name} guitarId={id} />
         </div>
       </main>
-      {isModalAddToCardOpen && <ModalAddToCart guitar={guitar} onAddToCardModalClose={onAddToCardModalClose} onSuccessModalOpen={onSuccessModalOpen} onAddToCartClick={onAddToCartClick} />}
+      {isModalAddToCardOpen && <ModalAddToCart guitar={guitar} onAddToCardModalClose={onAddToCardModalClose} onSuccessModalOpen={onSuccessModalOpen} />}
       {isModalSuccessOpen && <ModalSuccessAddToCart onSuccessModalClose={onSuccessModalClose} />}
     </div>
   );
