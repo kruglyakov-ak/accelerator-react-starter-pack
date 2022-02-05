@@ -1,10 +1,11 @@
 import { APIRoute, FilterPath, GUITARS_ON_PAGE, GuitarType, StringCountNumber } from '../const';
 import { ThunkActionResult } from '../types/action';
-import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin, loadGuitarsOnPage, setIsDataLoaded, setIsProductCardLoaded, loadCommentsByGuitarId, setIsCommentsLoaded, loadComments } from './action';
+import { loadGuitarById, loadGuitars, loadGuitarsWithoutFilters, setGuitarsCount, setPriceRangeMax, setPriceRangeMin, loadGuitarsOnPage, setIsDataLoaded, setIsProductCardLoaded, loadCommentsByGuitarId, setIsCommentsLoaded, loadComments, setDiscount } from './action';
 import { Guitar } from '../types/guitar';
 import { FetchGuitarProperty } from '../types/fetch-guitar-property';
 import { Comment } from '../types/comment';
 import { PostComment } from '../types/post-comment';
+import { PostCoupon } from '../types/post-coupon';
 
 const fetchGuitarsAction = (fetchProperty: FetchGuitarProperty): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
@@ -191,12 +192,12 @@ const postComments = (id: string, postComment: PostComment, onSuccessPost: () =>
     }
   };
 
-// const postCoupons = (): ThunkActionResult =>
-//   async (_dispatch, _getState, api): Promise<void> => {
-//     const { data } = await api.post(APIRoute.Coupons, {coupon: PromoCode.Light, 'guitarsIds': [7, 5]});
-//     // eslint-disable-next-line no-console
-//     console.log(data);
-//   };
+const postCoupons = (coupon: PostCoupon, onSuccessPost: () => void): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const { data } = await api.post(APIRoute.Coupons, coupon);
+    dispatch(setDiscount(data));
+    onSuccessPost();
+  };
 
 export {
   fetchGuitarsAction,
@@ -204,6 +205,6 @@ export {
   fetchGuitarWithoutFilters,
   fetchGuitarsOnPageAction,
   fetchCommentsByGuitarIdAction,
-  postComments
-  // postCoupons
+  postComments,
+  postCoupons
 };

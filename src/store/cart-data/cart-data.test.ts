@@ -10,7 +10,7 @@ describe('Reducer: cartData', () => {
         guitarsInCart: [],
         totalPrice: 0,
         guitarsInCartCount: [],
-
+        discount: 0,
       });
   });
 
@@ -19,13 +19,14 @@ describe('Reducer: cartData', () => {
       guitarsInCart: [],
       totalPrice: 0,
       guitarsInCartCount: [],
+      discount: 0,
     };
     expect(cartData(state, setGuitarsInCart(guitars[0])))
       .toEqual({
         guitarsInCart: [guitars[0]],
         totalPrice: 0,
         guitarsInCartCount: [],
-
+        discount: 0,
       });
   });
 
@@ -34,12 +35,14 @@ describe('Reducer: cartData', () => {
       guitarsInCart: [guitars[0]],
       totalPrice: 0,
       guitarsInCartCount: [],
+      discount: 0,
     };
     expect(cartData(state, deleteGuitarInCart(guitars[0])))
       .toEqual({
         guitarsInCart: [],
         totalPrice: 0,
         guitarsInCartCount: [],
+        discount: 0,
       });
   });
 
@@ -48,12 +51,14 @@ describe('Reducer: cartData', () => {
       guitarsInCart: [],
       totalPrice: 0,
       guitarsInCartCount: [],
+      discount: 0,
     };
     expect(cartData(state, setTotalPrice(1000)))
       .toEqual({
         guitarsInCart: [],
         totalPrice: 1000,
         guitarsInCartCount: [],
+        discount: 0,
       });
   });
 });

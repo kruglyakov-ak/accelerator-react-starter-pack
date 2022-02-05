@@ -17,7 +17,8 @@ type GuitarData = {
 type CartData = {
   guitarsInCart: Guitar[],
   totalPrice: number,
-  guitarsInCartCount: GuitarInCartCount[]
+  guitarsInCartCount: GuitarInCartCount[],
+  discount: number
 };
 
 type CatalogFilter = {

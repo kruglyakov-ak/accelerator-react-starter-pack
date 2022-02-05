@@ -166,6 +166,15 @@ const setTotalPrice = createAction(
   }),
 );
 
+const setDiscount = createAction(
+  ActionType.SetDiscount,
+  (discount: number) => ({
+    payload: {
+      discount,
+    },
+  }),
+);
+
 export {
   loadGuitars,
   loadGuitarById,
@@ -184,5 +193,6 @@ export {
   setGuitarsInCart,
   deleteGuitarInCart,
   setTotalPrice,
-  setGuitarsInCartCount
+  setGuitarsInCartCount,
+  setDiscount
 };
