@@ -1,6 +1,7 @@
 import { RootState } from '../store/root-reducer';
 import { Comment } from './comment';
 import { Guitar } from './guitar';
+import { GuitarInCartCount } from './guitar-in-cart-count';
 
 type State = RootState;
 
@@ -15,7 +16,8 @@ type GuitarData = {
 
 type CartData = {
   guitarsInCart: Guitar[],
-  totalPrices: number[],
+  totalPrice: number,
+  guitarsInCartCount: GuitarInCartCount[]
 };
 
 type CatalogFilter = {

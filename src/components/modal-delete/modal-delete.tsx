@@ -1,17 +1,16 @@
 import FocusLock from 'react-focus-lock';
 import { useDispatch } from 'react-redux';
 import ScrollLock from 'react-scrolllock';
-import { deleteGuitarInCart, setTotalPrices } from '../../store/action';
+import { deleteGuitarInCart } from '../../store/action';
 import { Guitar } from '../../types/guitar';
 import { changeGuitarTypeToReadable } from '../../utils/utils';
 
 type ModalDeleteProps = {
   guitar: Guitar,
-  totalPrice: number,
   onDeleteModalClose: () => void
 }
 
-function ModalDelete({ guitar, onDeleteModalClose, totalPrice }: ModalDeleteProps): JSX.Element {
+function ModalDelete({ guitar, onDeleteModalClose }: ModalDeleteProps): JSX.Element {
   const dispatch = useDispatch();
 
   const {
@@ -25,7 +24,6 @@ function ModalDelete({ guitar, onDeleteModalClose, totalPrice }: ModalDeleteProp
 
   const handleDeleteButtonClick = () => {
     dispatch(deleteGuitarInCart(guitar));
-    dispatch(setTotalPrices(-totalPrice));
   };
 
   return (

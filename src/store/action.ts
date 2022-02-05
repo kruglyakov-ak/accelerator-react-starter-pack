@@ -2,6 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 import { ActionType } from '../types/action';
 import { Comment } from '../types/comment';
 import { Guitar } from '../types/guitar';
+import { GuitarInCartCount } from '../types/guitar-in-cart-count';
 
 const loadGuitars = createAction(
   ActionType.LoadGuitars,
@@ -138,6 +139,15 @@ const setGuitarsInCart = createAction(
   }),
 );
 
+const setGuitarsInCartCount = createAction(
+  ActionType.SetGuitarsInCartCount,
+  (guitarInCartCount: GuitarInCartCount) => ({
+    payload: {
+      guitarInCartCount,
+    },
+  }),
+);
+
 const deleteGuitarInCart = createAction(
   ActionType.DeleteGuitarInCart,
   (deletedGuitarInCart: Guitar) => ({
@@ -147,7 +157,7 @@ const deleteGuitarInCart = createAction(
   }),
 );
 
-const setTotalPrices = createAction(
+const setTotalPrice = createAction(
   ActionType.SetTotalPrice,
   (totalPrice: number) => ({
     payload: {
@@ -173,5 +183,6 @@ export {
   setIsCommentsLoaded,
   setGuitarsInCart,
   deleteGuitarInCart,
-  setTotalPrices
+  setTotalPrice,
+  setGuitarsInCartCount
 };

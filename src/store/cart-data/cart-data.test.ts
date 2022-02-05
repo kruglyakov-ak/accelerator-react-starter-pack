@@ -1,5 +1,5 @@
 import { makeFakeGuitars } from '../../utils/mocks';
-import { deleteGuitarInCart, setGuitarsInCart, setTotalPrices } from '../action';
+import { deleteGuitarInCart, setGuitarsInCart, setTotalPrice } from '../action';
 import { cartData } from './cart-data';
 const guitars = makeFakeGuitars();
 
@@ -8,43 +8,52 @@ describe('Reducer: cartData', () => {
     expect(cartData(void 0, { type: 'UNKNOWN_ACTION' }))
       .toEqual({
         guitarsInCart: [],
-        totalPrices: [],
+        totalPrice: 0,
+        guitarsInCartCount: [],
+
       });
   });
 
   it('should update guitars in cart by setGuitarsInCart', () => {
     const state = {
       guitarsInCart: [],
-      totalPrices: [],
+      totalPrice: 0,
+      guitarsInCartCount: [],
     };
     expect(cartData(state, setGuitarsInCart(guitars[0])))
       .toEqual({
         guitarsInCart: [guitars[0]],
-        totalPrices: [],
+        totalPrice: 0,
+        guitarsInCartCount: [],
+
       });
   });
 
   it('should delete guitars in cart by deleteGuitarInCart', () => {
     const state = {
       guitarsInCart: [guitars[0]],
-      totalPrices: [],
+      totalPrice: 0,
+      guitarsInCartCount: [],
     };
     expect(cartData(state, deleteGuitarInCart(guitars[0])))
       .toEqual({
         guitarsInCart: [],
-        totalPrices: [],
+        totalPrice: 0,
+        guitarsInCartCount: [],
       });
   });
 
   it('should update total price by setTotalPrices', () => {
     const state = {
       guitarsInCart: [],
-      totalPrices: [],
+      totalPrice: 0,
+      guitarsInCartCount: [],
     };
-    expect(cartData(state, setTotalPrices(1000)))
+    expect(cartData(state, setTotalPrice(1000)))
       .toEqual({
         guitarsInCart: [],
-        totalPrices: [1000],
+        totalPrice: 1000,
+        guitarsInCartCount: [],
       });
   });
 });

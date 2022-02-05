@@ -9,6 +9,7 @@ const enum AppRoute {
 const enum APIRoute {
   Guitars = '/guitars',
   Comments = '/comments',
+  Coupons= '/coupons',
 }
 
 const enum GuitarType {

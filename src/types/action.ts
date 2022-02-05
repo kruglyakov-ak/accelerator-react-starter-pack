@@ -13,6 +13,7 @@ enum ActionType {
   SetIsProductCardLoaded = 'cart/setIsProductCardLoaded',
   DeleteGuitarInCart = 'cart/deleteGuitarInCart',
   SetTotalPrice = 'cart/setTotalPrice',
+  SetGuitarsInCartCount = 'cart/setGuitarsInCartCount',
   SetSortType = 'sort/setSortType',
   SetOrderType = 'sort/setOrderType',
   SetPriceRangeMin = 'filter/setPriceRangeMin',

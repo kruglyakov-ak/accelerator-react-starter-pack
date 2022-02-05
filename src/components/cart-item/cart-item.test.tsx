@@ -31,7 +31,7 @@ describe('Component: CartItem', () => {
     render(
       <Provider store={store}>
         <Router history={history}>
-          <CartItem guitar={guitars[0]} />
+          <CartItem guitar={guitars[0]} guitarInCartCount={1}/>
         </Router>
       </Provider>);
 

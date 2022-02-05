@@ -191,6 +191,13 @@ const postComments = (id: string, postComment: PostComment, onSuccessPost: () =>
     }
   };
 
+// const postCoupons = (): ThunkActionResult =>
+//   async (_dispatch, _getState, api): Promise<void> => {
+//     const { data } = await api.post(APIRoute.Coupons, {coupon: PromoCode.Light, 'guitarsIds': [7, 5]});
+//     // eslint-disable-next-line no-console
+//     console.log(data);
+//   };
+
 export {
   fetchGuitarsAction,
   fetchGuitarByIdAction,
@@ -198,4 +205,5 @@ export {
   fetchGuitarsOnPageAction,
   fetchCommentsByGuitarIdAction,
   postComments
+  // postCoupons
 };

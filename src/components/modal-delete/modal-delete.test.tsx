@@ -26,7 +26,7 @@ describe('Component: ModalDelete', () => {
   it('should render correctly', () => {
     render(
       <Provider store={store}>
-        <ModalDelete guitar={guitars[0]} totalPrice={1000} onDeleteModalClose={onDeleteModalClose} />
+        <ModalDelete guitar={guitars[0]} onDeleteModalClose={onDeleteModalClose} />
       </Provider>);
 
     expect(screen.getByText(guitars[0].name)).toBeInTheDocument();

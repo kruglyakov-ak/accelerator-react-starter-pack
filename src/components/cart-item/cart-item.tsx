@@ -1,19 +1,31 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { MIN_COUNT_GUITAR_IN_CART, MAX_COUNT_GUITAR_IN_CART } from '../../const';
-import { setTotalPrices } from '../../store/action';
+import { setGuitarsInCartCount } from '../../store/action';
 import { Guitar } from '../../types/guitar';
 import { changeGuitarTypeToReadable } from '../../utils/utils';
 import ModalDelete from '../modal-delete/modal-delete';
 
 type CartItemProps = {
   guitar: Guitar,
+  guitarInCartCount: number,
 }
 
-function CartItem({ guitar }: CartItemProps): JSX.Element {
+function CartItem({ guitar, guitarInCartCount }: CartItemProps): JSX.Element {
   const dispatch = useDispatch();
-  const [guitarCount, setGuitarCount] = useState(1);
+  const {
+    previewImg,
+    name,
+    vendorCode,
+    type,
+    stringCount,
+    price,
+    id,
+  } = guitar;
+
+  const [guitarCount, setGuitarCount] = useState(guitarInCartCount);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const handleEscapeKeyDown = useCallback((evt: { key: string; }) => {
     if (evt.key === 'Escape') {
@@ -32,20 +44,23 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
       document.body.removeEventListener('keydown', handleEscapeKeyDown);
   }, [handleEscapeKeyDown, isDeleteModalOpen]);
 
-  const {
-    previewImg,
-    name,
-    vendorCode,
-    type,
-    stringCount,
-    price,
-    id,
-  } = guitar;
+  useEffect(() => {
+    dispatch(setGuitarsInCartCount({ id, count: guitarCount }));
+  }, [dispatch, guitarCount, id]);
+
+  useEffect(() => {
+    if (guitarCount > MAX_COUNT_GUITAR_IN_CART) {
+      setTotalPrice(MAX_COUNT_GUITAR_IN_CART * price);
+    } else if (guitarCount < MIN_COUNT_GUITAR_IN_CART) {
+      setTotalPrice(MIN_COUNT_GUITAR_IN_CART * price);
+    } else {
+      setTotalPrice(guitarCount * price);
+    }
+  }, [guitarCount, price, totalPrice]);
 
   const handleDecreaseButtonClick = () => {
     if (guitarCount > MIN_COUNT_GUITAR_IN_CART) {
       setGuitarCount(guitarCount - 1);
-      dispatch(setTotalPrices(-price));
     } else {
       setIsDeleteModalOpen(true);
     }
@@ -54,14 +69,11 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
   const handleIncreaseButtonClick = () => {
     if (guitarCount < MAX_COUNT_GUITAR_IN_CART) {
       setGuitarCount(guitarCount + 1);
-      dispatch(setTotalPrices(price));
     }
   };
 
   const handleInputCountChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    const prevCount = guitarCount;
     setGuitarCount(Number(target.value));
-    dispatch(setTotalPrices((Number(target.value) * price) - (prevCount * price)));
   };
 
   const handleInputCountBlure = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,8 +116,8 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
           </svg>
         </button>
       </div>
-      <div className="cart-item__price-total">{guitarCount < MIN_COUNT_GUITAR_IN_CART ? MIN_COUNT_GUITAR_IN_CART * price : guitarCount * price} ₽</div>
-      {isDeleteModalOpen && <ModalDelete onDeleteModalClose={onDeleteModalClose} guitar={guitar} totalPrice={guitarCount * price}/>}
+      <div className="cart-item__price-total">{totalPrice} ₽</div>
+      {isDeleteModalOpen && <ModalDelete onDeleteModalClose={onDeleteModalClose} guitar={guitar}/>}
     </div>
   );
 }
