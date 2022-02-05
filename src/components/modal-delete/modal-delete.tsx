@@ -33,7 +33,7 @@ function ModalDelete({ guitar, onDeleteModalClose, totalPrice }: ModalDeleteProp
       <FocusLock>
         <div className="modal is-active modal-for-ui-kit">
           <div className="modal__wrapper">
-            <div className="modal__overlay" data-close-modal=""></div>
+            <div className="modal__overlay" data-close-modal="" onClick={onDeleteModalClose}></div>
             <div className="modal__content">
               <h2 className="modal__header title title--medium title--red">Удалить этот товар?</h2>
               <div className="modal__info"><img className="modal__img" src={`/${previewImg}`} alt={name} width="67" height="137"/>

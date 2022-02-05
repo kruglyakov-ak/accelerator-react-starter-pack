@@ -13,7 +13,7 @@ function ModalSuccessAddToCart({ onSuccessModalClose }: ModalSuccessAddToCartPro
       <FocusLock>
         <div className="modal is-active modal--success modal-for-ui-kit">
           <div className="modal__wrapper">
-            <div className="modal__overlay" data-close-modal=""></div>
+            <div className="modal__overlay" data-close-modal="" onClick={onSuccessModalClose}></div>
             <div className="modal__content">
               <svg className="modal__icon" width="26" height="20" aria-hidden="true">
                 <use xlinkHref="#icon-success"></use>
@@ -21,7 +21,7 @@ function ModalSuccessAddToCart({ onSuccessModalClose }: ModalSuccessAddToCartPro
               <p className="modal__message">Товар успешно добавлен в корзину</p>
               <div className="modal__button-container modal__button-container--add">
                 <Link to={AppRoute.Cart} className="button button--small modal__button">Перейти в корзину</Link>
-                <button className="button button--black-border button--small modal__button modal__button--right" onClick={onSuccessModalClose}>Продолжить покупки</button>
+                <Link to={AppRoute.Main} className="button button--black-border button--small modal__button modal__button--right" onClick={onSuccessModalClose}>Продолжить покупки</Link>
               </div>
               <button className="modal__close-btn button-cross" type="button" aria-label="Закрыть" onClick={onSuccessModalClose}>
                 <span className="button-cross__icon"></span>

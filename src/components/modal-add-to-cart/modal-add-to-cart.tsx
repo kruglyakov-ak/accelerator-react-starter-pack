@@ -38,7 +38,7 @@ function ModalAddToCart({ guitar, onAddToCardModalClose, onSuccessModalOpen }: M
       <FocusLock>
         <div className="modal is-active modal--review modal-for-ui-kit">
           <div className="modal__wrapper">
-            <div className="modal__overlay" data-close-modal=""></div>
+            <div className="modal__overlay" data-close-modal=""  onClick={onAddToCardModalClose}></div>
             <div className="modal__content">
               <h2 className="modal__header title title--medium">Добавить товар в корзину</h2>
               <div className="modal__info"><img className="modal__img" src={`/${previewImg}`} alt={name} width="67" height="137" />

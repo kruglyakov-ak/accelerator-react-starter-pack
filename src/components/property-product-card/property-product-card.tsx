@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { AppRoute, RatingCountNumber } from '../../const';
 import { fetchCommentsByGuitarIdAction, fetchGuitarByIdAction } from '../../store/api-actions';
-import { getGuitarsInCart } from '../../store/cart-data/selectors';
 import { getCommentsByGuitarId } from '../../store/comment-data/selectors';
 import { getGuitarById, getIsProductCardLoaded } from '../../store/guitar-data/selectors';
 import { changeGuitarTypeToReadable } from '../../utils/utils';
@@ -23,7 +22,6 @@ function PropertyProductCard(): JSX.Element {
   const guitar = useSelector(getGuitarById);
   const comments = useSelector(getCommentsByGuitarId);
   const isProductCardLoaded = useSelector(getIsProductCardLoaded);
-  const guitarsInCart = useSelector(getGuitarsInCart);
 
   const [isSpecificationsTabOpen, setIsSpecificationsTabOpen] = useState(true);
   const [isModalAddToCardOpen, setIsModalAddToCardOpen] = useState(false);
@@ -158,18 +156,20 @@ function PropertyProductCard(): JSX.Element {
                 <button className={isSpecificationsTabOpen ? 'button button--black-border button--medium tabs__button' : 'button button--medium tabs__button'} onClick={handleDescriptionTabsClick}>Описание</button>
                 <div className="tabs__content" id="characteristics">
                   <table className={isSpecificationsTabOpen ? 'tabs__table' : 'tabs__table hidden'}>
-                    <tr className="tabs__table-row">
-                      <td className="tabs__title">Артикул:</td>
-                      <td className="tabs__value">{vendorCode}</td>
-                    </tr>
-                    <tr className="tabs__table-row">
-                      <td className="tabs__title">Тип:</td>
-                      <td className="tabs__value">{changeGuitarTypeToReadable(type)}</td>
-                    </tr>
-                    <tr className="tabs__table-row">
-                      <td className="tabs__title">Количество струн:</td>
-                      <td className="tabs__value">{stringCount} струнная</td>
-                    </tr>
+                    <tbody>
+                      <tr className="tabs__table-row">
+                        <td className="tabs__title">Артикул:</td>
+                        <td className="tabs__value">{vendorCode}</td>
+                      </tr>
+                      <tr className="tabs__table-row">
+                        <td className="tabs__title">Тип:</td>
+                        <td className="tabs__value">{changeGuitarTypeToReadable(type)}</td>
+                      </tr>
+                      <tr className="tabs__table-row">
+                        <td className="tabs__title">Количество струн:</td>
+                        <td className="tabs__value">{stringCount} струнная</td>
+                      </tr>
+                    </tbody>
                   </table>
                   <p className={isSpecificationsTabOpen ? 'tabs__product-description hidden' : 'tabs__product-description'}>
                     {description}
@@ -180,9 +180,7 @@ function PropertyProductCard(): JSX.Element {
             <div className="product-container__price-wrapper">
               <p className="product-container__price-info product-container__price-info--title">Цена:</p>
               <p className="product-container__price-info product-container__price-info--value">{price} ₽</p>
-              {guitarsInCart.some((guitarInCart) => guitarInCart.id === guitar.id) ?
-                <Link to={AppRoute.Cart} className="button button--red-border button--big button--in-cart">В Корзине</Link> :
-                <button className="button button--red button--big product-container__button" onClick={handleAddToCartClick}>Добавить в корзину</button>}
+              <button className="button button--red button--big product-container__button" onClick={handleAddToCartClick}>Добавить в корзину</button>
             </div>
           </div>
           <ProductCardComments name={name} guitarId={id} />
