@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { AppRoute, RatingCountNumber } from '../../const';
+import { setGuitarsInCartCount } from '../../store/action';
 import { fetchCommentsByGuitarIdAction, fetchGuitarByIdAction } from '../../store/api-actions';
 import { getCommentsByGuitarId } from '../../store/comment-data/selectors';
 import { getGuitarById, getIsProductCardLoaded } from '../../store/guitar-data/selectors';
@@ -35,7 +36,7 @@ function PropertyProductCard(): JSX.Element {
     }
   }, []);
 
-  const handleAddToCartClick = () => {
+  const handleModalAddToCardOpen = () => {
     setIsModalAddToCardOpen(true);
   };
 
@@ -57,6 +58,10 @@ function PropertyProductCard(): JSX.Element {
 
   const handleDescriptionTabsClick = () => {
     setIsSpecificationsTabOpen(false);
+  };
+
+  const onAddToCartClick = () => {
+    dispatch(setGuitarsInCartCount({ id: +id, count: 1 }));
   };
 
   useEffect(() => {
@@ -180,13 +185,13 @@ function PropertyProductCard(): JSX.Element {
             <div className="product-container__price-wrapper">
               <p className="product-container__price-info product-container__price-info--title">Цена:</p>
               <p className="product-container__price-info product-container__price-info--value">{price} ₽</p>
-              <button className="button button--red button--big product-container__button" onClick={handleAddToCartClick}>Добавить в корзину</button>
+              <button className="button button--red button--big product-container__button" onClick={handleModalAddToCardOpen}>Добавить в корзину</button>
             </div>
           </div>
           <ProductCardComments name={name} guitarId={id} />
         </div>
       </main>
-      {isModalAddToCardOpen && <ModalAddToCart guitar={guitar} onAddToCardModalClose={onAddToCardModalClose} onSuccessModalOpen={onSuccessModalOpen} />}
+      {isModalAddToCardOpen && <ModalAddToCart guitar={guitar} onAddToCardModalClose={onAddToCardModalClose} onSuccessModalOpen={onSuccessModalOpen} onAddToCartClick={onAddToCartClick} />}
       {isModalSuccessOpen && <ModalSuccessAddToCart onSuccessModalClose={onSuccessModalClose} />}
     </div>
   );

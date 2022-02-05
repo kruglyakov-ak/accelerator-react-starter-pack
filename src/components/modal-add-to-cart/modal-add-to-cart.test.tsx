@@ -11,6 +11,7 @@ import { State } from '../../types/state';
 const guitars = makeFakeGuitars();
 const onAddToCardModalClose = jest.fn();
 const onSuccessModalOpen = jest.fn();
+const onAddToCartClick = jest.fn();
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
 const mockStore = configureMockStore<
@@ -27,7 +28,7 @@ describe('Component: ModalAddToCart', () => {
   it('should render correctly', () => {
     render(
       <Provider store={store}>
-        <ModalAddToCart guitar={guitars[0]} onAddToCardModalClose={onAddToCardModalClose} onSuccessModalOpen={onSuccessModalOpen} />
+        <ModalAddToCart guitar={guitars[0]} onAddToCardModalClose={onAddToCardModalClose} onSuccessModalOpen={onSuccessModalOpen} onAddToCartClick={onAddToCartClick} />
       </Provider>);
 
     expect(screen.getByText(guitars[0].name)).toBeInTheDocument();

@@ -6,6 +6,7 @@ import {
   setTotalPrice,
   setGuitarsInCartCount,
   setDiscount
+  // increaseGuitarsInCartCount
 } from '../action';
 
 const initialState: CartData = {
@@ -33,6 +34,16 @@ const cartData = createReducer(initialState, (builder) => {
         state.guitarsInCartCount.push(guitarInCartCount);
       }
     })
+    // .addCase(increaseGuitarsInCartCount, (state, action) => {
+    //   const { id } = action.payload;
+    //   state.guitarsInCartCount.forEach((guitar) => {
+    //     if (id === guitar.id) {
+    //       guitar.count = guitar.count + 1;
+    //     } else {
+    //       state.guitarsInCartCount.push({id, count: 1});
+    //     }
+    //   });
+    // })
     .addCase(deleteGuitarInCart, (state, action) => {
       const { deletedGuitarInCart } = action.payload;
       const index = state.guitarsInCart.findIndex((guitar) => guitar.id === deletedGuitarInCart.id);

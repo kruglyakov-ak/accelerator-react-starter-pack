@@ -15,6 +15,7 @@ enum ActionType {
   SetTotalPrice = 'cart/setTotalPrice',
   SetGuitarsInCartCount = 'cart/setGuitarsInCartCount',
   SetDiscount = 'cart/setDiscount',
+  IncreaseGuitarsInCartCount = 'cart/increaseGuitarsInCartCount',
   SetSortType = 'sort/setSortType',
   SetOrderType = 'sort/setOrderType',
   SetPriceRangeMin = 'filter/setPriceRangeMin',

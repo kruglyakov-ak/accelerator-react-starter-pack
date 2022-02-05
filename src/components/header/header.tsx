@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { getGuitarsInCart } from '../../store/cart-data/selectors';
+import { getGuitarsInCartCount } from '../../store/cart-data/selectors';
 import { getGuitarsWithoutFilters } from '../../store/guitar-data/selectors';
 
 function Header(): JSX.Element {
   const guitars = useSelector(getGuitarsWithoutFilters);
-  const guitarsInCart = useSelector(getGuitarsInCart);
+  const guitarsInCartCount = useSelector(getGuitarsInCartCount);
   const path = useLocation().pathname;
-
+  const count = guitarsInCartCount.reduce((prev, next) => prev + next.count, 0);
   const [isSearchListHidden, setIsSearchListHidden] = useState(true);
   const [searchValue, setSearchValue] = useState('');
 
@@ -84,7 +84,7 @@ function Header(): JSX.Element {
             <use xlinkHref="#icon-basket"></use>
           </svg>
           <span className="visually-hidden">Перейти в корзину</span>
-          {guitarsInCart.length !== 0 && <span className="header__cart-count">{guitarsInCart.length}</span>}
+          {count !== 0 && <span className="header__cart-count">{count}</span>}
         </Link>
       </div>
     </header>

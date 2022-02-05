@@ -10,11 +10,13 @@ type ModalAddToCartProps = {
   guitar: Guitar,
   onAddToCardModalClose: () => void,
   onSuccessModalOpen: () => void,
+  onAddToCartClick: () => void,
 }
 
-function ModalAddToCart({ guitar, onAddToCardModalClose, onSuccessModalOpen }: ModalAddToCartProps): JSX.Element {
+function ModalAddToCart({ guitar, onAddToCardModalClose, onSuccessModalOpen, onAddToCartClick }: ModalAddToCartProps): JSX.Element {
   const dispatch = useDispatch();
   const guitarsInCart = useSelector(getGuitarsInCart);
+
   const {
     previewImg,
     name,
@@ -27,6 +29,7 @@ function ModalAddToCart({ guitar, onAddToCardModalClose, onSuccessModalOpen }: M
   const handleAddToCartClick = () => {
     if (!guitarsInCart.some((guitarInCart) => guitarInCart.id === guitar.id)) {
       dispatch(setGuitarsInCart(guitar));
+      onAddToCartClick();
     }
     onAddToCardModalClose();
     onSuccessModalOpen();
@@ -37,7 +40,7 @@ function ModalAddToCart({ guitar, onAddToCardModalClose, onSuccessModalOpen }: M
       <FocusLock>
         <div className="modal is-active modal--review modal-for-ui-kit">
           <div className="modal__wrapper">
-            <div className="modal__overlay" data-close-modal=""  onClick={onAddToCardModalClose}></div>
+            <div className="modal__overlay" data-close-modal="" onClick={onAddToCardModalClose}></div>
             <div className="modal__content">
               <h2 className="modal__header title title--medium">Добавить товар в корзину</h2>
               <div className="modal__info"><img className="modal__img" src={`/${previewImg}`} alt={name} width="67" height="137" />
