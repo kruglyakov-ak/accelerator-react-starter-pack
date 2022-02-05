@@ -54,8 +54,8 @@ function Cart(): JSX.Element {
                   <div className="form-input coupon__input">
                     <label className="visually-hidden">Промокод</label>
                     <input type="text" placeholder="Введите промокод" id="coupon" name="coupon" value={couponValue} onChange={handleCouponInputChange} />
-                    {isCouponValid === PromoCodeValidate.False &&  <p className="form-input__message form-input__message--error">Неверный промокод</p>}
-                    {isCouponValid === PromoCodeValidate.True &&  <p className="form-input__message form-input__message--success">Промокод принят</p>}
+                    {isCouponValid === PromoCodeValidate.False && <p className="form-input__message form-input__message--error">Неверный промокод</p>}
+                    {isCouponValid === PromoCodeValidate.True && <p className="form-input__message form-input__message--success">Промокод принят</p>}
                   </div>
                   <button className="button button--big coupon__button">Применить</button>
                 </form>
@@ -67,7 +67,7 @@ function Cart(): JSX.Element {
                 </p>
                 <p className="cart__total-item">
                   <span className="cart__total-value-name">Скидка:</span>
-                  <span className="cart__total-value cart__total-value--bonus">{discount} ₽</span>
+                  {discount <= 0 ? <span className="cart__total-value">0 ₽</span> : <span className="cart__total-value cart__total-value--bonus">-{discount} ₽</span>}
                 </p>
                 <p className="cart__total-item">
                   <span className="cart__total-value-name">К оплате:</span>
