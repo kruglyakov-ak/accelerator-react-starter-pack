@@ -74,6 +74,12 @@ function CartItem({ guitar, guitarInCartCount }: CartItemProps): JSX.Element {
 
   const handleInputCountChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setGuitarCount(Number(target.value));
+    if (Number(target.value) > MAX_COUNT_GUITAR_IN_CART) {
+      setGuitarCount(MAX_COUNT_GUITAR_IN_CART);
+    }
+    if (Number(target.value) < MIN_COUNT_GUITAR_IN_CART) {
+      setGuitarCount(MIN_COUNT_GUITAR_IN_CART);
+    }
   };
 
   const handleInputCountBlure = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
