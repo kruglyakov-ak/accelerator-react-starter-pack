@@ -23,7 +23,7 @@ function CartItem({ guitar, guitarInCartCount }: CartItemProps): JSX.Element {
     id,
   } = guitar;
 
-  const [guitarCount, setGuitarCount] = useState(guitarInCartCount);
+  const [guitarCount, setGuitarCount] = useState<number | string>(guitarInCartCount);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -45,7 +45,7 @@ function CartItem({ guitar, guitarInCartCount }: CartItemProps): JSX.Element {
   }, [handleEscapeKeyDown, isDeleteModalOpen]);
 
   useEffect(() => {
-    dispatch(setGuitarsInCartCount({ id, count: guitarCount }));
+    dispatch(setGuitarsInCartCount({ id, count: +guitarCount }));
   }, [dispatch, guitarCount, id]);
 
   useEffect(() => {
@@ -54,13 +54,13 @@ function CartItem({ guitar, guitarInCartCount }: CartItemProps): JSX.Element {
     } else if (guitarCount < MIN_COUNT_GUITAR_IN_CART) {
       setTotalPrice(MIN_COUNT_GUITAR_IN_CART * price);
     } else {
-      setTotalPrice(guitarCount * price);
+      setTotalPrice(+guitarCount * price);
     }
   }, [guitarCount, price, totalPrice]);
 
   const handleDecreaseButtonClick = () => {
     if (guitarCount > MIN_COUNT_GUITAR_IN_CART) {
-      setGuitarCount(guitarCount - 1);
+      setGuitarCount(+guitarCount - 1);
     } else {
       setIsDeleteModalOpen(true);
     }
@@ -68,17 +68,14 @@ function CartItem({ guitar, guitarInCartCount }: CartItemProps): JSX.Element {
 
   const handleIncreaseButtonClick = () => {
     if (guitarCount < MAX_COUNT_GUITAR_IN_CART) {
-      setGuitarCount(guitarCount + 1);
+      setGuitarCount(+guitarCount + 1);
     }
   };
 
   const handleInputCountChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    setGuitarCount(Number(target.value));
+    setGuitarCount(target.value);
     if (Number(target.value) > MAX_COUNT_GUITAR_IN_CART) {
       setGuitarCount(MAX_COUNT_GUITAR_IN_CART);
-    }
-    if (Number(target.value) < MIN_COUNT_GUITAR_IN_CART) {
-      setGuitarCount(MIN_COUNT_GUITAR_IN_CART);
     }
   };
 
@@ -115,7 +112,7 @@ function CartItem({ guitar, guitarInCartCount }: CartItemProps): JSX.Element {
             <use xlinkHref="#icon-minus"></use>
           </svg>
         </button>
-        <input className="quantity__input" type="number" placeholder="1" id={`${id}-count`} name={`${id}-count`} max={MAX_COUNT_GUITAR_IN_CART} value={guitarCount} onChange={handleInputCountChange} onBlur={handleInputCountBlure} />
+        <input className="quantity__input" type="number" id={`${id}-count`} name={`${id}-count`} max={MAX_COUNT_GUITAR_IN_CART} value={guitarCount} onChange={handleInputCountChange} onBlur={handleInputCountBlure} />
         <button className="quantity__button" aria-label="Увеличить количество" onClick={handleIncreaseButtonClick}>
           <svg width="8" height="8" aria-hidden="true">
             <use xlinkHref="#icon-plus"></use>
