@@ -3,7 +3,7 @@ import { changeGuitarTypeToReadable } from '../../utils/utils';
 import FocusLock from 'react-focus-lock';
 import ScrollLock from 'react-scrolllock';
 import { useDispatch, useSelector } from 'react-redux';
-import { getGuitarsInCart } from '../../store/cart-data/selectors';
+import { getGuitarsInCart, getGuitarsInCartCount } from '../../store/cart-data/selectors';
 import { setGuitarsInCart, setGuitarsInCartCount } from '../../store/action';
 
 type ModalAddToCartProps = {
@@ -12,9 +12,10 @@ type ModalAddToCartProps = {
   onSuccessModalOpen: () => void,
 }
 
-function ModalAddToCart({ guitar, onAddToCardModalClose, onSuccessModalOpen  }: ModalAddToCartProps): JSX.Element {
+function ModalAddToCart({ guitar, onAddToCardModalClose, onSuccessModalOpen }: ModalAddToCartProps): JSX.Element {
   const dispatch = useDispatch();
   const guitarsInCart = useSelector(getGuitarsInCart);
+  const guitarsInCartCount = useSelector(getGuitarsInCartCount);
 
   const {
     previewImg,
@@ -30,7 +31,12 @@ function ModalAddToCart({ guitar, onAddToCardModalClose, onSuccessModalOpen  }: 
     if (!guitarsInCart.some((guitarInCart) => guitarInCart.id === guitar.id)) {
       dispatch(setGuitarsInCart(guitar));
       dispatch(setGuitarsInCartCount({ id, count: 1 }));
+    } else {
+      const currentCountIndex = guitarsInCartCount.findIndex((count) => count.id === guitar.id);
+      const currentCount = guitarsInCartCount[currentCountIndex].count;
+      dispatch(setGuitarsInCartCount({ id, count: currentCount + 1 }));
     }
+
     onAddToCardModalClose();
     onSuccessModalOpen();
   };
